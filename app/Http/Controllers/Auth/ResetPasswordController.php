@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;

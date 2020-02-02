@@ -1,7 +1,10 @@
 <?php
 
-return [
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -20,7 +23,7 @@ return [
     ],
 
     'ses' => [
-        'key' => env('SES_KEY'),
+        'key'    => env('SES_KEY'),
         'secret' => env('SES_SECRET'),
         'region' => 'us-east-1',
     ],
@@ -30,9 +33,8 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
+        'model'  => App\User::class,
+        'key'    => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
-
 ];
