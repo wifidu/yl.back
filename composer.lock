@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "43a88de747f5882b0baffe3c40230a4d",
+    "content-hash": "7c62ad7004e3c313fd286c3b6fd5f6f5",
     "packages": [
         {
             "name": "dingo/api",
