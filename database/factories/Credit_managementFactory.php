@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Http\Models\Credit_management;
+use App\Models\Credit_management;
 
 $factory->define(Credit_management::class, function (Faker $faker) {
     $unix_time = $faker->unixTime;
