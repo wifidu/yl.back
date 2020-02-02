@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCreditManagementTable extends Migration
+class CreateCreditManagementsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateCreditManagementTable extends Migration
      */
     public function up()
     {
-        Schema::create('credit_management', function (Blueprint $table) {
+        Schema::create('credit_managements', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
             $table->integer('business_time')->comment('业务时间');
@@ -34,6 +34,6 @@ class CreateCreditManagementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('credit_management');
+        Schema::dropIfExists('credit_managements');
     }
 }
