@@ -43,6 +43,16 @@ class CreditManagementService
         return $credit;
     }
 
+    // 根据是否已经收款查询
+    public function showWithIfPay($ifPay)
+    {
+        $credits = $this->creditManagementRespository->showWithIfPay($ifPay);
+
+        $credits = $this->formatting($credits);
+
+        return $credits;
+    }
+
     // 数据格式化函数
     public function formatting($credits)
     {

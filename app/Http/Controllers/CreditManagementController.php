@@ -33,4 +33,11 @@ class CreditManagementController extends Controller
         $credit = $this->creditManagementService->showWithVoucherNo($voucherNo);
         return $credit;
     }
+
+    // 根据是否已经收款查询
+    public function showWithIfPay($ifPay)
+    {
+        $credits = $this->creditManagementService->showWithIfPay($ifPay);
+        return $credits;
+    }
 }

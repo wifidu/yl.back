@@ -14,6 +14,7 @@ $factory->define(CreditManagement::class, function (Faker $faker) {
         'payment_type' => $faker->numberBetween(0, 1),
         'amount_receivable' => $faker->randomFloat(2, 100, 90000),
         'account_balance' => $faker->randomFloat(2, 0, 5000),
-        'voucher_no' => 'SK4' . date("Ymd", $unix_time) . $faker->randomNumber(8, true)
+        'voucher_no' => 'SK4' . date("Ymd", $unix_time) . $faker->randomNumber(8, true),
+        'if_pay' => $faker->numberBetween(0, 1)
     ];
 });

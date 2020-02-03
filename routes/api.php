@@ -18,4 +18,5 @@ $api->version('v1', function($api){
     $api->get('credit_management/show', 'App\Http\Controllers\CreditManagementController@show');
     $api->get('credit_management/showWithType/{type}','App\Http\Controllers\CreditManagementController@showWithType');
     $api->get('credit_management/showWithVoucherNo/{voucherNo}','App\Http\Controllers\CreditManagementController@showWithVoucherNo');
+    $api->get('credit_management/showWithIfPay/{ifPay}','App\Http\Controllers\CreditManagementController@showWithIfPay');
 });

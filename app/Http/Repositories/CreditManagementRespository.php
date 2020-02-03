@@ -12,11 +12,6 @@ class CreditManagementRespository
         $this->creditManagement = $CreditManagement;
     }
 
-    public function save()
-    {
-        
-    }
-
     public function show()
     {
         return $this->creditManagement->all();
@@ -32,6 +27,12 @@ class CreditManagementRespository
     public function showWithVoucherNo($voucherNo)
     {
         return $this->creditManagement->where('voucher_no', $voucherNo)->get();
+    }
+
+    // 根据是否已经收费进行查询
+    public function showWithIfPay($ifPay)
+    {
+        return $this->creditManagement->where('if_pay', $ifPay)->get();
     }
 
 }
