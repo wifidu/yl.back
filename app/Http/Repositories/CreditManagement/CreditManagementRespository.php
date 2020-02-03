@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Respositories;
+namespace App\Http\Repositories\CreditManagement;
 
 use App\Models\CreditManagement;
 

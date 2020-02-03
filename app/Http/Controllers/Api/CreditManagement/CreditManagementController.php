@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\CreditManagement;
 
 use Illuminate\Http\Request;
-use App\Http\Services\CreditManagementService;
+use App\Http\Controllers\Controller;
+use App\Http\Services\CreditManagement\CreditManagementService;
 
 class CreditManagementController extends Controller
 {

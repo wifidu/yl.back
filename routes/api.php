@@ -1,22 +1,28 @@
-<?php
+    <?php
 
+use Dingo\Api\Routing\Router;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
+/**
+ * @var $api Dingo\Api\Routing\Router
+ */
 $api = app('Dingo\Api\Routing\Router');
 
-$api->version('v1', function($api){
-    $api->get('credit_management/show', 'App\Http\Controllers\CreditManagementController@show');
-    $api->get('credit_management/showWithType/{type}','App\Http\Controllers\CreditManagementController@showWithType');
-    $api->get('credit_management/showWithVoucherNo/{voucherNo}','App\Http\Controllers\CreditManagementController@showWithVoucherNo');
-    $api->get('credit_management/showWithIfPay/{ifPay}','App\Http\Controllers\CreditManagementController@showWithIfPay');
+$api->version('v1', [
+    "prefix"     => "api",
+    'namespace'  => 'App\Http\Controllers\Api',
+], function (Router $api) {
+    $api->group(["prefix" => "credit-management"], function ($api){
+        // 收款账单查询
+        $api->get('/', 'CreditManagement\CreditManagementController@show');
+
+        //收款账单按付款类型查询
+        $api->get('/Type/{type}','CreditManagement\CreditManagementController@showWithType');
+
+        //收款账单按账单号查询
+        $api->get('/VoucherNo/{voucherNo}','CreditManagement\CreditManagementController@showWithVoucherNo');
+
+        //收款账单按是否已经缴费分类查询
+        $api->get('/IfPay/{ifPay}','CreditManagement\CreditManagementController@showWithIfPay');
+
+    });
 });
