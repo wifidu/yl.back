@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;

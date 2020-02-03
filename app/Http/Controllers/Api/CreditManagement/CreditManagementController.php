@@ -1,8 +1,11 @@
 <?php
 
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace App\Http\Controllers\Api\CreditManagement;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Services\CreditManagement\CreditManagementService;
 
@@ -18,6 +21,7 @@ class CreditManagementController extends Controller
     public function show()
     {
         $results = $this->creditManagementService->show();
+
         return $results;
     }
 
@@ -25,6 +29,7 @@ class CreditManagementController extends Controller
     public function showWithType($type)
     {
         $credits = $this->creditManagementService->showWithType($type);
+
         return $credits;
     }
 
@@ -32,6 +37,7 @@ class CreditManagementController extends Controller
     public function showWithVoucherNo($voucherNo)
     {
         $credit = $this->creditManagementService->showWithVoucherNo($voucherNo);
+
         return $credit;
     }
 
@@ -39,6 +45,7 @@ class CreditManagementController extends Controller
     public function showWithIfPay($ifPay)
     {
         $credits = $this->creditManagementService->showWithIfPay($ifPay);
+
         return $credits;
     }
 }

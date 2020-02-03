@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace App\Http\Repositories\CreditManagement;
 
 use App\Models\CreditManagement;
@@ -34,6 +39,4 @@ class CreditManagementRespository
     {
         return $this->creditManagement->where('if_pay', $ifPay)->get();
     }
-
 }
-?>

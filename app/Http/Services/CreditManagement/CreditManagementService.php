@@ -1,4 +1,9 @@
 <?php
+
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace app\Http\Services\CreditManagement;
 
 use App\Http\Repositories\CreditManagement\CreditManagementRespository;
@@ -6,7 +11,7 @@ use App\Http\Repositories\CreditManagement\CreditManagementRespository;
 class CreditManagementService
 {
     protected $creditManagementRespository;
-    
+
     public function __construct(CreditManagementRespository $creditManagementRespository)
     {
         $this->creditManagementRespository = $creditManagementRespository;
@@ -56,16 +61,15 @@ class CreditManagementService
     // 数据格式化函数
     public function formatting($credits)
     {
-        foreach($credits as $credit){
-          // 将时间戳转化为时间
-          $credit->business_time = date('Y-m-d H:i:s',$credit->business_time);
-          $credit->billing_date = date('Y-m-d H:i:s', $credit->billing_date);
+        foreach ($credits as $credit) {
+            // 将时间戳转化为时间
+            $credit->business_time = date('Y-m-d H:i:s', $credit->business_time);
+            $credit->billing_date  = date('Y-m-d H:i:s', $credit->billing_date);
 
-          // 将0/1 转换为退费类型
-          $credit->payment_type = $credit->payment_type == 1 ? '变更收费' : '入住收费';
+            // 将0/1 转换为退费类型
+            $credit->payment_type = 1 == $credit->payment_type ? '变更收费' : '入住收费';
         }
 
         return $credits;
     }
 }
-?>
