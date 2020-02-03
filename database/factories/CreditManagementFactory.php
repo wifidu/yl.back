@@ -1,9 +1,9 @@
 <?php
 
+use App\Models\CreditManagement;
 use Faker\Generator as Faker;
-use App\Models\Credit_management;
 
-$factory->define(Credit_management::class, function (Faker $faker) {
+$factory->define(CreditManagement::class, function (Faker $faker) {
     $unix_time = $faker->unixTime;
     $beds = $faker->randomDigit . '号楼-' . $faker->regexify('[1-9]{1}-[1-9]{3}-[1-9]{3}');
     return [

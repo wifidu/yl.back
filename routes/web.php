@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+/* Route::get('credit_management/show', 'CreditManagementController@show'); */
