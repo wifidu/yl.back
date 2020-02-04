@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Api\CreditManagement;
 
 use App\Http\Controllers\Controller;
 use App\Http\Services\CreditManagement\CreditManagementService;
-use Dingo\Api\Contract\Http\Request;
+use Illuminate\Http\Request;
 
 class CreditManagementController extends Controller
 {
@@ -54,5 +54,23 @@ class CreditManagementController extends Controller
         $credits = $this->creditManagementService->showWithIfPay($ifPay, $page, $page_size);
 
         return $credits;
+    }
+
+    public function store(Request $request)
+    {
+        $bill = $request->post();
+        return $this->creditManagementService->store($bill);
+    }
+
+
+    public function destory($voucherNo)
+    {
+        return $this->creditManagementService->destory($voucherNo);
+    }
+
+    public function update(Request $request)
+    {
+        $bill = $request->post();
+        return $this->creditManagementService->update($bill);
     }
 }

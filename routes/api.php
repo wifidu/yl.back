@@ -23,5 +23,11 @@ $api->version('v1', [
 
         //收款账单按是否已经缴费分类查询
         $api->get('/IfPay/{ifPay}', 'CreditManagement\CreditManagementController@showWithIfPay');
+
+        $api->post('/', 'CreditManagement\CreditManagementController@store');
+
+        $api->delete('/{voucherNo}', 'CreditManagement\CreditManagementController@destory');
+
+        $api->patch('/', 'CreditManagement\CreditManagementController@update');
     });
 });

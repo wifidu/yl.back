@@ -39,4 +39,24 @@ class CreditManagementRespository
     {
         return $this->creditManagement->where('if_pay', $ifPay)->paginate($page_size);
     }
+
+    public function store($bill)
+    {
+        $this->creditManagement->fill($bill);
+        return $this->creditManagement->save();
+    }
+
+    public function update($bill)
+    {
+        return $this->creditManagement
+                    ->where('voucher_no', $bill['voucher_no'])
+                    ->update($bill);
+    }
+
+    public function destory($VoucherNo)
+    {
+        return $this->creditManagement
+                    ->where('voucher_no', $VoucherNo)
+                    ->delete();
+    }
 }
