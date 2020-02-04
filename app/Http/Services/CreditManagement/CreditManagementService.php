@@ -18,9 +18,9 @@ class CreditManagementService
     }
 
     // 将收款单全部返回
-    public function show()
+    public function show($page, $page_size)
     {
-        $credits = $this->creditManagementRespository->show();
+        $credits = $this->creditManagementRespository->show($page, $page_size);
 
         // 格式化数据
         $credits = $this->formatting($credits);
@@ -29,9 +29,9 @@ class CreditManagementService
     }
 
     // 根据收款类型返回收款单
-    public function showWithType($type)
+    public function showWithType($type, $page, $page_size)
     {
-        $credits = $this->creditManagementRespository->showWithType($type);
+        $credits = $this->creditManagementRespository->showWithType($type, $page, $page_size);
 
         $credits = $this->formatting($credits);
 
@@ -49,9 +49,9 @@ class CreditManagementService
     }
 
     // 根据是否已经收款查询
-    public function showWithIfPay($ifPay)
+    public function showWithIfPay($ifPay, $page, $page_size)
     {
-        $credits = $this->creditManagementRespository->showWithIfPay($ifPay);
+        $credits = $this->creditManagementRespository->showWithIfPay($ifPay, $page, $page_size);
 
         $credits = $this->formatting($credits);
 
