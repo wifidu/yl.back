@@ -29,6 +29,10 @@ class CreateBedInformationTable extends Migration
             $table->tinyInteger('self-care_ability')->comment('自理能力 0-自理 1-半自理 2-失能');
             $table->string('address', 128)->comment('居住地址');
             $table->text('remark')->comment('备注');
+
+            //新增是否入住和是否取消入住字段
+            $table->tinyInteger('is_checkin')->comment('是否入住 0-未入住 1-已入住');
+            $table->tinyInteger('is_cancel')->comment('是否取消入住 0-未取消 1-已取消 ');
             $table->timestamps();
         });
     }

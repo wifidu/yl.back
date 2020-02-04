@@ -25,6 +25,8 @@ class CreateCheckOutInformationTable extends Migration
             $table->text('remark')->comment('备注');
             $table->decimal('account_balance', 10, 2)->comment('账户余额');
             $table->json('expense_item')->comment('费用项目');
+            //增加是否删除字段
+            $table->tinyInteger('is_del')->comment('是否已经删除  0-未删除 1-已删除')->default(0);
             $table->timestamps();
         });
     }

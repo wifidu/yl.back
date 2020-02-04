@@ -24,6 +24,8 @@ class CreateDeathRegistrationTable extends Migration
             $table->bigInteger('certificate_time')->comment('开据证明时间');
             $table->string('death_disease', 128)->comment('死亡疾病名称');
             $table->string('certificate_doctor', 32)->comment('开据证明医生');
+            //增加删除字段
+            $table->tinyInteger('is_del')->comment('是否已经删除 0-未删除 1-已删除')->default(0);
             $table->timestamps();
         });
     }
