@@ -1,7 +1,7 @@
 <?php
-namespace App\Http\Respositories;
+namespace App\Http\Repository\FinancialManagement;
 
-use App\Models\CreditManagement;
+use App\Model\CreditManagement;
 
 class CreditManagementRespository
 {

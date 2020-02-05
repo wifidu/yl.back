@@ -32,9 +32,9 @@ $api->version('v1', [
     });
 
     $api->group(["prefix" => "financial_management"], function ($api) {
-        $api->get('credit_management/show', 'App\Http\Controllers\CreditManagementController@show');
-        $api->get('credit_management/showWithType/{type}','App\Http\Controllers\CreditManagementController@showWithType');
-        $api->get('credit_management/showWithVoucherNo/{voucherNo}','App\Http\Controllers\CreditManagementController@showWithVoucherNo');
-        $api->get('credit_management/showWithIfPay/{ifPay}','App\Http\Controllers\CreditManagementController@showWithIfPay');
+        $api->get('credit_management/show', 'FinancialManagement\CreditManagementController@show');
+        $api->get('credit_management/showWithType/{type}','FinancialManagement\CreditManagementController@showWithType');
+        $api->get('credit_management/showWithVoucherNo/{voucherNo}','FinancialManagement\CreditManagementController@showWithVoucherNo');
+        $api->get('credit_management/showWithIfPay/{ifPay}','FinancialManagement\CreditManagementController@showWithIfPay');
     });
 });
