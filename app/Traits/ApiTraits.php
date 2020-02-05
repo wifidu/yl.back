@@ -19,4 +19,8 @@ Trait ApiTraits
         ];
     }
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> ac41b103b8309f213dff1f7c72a890c19243358f
