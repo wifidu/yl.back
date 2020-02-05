@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\FixedAssets;
+namespace App\Http\Requests\Api\MaterialManagement;
 
 use Dingo\Api\Http\FormRequest;
 

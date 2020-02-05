@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Repository\FixedAssets;
+namespace App\Http\Repository\MaterialManagement;
 
 use App\Model\FixedAssets;
 
