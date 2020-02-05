@@ -7,6 +7,7 @@ use Dingo\Api\Routing\Router;
  */
 $api = app('Dingo\Api\Routing\Router');
 
+
 $api->version('v1', [
     "prefix"     => "api",
     'namespace'  => 'App\Http\Controllers\Api',
@@ -28,5 +29,12 @@ $api->version('v1', [
 
         // 固定资产数据列表
         $api->get('/list', 'FixedAssets\FixedAssetsController@list');
+    });
+
+    $api->group(["prefix" => "financial_management"], function ($api) {
+        $api->get('credit_management/show', 'App\Http\Controllers\CreditManagementController@show');
+        $api->get('credit_management/showWithType/{type}','App\Http\Controllers\CreditManagementController@showWithType');
+        $api->get('credit_management/showWithVoucherNo/{voucherNo}','App\Http\Controllers\CreditManagementController@showWithVoucherNo');
+        $api->get('credit_management/showWithIfPay/{ifPay}','App\Http\Controllers\CreditManagementController@showWithIfPay');
     });
 });
