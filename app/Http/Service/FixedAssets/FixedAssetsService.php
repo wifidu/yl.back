@@ -3,7 +3,7 @@
 
 namespace App\Http\Service\FixedAssets;
 
-use App\Http\Repository\FixedAssets\FixedAssetsRepository;
+use App\Http\Repository\MaterialManagement\FixedAssetsRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 use Log;

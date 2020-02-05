@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\FixedAssets;
+namespace App\Http\Controllers\Api\MaterialManagement;
 
 use App\Http\Service\FixedAssets\FixedAssetsService;
-use App\Http\Requests\Api\FixedAssets\FixedAssetsRequest;
+use App\Http\Requests\Api\MaterialManagement\FixedAssetsRequest;
 use Dingo\Api\Contract\Http\Request;
 
 
