@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\FinancialManagement;
 use Illuminate\Http\Request;
 use App\Http\Service\FinancialManagement\CreditManagementService;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\FinancialManagement\CreditManagementRequest;
 
 class CreditManagementController extends Controller
 {
@@ -52,7 +53,7 @@ class CreditManagementController extends Controller
         return $credits;
     }
 
-    public function store(Request $request)
+    public function store(CreditManagementRequest $request)
     {
         $bill = $request->post();
         return $this->creditManagementService->store($bill);
