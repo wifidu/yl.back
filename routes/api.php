@@ -32,7 +32,7 @@ $api->version('v1', [
         $api->get('/list', 'MaterialManagement\FixedAssetsController@list');
     });
 
-    $api->group(["prefix" => "financial-management"], function ($api) {
+    $api->group(["prefix" => "credit-management"], function ($api) {
         // 收款账单查询
         $api->get('/', 'FinancialManagement\CreditManagementController@show');
 
