@@ -18,5 +18,4 @@ Trait ApiTraits
             'data' => $data
         ];
     }
-
 }

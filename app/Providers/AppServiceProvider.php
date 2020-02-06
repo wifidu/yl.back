@@ -1,5 +1,9 @@
 <?php
 
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
+
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
@@ -13,7 +17,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
     }
 
     /**
@@ -23,6 +26,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

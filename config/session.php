@@ -1,7 +1,10 @@
 <?php
 
-return [
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver
@@ -175,5 +178,4 @@ return [
     */
 
     'http_only' => true,
-
 ];

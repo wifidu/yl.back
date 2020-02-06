@@ -1,7 +1,10 @@
 <?php
 
-return [
+/*
+ * What php team is that is 'one thing, a team, work together'
+ */
 
+return [
     /*
     |--------------------------------------------------------------------------
     | View Storage Paths
@@ -29,5 +32,4 @@ return [
     */
 
     'compiled' => realpath(storage_path('framework/views')),
-
 ];
