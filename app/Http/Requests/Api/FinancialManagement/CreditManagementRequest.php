@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\CreditManagement;
+namespace App\Http\Requests\Api\FinancialManagement;
 
 use Illuminate\Foundation\Http\FormRequest;
 

@@ -4,9 +4,9 @@
  * What php team is that is 'one thing, a team, work together'
  */
 
-namespace app\Http\Services\CreditManagement;
+namespace App\Http\Service\FinancialManagement;
 
-use App\Http\Repositories\CreditManagement\CreditManagementRespository;
+use App\Http\Repository\FinancialManagement\CreditManagementRespository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 
