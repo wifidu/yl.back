@@ -34,22 +34,22 @@ $api->version('v1', [
 
     $api->group(["prefix" => "financial-management"], function ($api) {
         // 收款账单查询
-        $api->get('/', 'CreditManagement\CreditManagementController@show');
+        $api->get('/', 'FinancialManagement\CreditManagementController@show');
 
         //收款账单按付款类型查询
-        $api->get('/Type/{type}', 'CreditManagement\CreditManagementController@showWithType');
+        $api->get('/Type/{type}', 'FinancialManagement\CreditManagementController@showWithType');
 
         //收款账单按账单号查询
-        $api->get('/VoucherNo/{voucherNo}', 'CreditManagement\CreditManagementController@showWithVoucherNo');
+        $api->get('/VoucherNo/{voucherNo}', 'FinancialManagement\CreditManagementController@showWithVoucherNo');
 
         //收款账单按是否已经缴费分类查询
-        $api->get('/IfPay/{ifPay}', 'CreditManagement\CreditManagementController@showWithIfPay');
+        $api->get('/IfPay/{ifPay}', 'FinancialManagement\CreditManagementController@showWithIfPay');
 
-        $api->post('/', 'CreditManagement\CreditManagementController@store');
+        $api->post('/', 'FinancialManagement\CreditManagementController@store');
 
-        $api->delete('/{voucherNo}', 'CreditManagement\CreditManagementController@destory');
+        $api->delete('/{voucherNo}', 'FinancialManagement\CreditManagementController@destory');
 
-        $api->patch('/', 'CreditManagement\CreditManagementController@update');
+        $api->patch('/', 'FinancialManagement\CreditManagementController@update');
     });
     $api->group(["prefix" => "department-manage"], function ($api) {
 
