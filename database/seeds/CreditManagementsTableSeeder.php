@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\CreditManagement;
+use App\Model\CreditManagement;
 
 class CreditManagementsTableSeeder extends Seeder
 {

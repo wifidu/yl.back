@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\CreditManagement;
+use App\Model\CreditManagement;
 use Faker\Generator as Faker;
 
 $factory->define(CreditManagement::class, function (Faker $faker) {
