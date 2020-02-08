@@ -43,6 +43,7 @@ class RefundService
         $refunds = $this->refundRespository->showWithStatus($status, $page, $page_size);
 
         // formatting
+        $refunds = $this->formatting($refunds);
 
         return $refunds = $this->apiReturn($refunds, CodeEnum::SUCCESS);
     }
@@ -52,24 +53,25 @@ class RefundService
         $refunds = $this->refundRespository->showWithNo($no);
 
         // formatting
+        $refunds = $this->formatting($refunds);
 
         return $refunds = $this->apiReturn($refunds, CodeEnum::SUCCESS);
     }
 
-    public function update(Request $refund)
+    public function update($refund)
     {
+        $refund = $this->formatting($refund, 0);
         $result = $this->refundRespository->update($refund);
         $result = $result == true ? CodeEnum::SUCCESS : CodeEnum::FAIL;
 
-        $refund = $this->formatting($refund, 0);
         return $this->apiReturn(['refund_no' => $refund['refund_no']], $result);
     }
 
-    public function store(Request $refund)
+    public function store($refund)
     {
+        $refund = $this->formatting($refund, 0);
         $result = $this->refundRespository->store($refund);
         $result = $result == true ? CodeEnum::SUCCESS : CodeEnum::FAIL;
-        $refund = $this->formatting($refund, 0);
         return $this->apiReturn(['refund_no' => $refund['refund_no']], $result);
     }
 
@@ -85,7 +87,7 @@ class RefundService
       if ($type == 1){
         foreach ($refunds as $refund){
           $refund->business_time = Date('Y-m-d H:i:s', $refund->business_time);
-          $refund->refund_date = Date('Y-m-d H:i:s', $refund->refund_date);
+          $refund->refund_date == null ? : $refund->refund_date = Date('Y-m-d H:i:s', $refund->refund_date);
 
           // 将数字转换为收费类型，0：变更收费、1：请假退费、2：押金退费、3：退院退费
 
@@ -93,33 +95,39 @@ class RefundService
           {
               case 0:
                 $refund->refund_type = '变更收费';
+                break;
               case 1:
                 $refund->refund_type = '请假退费';
+                break;
               case 2:
                 $refund->refund_type = '押金退费';
+                break;
               case 3:
                 $refund->refund_type = '退院退费';
+                break;
           }
         }
       }else{
-        foreach ($refunds as $refund){
-          $refund->business_time = strtotime($refunds->business_time);
-          $refund->refund_date = strtotime($refunds->refund_date);
+          $refunds['business_time'] = strtotime($refunds['business_time']);
+          $refunds['refund_date'] == null ? : $refunds['refund_date'] = strtotime($refunds['refund_date']);
 
           // 将数字转换为收费类型，0：变更收费、1：请假退费、2：押金退费、3：退院退费
 
-          switch ($refund->refund_type)
+          switch ($refunds['refund_type'])
           {
               case '变更收费':
-                $refund->refund_type = 0;
+                $refunds['refund_type'] = 0;
+                break;
               case '请假退费':
-                $refund->refund_type = 1;
+                $refunds['refund_type'] = 1;
+                break;
               case '押金退费':
-                $refund->refund_type = 2;
+                $refunds['refund_type'] = 2;
+                break;
               case '退院退费':
-                $refund->refund_type = 3;
+                $refunds['refund_type'] = 3;
+                break;
           }
-        }
       }
 
       return $refunds;
