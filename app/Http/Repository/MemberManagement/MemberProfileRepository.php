@@ -1,10 +1,14 @@
 <?php
 
 
-namespace App\Http\Repository\MemberProfile;
+namespace App\Http\Repository\MemberManagement;
 
 use App\Common\CommonFunc;
 use App\MemberProfile;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MemberProfileRepository
@@ -18,7 +22,7 @@ class MemberProfileRepository
     /**
      * 新增会员或者更新会员相关信息
      * @param $params
-     * @return \Illuminate\Database\Eloquent\Model
+     * @return Model
      */
     public function store($params)
     {
@@ -31,7 +35,7 @@ class MemberProfileRepository
     /**
      * 查询单个用户信息
      * @param $id
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return Builder|Model|object|null
      */
     public function item($id)
     {
@@ -46,7 +50,7 @@ class MemberProfileRepository
     /**
      * 分页显示结果
      * @param $pageSize
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @return LengthAwarePaginator
      */
     public function list($pageSize)
     {
@@ -72,18 +76,18 @@ class MemberProfileRepository
     /**
      * 根据人名或者手机号搜索会员
      * @param $params
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return Builder[]|Collection
      */
     public function search($params)
     {
         return MemberProfile::query()
-            ->where(function ($query) use ($params) {
-                $query->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params).'%')
-                    ->where('is_del', '=', '0');
+            ->when(isset($params['member_name']), function ($query) use ($params) {
+                return $query->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params['member_name']).'%')
+                    ->where('is_cancel', '=', '0');
             })
-            ->orWhere(function ($query) use ($params) {
-                $query->where('phone_number', '=', $params)
-                    ->where('is_del', '=', '0');
+            ->when(isset($params['phone_number']), function ($query) use ($params) {
+                return $query->where('phone_number', '=', $params['phone_number'])
+                    ->where('is_cancel', '=', '0');
             })
             ->get();
 

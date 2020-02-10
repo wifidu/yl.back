@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Requests\Api\MemberProfile;
+namespace App\Http\Requests\Api\MemberManagement;
 
 
 use Dingo\Api\Http\FormRequest;

@@ -76,22 +76,46 @@ $api->version('v1', [
     // 会员档案路由注册
     $api->group(["prefix" => "member-profile"], function ($api) {
         //新增会员
-        $api->post('/', 'MemberProfile\MemberProfileController@store')->name('api.member-profile.store');
+        $api->post('/', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store');
 
         //会员信息修改
-        $api->post('/{id}', 'MemberProfile\MemberProfileController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+        $api->post('/{id}', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
 
         //会员详情
-        $api->get('/{id}', 'MemberProfile\MemberProfileController@detail')->where(['id' => '\d+']);
+        $api->get('/{id}', 'MemberManagement\MemberProfileController@detail')->where(['id' => '\d+']);
 
         //会员删除
-        $api->delete('/{id}', 'MemberProfile\MemberProfileController@delete')->where(['id' => '\d+']);
+        $api->delete('/{id}', 'MemberManagement\MemberProfileController@delete')->where(['id' => '\d+']);
 
         //会员列表
-        $api->get('/list', 'MemberProfile\MemberProfileController@list');
+        $api->get('/list', 'MemberManagement\MemberProfileController@list');
 
         //会员搜索
-        $api->get('/search', 'MemberProfile\MemberProfileController@search');
+        $api->get('/search', 'MemberManagement\MemberProfileController@search');
     });
 
+
+    // 预约占床
+    $api->group(["prefix" => "book-bed"], function ($api) {
+        //新增预约订单
+        $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-profile.store');
+
+        //预约订单信息修改
+        $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+
+        //预约订单详情
+        $api->get('/{id}', 'MemberManagement\BookBedController@detail')->where(['id' => '\d+']);
+
+        //预约订单取消
+        $api->delete('/{id}', 'MemberManagement\BookBedController@cancel')->where(['id' => '\d+']);
+
+        //预约订单列表
+        $api->get('/list', 'MemberManagement\BookBedController@list');
+
+        //预约订单搜索
+        $api->get('/search', 'MemberManagement\BookBedController@search');
+
+        //预约订单批量删除
+        $api->delete('/', 'MemberManagement\BookBedController@batchDelete');
+    });
 });

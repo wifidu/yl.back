@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Service\MemberProfile;
+namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
-use App\Http\Repository\MemberProfile\MemberProfileRepository;
+use App\Http\Repository\MemberManagement\MemberProfileRepository;
 use App\Traits\ApiTraits;
 use Log;
 
