@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Http\Service\PersonnalManage;
+namespace App\Http\Service\PersonnelManage;
 
-use App\Http\Repository\PersonnalManage\DepartmentManageRepository;
+use App\Http\Repository\PersonnelManage\DepartmentManageRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 use Log;

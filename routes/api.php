@@ -29,24 +29,46 @@ $api->version('v1', [
         // 固定资产数据列表
         $api->get('/list', 'FixedAssets\FixedAssetsController@list');
     });
-    $api->group(["prefix" => "department-manage"], function ($api) {
+    $api->group(["prefix" => "personnel-manage"], function ($api) {
+        $api->group(["prefix" => "department-manage"], function ($api) {
 
-        // 新增或编辑部门数据
-        $api->post('/', 'PersonnalManage\DepartmentManageController@store')->name('api.department-manage.store');
+            // 新增或编辑部门数据
+            $api->post('/', 'PersonnelManage\DepartmentManageController@store')->name('api.department-manage.store');
 
-        // 部门数据详情
-        $api->get('/{id}', 'PersonnalManage\DepartmentManageController@detail')
-            ->where(['id' => '\d+']);
+            // 部门数据详情
+            $api->get('/{id}', 'PersonnelManage\DepartmentManageController@detail')
+                ->where(['id' => '\d+']);
 
-        // 部门数据删除
-        $api->delete('/{id}', 'PersonnalManage\DepartmentManageController@delete')
-            ->where(['id' => '\d+']);
+            // 部门数据删除
+            $api->delete('/{id}', 'PersonnelManage\DepartmentManageController@delete')
+                ->where(['id' => '\d+']);
 
-        // 部门数据批量删除
-        $api->delete('/', 'PersonnalManage\DepartmentManageController@batchDelete');
+            // 部门数据批量删除
+            $api->delete('/', 'PersonnelManage\DepartmentManageController@batchDelete');
 
-        // 部门数据列表
-        $api->get('/list', 'PersonnalManage\DepartmentManageController@list');
+            // 部门数据列表
+            $api->get('/list', 'PersonnelManage\DepartmentManageController@list');
 
+        });
+        $api->group(["prefix" => "position-manage"], function ($api) {
+
+            // 新增或编辑部门数据
+            $api->post('/', 'PersonnelManage\PositionManageController@store')->name('api.position-manage.store');
+
+            // 部门数据详情
+            $api->get('/{id}', 'PersonnelManage\PositionManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 部门数据删除
+            $api->delete('/{id}', 'PersonnelManage\PositionManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 部门数据批量删除
+            $api->delete('/', 'PersonnelManage\PositionManageController@batchDelete');
+
+            // 部门数据列表
+            $api->get('/list', 'PersonnelManage\PositionManageController@list');
+
+        });
     });
 });

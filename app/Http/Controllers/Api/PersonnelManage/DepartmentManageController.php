@@ -1,10 +1,10 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\PersonnalManage;
+namespace App\Http\Controllers\Api\PersonnelManage;
 
-use App\Http\Service\PersonnalManage\DepartmentManageService;
-use App\Http\Requests\Api\PersonnalManage\DepartmentManageRequest;
+use App\Http\Service\PersonnelManage\DepartmentManageService;
+use App\Http\Requests\Api\PersonnelManage\DepartmentManageRequest;
 use Dingo\Api\Contract\Http\Request;
 
 
