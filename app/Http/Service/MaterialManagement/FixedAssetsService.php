@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Service\FixedAssets;
+namespace App\Http\Service\MaterialManagement;
 
 use App\Http\Repository\MaterialManagement\FixedAssetsRepository;
 use App\Traits\ApiTraits;
