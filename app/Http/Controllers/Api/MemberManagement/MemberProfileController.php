@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Api\MemberManagement;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\MemberManagement\MemberProfileRequests;
-use App\Http\Service\MemberProfile\MemberProfileService;
+use App\Http\Service\MemberManagement\MemberProfileService;
 use Dingo\Api\Contract\Http\Request;
 
 /**
@@ -69,7 +68,7 @@ class MemberProfileController extends Controller
      */
     public function search(MemberProfileRequests $request)
     {
-        $params = $request->get('params');
+        $params = $request->query();
         return $this->_memberProfile->search($params);
     }
 

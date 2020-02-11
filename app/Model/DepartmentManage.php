@@ -13,6 +13,5 @@ class DepartmentManage extends Model
     protected $fillable = [
         'department_name',             //部门名称
         'department_description',      //部门描述
-
     ];
 }

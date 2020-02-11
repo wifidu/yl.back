@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Service\MemberProfile;
+namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;

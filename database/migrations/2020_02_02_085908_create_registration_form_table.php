@@ -22,7 +22,7 @@ class CreateRegistrationFormTable extends Migration
             $table->json('meal_cost')->comment('膳食费(类型、套餐名称、收费标准)');
             $table->json('one-time_cost')->comment('一次性费(类型、项目名称、收费标准)');
             // 增加是否删除字段
-            $table->tinyInteger('is_del')->comment('是否已删除入住登记  0-未删除 1-已删除')->default(0);
+            $table->softDeletes()->comment('软删除设置');
             $table->timestamps();
         });
     }
