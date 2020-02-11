@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Api\PersonnalManage;
+namespace App\Http\Requests\Api\PersonnelManage;
 
 use Dingo\Api\Http\FormRequest;
 

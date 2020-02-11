@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Repository\PersonnalManage;
+namespace App\Http\Repository\PersonnelManage;
 
 use App\Model\DepartmentManage;
 
@@ -99,7 +99,6 @@ class DepartmentManageRepository
      */
     public function list($page, $page_size)
     {
-
         return DepartmentManage::query()->paginate($page_size);
     }
 

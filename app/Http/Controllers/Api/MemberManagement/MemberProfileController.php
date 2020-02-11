@@ -1,11 +1,11 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\MemberProfile;
+namespace App\Http\Controllers\Api\MemberManagement;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\MemberProfile\MemberProfileRequests;
+use App\Http\Requests\Api\MemberManagement\MemberProfileRequests;
 use App\Http\Service\MemberProfile\MemberProfileService;
 use Dingo\Api\Contract\Http\Request;
 

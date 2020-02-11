@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Repository\MemberProfile;
+namespace App\Http\Repository\MemberManagement;
 
 use App\Common\CommonFunc;
 use App\MemberProfile;
