@@ -74,6 +74,22 @@ $api->version('v1', [
             $api->patch('/', 'FinancialManagement\CreditManagementController@update');
         });
 
+        // 收款账单
+        $api->group(["prefix" => "refund"], function ($api){
+          $api->get('/', 'FinancialManagement\RefundController@show');
+
+          $api->get('/no/{no}', 'FinancialManagement\RefundController@showWithNo');
+
+          $api->get('/status/{status}', 'FinancialManagement\RefundController@showWithStatus');
+
+          $api->get('/type/{type}', 'FinancialManagement\RefundController@showWithType');
+
+          $api->post('/', 'FinancialManagement\RefundController@store');
+
+          $api->patch('/', 'FinancialManagement\RefundController@update');
+
+          $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
+        });
     });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
@@ -141,22 +157,6 @@ $api->version('v1', [
 
                 //预约订单批量删除
                 $api->delete('/', 'MemberManagement\BookBedController@batchDelete');
-            });
-            // 收款账单
-            $api->group(["prefix" => "refund"], function ($api){
-              $api->get('/', 'FinancialManagement\RefundController@show');
-
-              $api->get('/no/{no}', 'FinancialManagement\RefundController@showWithNo');
-
-              $api->get('/status/{status}', 'FinancialManagement\RefundController@showWithStatus');
-
-              $api->get('/type/{type}', 'FinancialManagement\RefundController@showWithType');
-
-              $api->post('/', 'FinancialManagement\RefundController@store');
-
-              $api->patch('/', 'FinancialManagement\RefundController@update');
-
-              $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
             });
     });
 });
