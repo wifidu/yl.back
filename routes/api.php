@@ -90,6 +90,15 @@ $api->version('v1', [
 
           $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
         });
+
+        // 会员账户
+        $api->group(["prefix" => "account"], function ($api){
+          $api->get('/', 'FinancialManagement\AccountController@show');
+          $api->get('/{no}', 'FinancialManagement\AccountController@showWithNo');
+          $api->post('/', 'FinancialManagement\AccountController@store');
+          $api->patch('/', 'FinancialManagement\AccountController@update');
+          $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
+        });
     });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
