@@ -54,7 +54,7 @@ $api->version('v1', [
 
     });
     $api->group(["prefix" => "financial-management"], function ($api) {
-        $api->group(["prefix" => "credit-management"], function ($api) {
+        $api->group(["prefix" => "collection"], function ($api) {
             // 收款账单查询
             $api->get('/', 'FinancialManagement\CreditManagementController@show');
 

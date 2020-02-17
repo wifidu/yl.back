@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\FinancialManagement;
 
+use App\Http\Requests\Api\FinancialManagement\AccountRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Service\FinancialManagement\AccountService;
@@ -15,7 +16,7 @@ class AccountController extends Controller
         $this->accountService = $accountService;
     }
 
-    public function store(Request $request)
+    public function store(AccountRequest $request)
     {
         $account = $request->post();
         return $this->accountService->store($account);
@@ -26,7 +27,7 @@ class AccountController extends Controller
         return $this->accountService->destory($id);
     }
 
-    public function update(Request $request)
+    public function update(AccountRequest $request)
     {
         $account = $request->all();
         return $this->accountService->update($account);
