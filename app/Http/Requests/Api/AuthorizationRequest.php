@@ -28,4 +28,15 @@ class AuthorizationRequest extends FormRequest
             'password' => 'required|string|min:5',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'username.required'             => '用户名 必须',
+            'username.string'               => '用户名 必须为字符串',
+            'password.required'             => '密码 必须',
+            'username.string'               => '密码 必须为字符串',
+            'password.min'                  => '密码 长度最小为5',
+        ];
+    }
 }

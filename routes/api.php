@@ -13,16 +13,17 @@ $api->version('v1', [
 ], function (Router $api) {
 
     $api->group([
-        'middleware' => 'api.throttle',
-        'limit' => config('api.rate_limits.sign.limit'),
-        'expires' => config('api.rate_limits.sign.expires'),
+//        'middleware' => 'api.throttle',
+//        'limit' => config('api.rate_limits.sign.limit'),
+//        'expires' => config('api.rate_limits.sign.expires'),
     ], function($api) {
+
         // 用户注册
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
         // 获取token
-        $api->post('authorizations', 'AuthorizationsController@store')
-            ->name('api.authorizations.store');
+        $api->post('authorizations', 'AuthorizationsController@login')
+            ->name('api.authorizations.login');
         // 需要 token 验证的接口
         $api->group(['middleware' => 'auth:api'], function($api) {
             // 当前登录用户信息
@@ -34,10 +35,28 @@ $api->version('v1', [
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+            //角色权限
+            $api->group(['prefix' => 'role-permission'], function ($api){
+                // 所有权限列表
+                $api->get('list','RolePermissionController@list');
+                // 赋予角色权限
+                $api->post('givepermisstorole','RolePermissionController@givePermissionToRole');
+                // 取消角色权限
+                $api->post('revokepermisstorole','RolePermissionController@revokePermissionToRole');
+                // 获取当前角色权限
+                $api->post('rolehavepermisson','RolePermissionController@roleHavePermisson');
+                // 添加角色
+                $api->post('addrole','RolePermissionController@addRole');
+            });
+            //用户权限
+            $api->group(['prefix' => 'model-permission'], function ($api){
+                $api->get('modelhavepermisson','ModelPermissionController@modelHavePermisson');
+            });
         });
     });
 
-    $api->group(['prefix' => "material-management"],function ($api) {
+    $api->group([
+        'prefix' => "material-management", 'middleware' => 'permission'],function ($api) {
         $api->group(["prefix" => "fixed-assets"], function ($api) {
             // 固定资产数据存储
             $api->post('/', 'MaterialManagement\FixedAssetsController@store')->name('api.fixed-assets.store');

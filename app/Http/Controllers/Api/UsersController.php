@@ -25,13 +25,20 @@ class UsersController extends Controller
 
     public function me()
     {
-        $user = \Auth::guard('api')->user();
+        // 获取当前登陆用户信息
+        $user   = \Auth::guard('api')->user();
+        // 获取当前用户所有权限
+        $models_permission  = $user->getAllPermissions();
+        foreach ($models_permission as $key=>$value) {
+            $models_permission[$key]['cn_name'] = config("module.".$value['name']);
+        }
         $user->mate = [
             'access_token' => \Auth::guard('api')->fromUser(\Auth::guard('api')->user()),
             'token_type' => 'Bearer',
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
         ];
-
+        $user->permission = $models_permission;
+        unset($user['permissions'],$user['roles']);
         return $this->apiReturn($user,CodeEnum::SUCCESS);
     }
 

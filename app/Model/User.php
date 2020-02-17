@@ -3,11 +3,12 @@
 namespace App\Model;
 
 use Tymon\JWTAuth\Contracts\JWTSubject;
-//use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements JWTSubject
 {
+    use HasRoles;
     protected $table = 'users';
 
     public $timestamps = true;
@@ -17,7 +18,7 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token'
     ];
 
     public function getJWTIdentifier()
