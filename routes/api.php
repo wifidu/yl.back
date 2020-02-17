@@ -59,10 +59,10 @@ $api->version('v1', [
             $api->get('/', 'FinancialManagement\CreditManagementController@show');
 
             //收款账单按付款类型查询
-            $api->get('/Type/{type}', 'FinancialManagement\CreditManagementController@showWithType');
+            $api->get('/type/{type}', 'FinancialManagement\CreditManagementController@showWithType');
 
             //收款账单按账单号查询
-            $api->get('/VoucherNo/{voucherNo}', 'FinancialManagement\CreditManagementController@showWithVoucherNo');
+            $api->get('/no/{voucherNo}', 'FinancialManagement\CreditManagementController@showWithVoucherNo');
 
             //收款账单按是否已经缴费分类查询
             $api->get('/IfPay/{ifPay}', 'FinancialManagement\CreditManagementController@showWithIfPay');
