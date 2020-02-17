@@ -48,15 +48,11 @@ $api->version('v1', [
                 // 添加角色
                 $api->post('addrole','RolePermissionController@addRole');
             });
-            //用户权限
-            $api->group(['prefix' => 'model-permission'], function ($api){
-                $api->get('modelhavepermisson','ModelPermissionController@modelHavePermisson');
-            });
         });
     });
 
     $api->group([
-        'prefix' => "material-management", 'middleware' => 'permission'],function ($api) {
+        'prefix' => "material-management"],function ($api) {
         $api->group(["prefix" => "fixed-assets"], function ($api) {
             // 固定资产数据存储
             $api->post('/', 'MaterialManagement\FixedAssetsController@store')->name('api.fixed-assets.store');
@@ -70,7 +66,7 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
             // 固定资产数据批量删除
-            $api->delete('/', 'MaterialManagement\FixedAssetsController@batchDelete');
+            $api->delete('/', 'MaterialManagement\FixedAssetsController@batchDelete')->name('api.fixed-assets.delete');
 
             // 固定资产数据列表
             $api->get('/list', 'MaterialManagement\FixedAssetsController@list');
@@ -88,12 +84,29 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
             // 物资数据批量删除
-            $api->delete('/', 'MaterialManagement\MaterialController@batchDelete');
+            $api->delete('/', 'MaterialManagement\MaterialController@batchDelete')->name('api.material.delete');
 
             // 物资数据列表
             $api->get('/list', 'MaterialManagement\MaterialController@list');
         });
+        $api->group(["prefix" => "material-in"], function ($api) {
+            // 物资入库数据存储
+            $api->post('/', 'MaterialManagement\MaterialInController@store')->name('api.material.in.store');
 
+            // 物资入库数据详情
+            $api->get('/{id}', 'MaterialManagement\MaterialInController@detail')
+                ->where(['id' => '\d+']);
+
+            // 物资入库数据删除
+            $api->delete('/{id}', 'MaterialManagement\MaterialInController@delete')
+                ->where(['id' => '\d+']);
+
+            // 物资入库数据批量删除
+            $api->delete('/', 'MaterialManagement\MaterialInController@batchDelete')->name('api.material.in.delete');
+
+            // 物资入库数据列表
+            $api->get('/list', 'MaterialManagement\MaterialInController@list');
+        });
 
     });
 });

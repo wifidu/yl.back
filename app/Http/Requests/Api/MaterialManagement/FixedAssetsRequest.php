@@ -33,6 +33,11 @@ class FixedAssetsRequest extends FormRequest
                     "install_date" => "required|integer"
                 ];
                 break;
+            case "api.fixed-assets.detele":
+                $rule = [
+                    "ids"               => "required",
+                ];
+                break;
             case "":
                 $rule = [];
                 break;
@@ -50,7 +55,8 @@ class FixedAssetsRequest extends FormRequest
             'type.integer'                  => '状态 type 必须是整型',
             'type.in'                       => '状态参数可选0-已损坏,1-在用,2-维修中',
             'install_date.required'         => '安装时间 install_date 必须',
-            'install_date.integer'          => '安装时间 install_date 必须是整型'
+            'install_date.integer'          => '安装时间 install_date 必须是整型',
+            'ids.required'                  => '删除id 必须',
         ];
     }
 }
