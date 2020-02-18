@@ -45,11 +45,7 @@ return [
         ],
 
         'api' => [
-<<<<<<< HEAD
-            'driver'   => 'token',
-=======
             'driver' => 'jwt',
->>>>>>> material_management
             'provider' => 'users',
         ],
     ],
@@ -74,11 +70,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-<<<<<<< HEAD
-            'model'  => App\User::class,
-=======
             'model' => App\Model\User::class,
->>>>>>> material_management
         ],
 
         // 'users' => [
@@ -109,11 +101,7 @@ return [
             'expire'   => 60,
         ],
     ],
-<<<<<<< HEAD
-=======
-
     'auth' => [
         'jwt' => 'Dingo\Api\Auth\Provider\JWT',
     ],
->>>>>>> material_management
 ];
