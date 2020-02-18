@@ -262,5 +262,28 @@ $api->version('v1', [
             //预约订单批量删除
             $api->delete('/', 'MemberManagement\BookBedController@batchDelete');
         });
+
+        // 入住登记
+        $api->group(["prefix" => "check-in"], function ($api){
+            $api->post('/', 'MemberManagement\CheckInManageController@store')->name('api.member-manage.check-in.store');
+
+            $api->post('/upload', 'MemberManagement\CheckInManageController@upload');
+
+            //入住登记详情
+            $api->get('/{id}', 'MemberManagement\CheckInManageController@detail')->where(['id' => '\d+']);
+
+            //入住登记删除
+            $api->delete('/{id}', 'MemberManagement\CheckInManageController@delete')->where(['id' => '\d+']);
+
+            //入住登记列表
+            $api->get('/list', 'MemberManagement\CheckInManageController@list');
+
+            //入住登记搜索
+            $api->get('/search', 'MemberManagement\CheckInManageController@search');
+
+            //入住登记批量删除
+            $api->delete('/', 'MemberManagement\CheckInManageController@batchDelete');
+
+        });
     });
 });
