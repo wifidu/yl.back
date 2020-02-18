@@ -42,7 +42,7 @@ class FixedAssetsRepository
     public function item($id)
     {
         //查询缓存
-        $cache = $this->_redis->get(self::CACHE_KEY_RULE_PRE . $id);
+        $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $id));
 
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)){
