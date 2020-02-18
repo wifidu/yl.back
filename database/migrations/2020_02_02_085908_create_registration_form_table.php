@@ -24,6 +24,9 @@ class CreateRegistrationFormTable extends Migration
             // 增加是否删除字段
             $table->softDeletes()->comment('软删除设置');
             $table->timestamps();
+
+            // 增加体检报告路径字段
+            $table->string('medical_port_path', 128)->comment('体检报告路径')->default('');
         });
     }
 

@@ -75,6 +75,7 @@ $api->version('v1', [
         });
 
     });
+
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
 
@@ -97,66 +98,86 @@ $api->version('v1', [
 
         });
 
-        $api->group(["prefix" => "member-manage"], function ($api) {
-            // 会员档案路由注册
-            $api->group(["prefix" => "member-profile"], function ($api) {
-                //新增会员
-                $api->post('/', 'MemberProfile\MemberProfileController@store')->name('api.member-profile.store');
+        // 收款账单
+        $api->group(["prefix" => "refund"], function ($api){
+          $api->get('/', 'FinancialManagement\RefundController@show');
 
-                //会员信息修改
-                $api->post('/{id}', 'MemberProfile\MemberProfileController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+          $api->get('/no/{no}', 'FinancialManagement\RefundController@showWithNo');
 
-                //会员详情
-                $api->get('/{id}', 'MemberProfile\MemberProfileController@detail')->where(['id' => '\d+']);
+          $api->get('/status/{status}', 'FinancialManagement\RefundController@showWithStatus');
 
-                //会员删除
-                $api->delete('/{id}', 'MemberProfile\MemberProfileController@delete')->where(['id' => '\d+']);
+          $api->get('/type/{type}', 'FinancialManagement\RefundController@showWithType');
 
-                //会员列表
-                $api->get('/list', 'MemberProfile\MemberProfileController@list');
+          $api->post('/', 'FinancialManagement\RefundController@store');
 
-                //会员搜索
-                $api->get('/search', 'MemberProfile\MemberProfileController@search');
-            });
+          $api->patch('/', 'FinancialManagement\RefundController@update');
 
-            // 预约占床
-            $api->group(["prefix" => "book-bed"], function ($api) {
-                //新增预约订单
-                $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-profile.store');
+          $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
+        });
+    });
 
-                //预约订单信息修改
-                $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+    $api->group(["prefix" => "member-manage"], function ($api) {
+        // 会员档案路由注册
+        $api->group(["prefix" => "member-profile"], function ($api) {
+            //新增或修改会员
+            $api->post('/', 'MemberProfile\MemberProfileController@store')->name('api.member-profile.store');
 
-                //预约订单详情
-                $api->get('/{id}', 'MemberManagement\BookBedController@detail')->where(['id' => '\d+']);
+            //会员详情
+            $api->get('/{id}', 'MemberProfile\MemberProfileController@detail')->where(['id' => '\d+']);
 
-                //预约订单取消
-                $api->delete('/{id}', 'MemberManagement\BookBedController@cancel')->where(['id' => '\d+']);
+            //会员删除
+            $api->delete('/{id}', 'MemberProfile\MemberProfileController@delete')->where(['id' => '\d+']);
 
-                //预约订单列表
-                $api->get('/list', 'MemberManagement\BookBedController@list');
+            //会员列表
+            $api->get('/list', 'MemberProfile\MemberProfileController@list');
 
-                //预约订单搜索
-                $api->get('/search', 'MemberManagement\BookBedController@search');
+            //会员搜索
+            $api->get('/search', 'MemberProfile\MemberProfileController@search');
+        });
 
-                //预约订单批量删除
-                $api->delete('/', 'MemberManagement\BookBedController@batchDelete');
-            });
-            // 收款账单
-            $api->group(["prefix" => "refund"], function ($api){
-              $api->get('/', 'FinancialManagement\RefundController@show');
+        // 预约占床
+        $api->group(["prefix" => "book-bed"], function ($api) {
+            //新增或修改预约订单
+            $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-profile.store');
 
-              $api->get('/no/{no}', 'FinancialManagement\RefundController@showWithNo');
+            //预约订单详情
+            $api->get('/{id}', 'MemberManagement\BookBedController@detail')->where(['id' => '\d+']);
 
-              $api->get('/status/{status}', 'FinancialManagement\RefundController@showWithStatus');
+            //预约订单取消
+            $api->delete('/{id}', 'MemberManagement\BookBedController@cancel')->where(['id' => '\d+']);
 
-              $api->get('/type/{type}', 'FinancialManagement\RefundController@showWithType');
+            //预约订单列表
+            $api->get('/list', 'MemberManagement\BookBedController@list');
 
-              $api->post('/', 'FinancialManagement\RefundController@store');
+            //预约订单搜索
+            $api->get('/search', 'MemberManagement\BookBedController@search');
 
-              $api->patch('/', 'FinancialManagement\RefundController@update');
+            //预约订单批量删除
+            $api->delete('/', 'MemberManagement\BookBedController@batchDelete');
+        });
 
-              $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
-            });
+        // 入住登记
+        $api->group(["prefix" => "check-in"], function ($api){
+            $api->post('/', 'MemberManagement\CheckInManageController@store')->name('api.member-manage.check-in.store');
+
+            $api->post('/upload', 'MemberManagement\CheckInManageController@upload');
+
+            //入住登记详情
+            $api->get('/{id}', 'MemberManagement\CheckInManageController@detail')->where(['id' => '\d+']);
+
+            //入住登记删除
+            $api->delete('/{id}', 'MemberManagement\CheckInManageController@delete')->where(['id' => '\d+']);
+
+            //入住登记列表
+            $api->get('/list', 'MemberManagement\CheckInManageController@list');
+
+            //入住登记搜索
+            $api->get('/search', 'MemberManagement\CheckInManageController@search');
+
+            //入住登记批量删除
+            $api->delete('/', 'MemberManagement\CheckInManageController@batchDelete');
+
+        });
+
     });
 });

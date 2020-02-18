@@ -34,11 +34,10 @@ class BookBedRepository
      */
     public function item($id)
     {
-        $msg = BookBed::query()
+        return BookBed::query()
             ->where('id', '=', $id)
             ->where('is_cancel', '=', 0)
             ->first();
-        return $msg;
     }
 
     /**
@@ -99,4 +98,15 @@ class BookBedRepository
     }
 
 
+    /**
+     * 当有预约订单的人入住后所调用的函数
+     * @param $id
+     * @return int
+     */
+    public function CheckIn($id)
+    {
+        return BookBed::query()
+            ->where('id', $id)
+            ->update(['is_checkin' => 1]);
+    }
 }
