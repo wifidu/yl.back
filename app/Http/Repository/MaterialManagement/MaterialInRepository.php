@@ -3,13 +3,13 @@
 
 namespace App\Http\Repository\MaterialManagement;
 
-use App\Model\FixedAssets;
+use App\Model\MaterialIn;
 
-class FixedAssetsRepository
+class MaterialInRepository
 {
     private $_redis;
 
-    const CACHE_KEY_RULE_PRE = 'fixed_assets_';
+    const CACHE_KEY_RULE_PRE = 'material_in_';
 
     public function __construct()
     {
@@ -17,27 +17,26 @@ class FixedAssetsRepository
     }
 
     /**
-     * function 固定资产数据存储或更新
-     * describe 固定资产数据存储或更新
+     * function 物资数据存储或更新
+     * describe 物资数据存储或更新
      * @param $params
      * @return \Illuminate\Database\Eloquent\Model
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:30
+     * 2020/2/11 上午11:12
      */
     public function store($params)
     {
         $id = $params['id'] ?? '';
-
-        return FixedAssets::query()->updateOrCreate(['id' => $id], $params);
+        return MaterialIn::query()->updateOrCreate(['id' => $id], $params);
     }
 
     /**
-     * function 固定资产数据详情
-     * describe 固定资产数据详情
-     * @param $id 数据项id
+     * function 物资数据详情
+     * describe 物资数据详情
+     * @param $id 物资项id
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:31
+     * 2020/2/11 上午11:15
      */
     public function item($id)
     {
@@ -47,7 +46,7 @@ class FixedAssetsRepository
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)){
             //
-            $query = FixedAssets::query()->where(['id' => $id])->first();
+            $query = MaterialIn::query()->where(['id' => $id])->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -57,55 +56,55 @@ class FixedAssetsRepository
     }
 
     /**
-     * function 固定资产数据列表
-     * describe 固定资产数据列表
+     * function 物资数据列表
+     * describe 物资数据列表
      * @param $page 当前页数
-     * @param $page_size 每页大小
+     * @param $page_size 页面大小
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:31
+     * 2020/2/11 上午11:17
      */
     public function list($page, $page_size)
     {
 
-        return FixedAssets::query()->paginate($page_size);
+        return MaterialIn::query()->paginate($page_size);
     }
 
     /**
-     * function 固定资产数据删除
-     * describe 固定资产数据删除
-     * @param $id 数据项id
+     * function 物资数据删除
+     * describe 物资数据删除
+     * @param $id 物资项id
      * @return mixed
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:32
+     * 2020/2/11 上午11:21
      */
     public function delete($id)
     {
         //清除缓存
         $this->cleanCache($id);
 
-        return FixedAssets::query()->where('id', $id)->delete();
+        return MaterialIn::query()->where('id', $id)->delete();
     }
 
     /**
-     * function 固定资产数据批量删除
-     * describe 固定资产数据批量删除
-     * @param $ids 多个数据想项id
+     * function 物资数据批量删除
+     * describe 物资数据批量删除
+     * @param $ids 物资项id
      * @return mixed
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:32
+     * 2020/2/11 上午11:22
      */
     public function batchDelete($ids)
     {
-        return FixedAssets::query()->whereIn('id', $ids)->delete();
+        return MaterialIn::query()->whereIn('id', $ids)->delete();
     }
 
     /**
-     * function 删除缓存
-     * describe 删除缓存
+     * function 清除缓存
+     * describe 清除缓存
      * @param $id
      * @author ZhaoDaYuan
-     * 2020/2/3 下午5:32
+     * 2020/2/11 上午11:23
      */
     private function cleanCache($id)
     {

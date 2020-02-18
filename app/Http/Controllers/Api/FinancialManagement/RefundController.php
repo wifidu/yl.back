@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\FinancialManagement;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\Api\FinancialManagement\RefundRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Service\FinancialManagement\RefundService;
 
@@ -47,7 +48,7 @@ class RefundController extends Controller
         return  $this->refundService->showWithNo($no);
     }
 
-    public function store(Request $request)
+    public function store(RefundRequest $request)
     {
         $reufnd = $request->post();
         return $this->refundService->store($reufnd);
@@ -58,7 +59,7 @@ class RefundController extends Controller
         return $this->refundService->destory($no);
     }
 
-    public function update(Request $request)
+    public function update(RefundRequest $request)
     {
         $refund = $request->all();
         return $this->refundService->update($refund);
