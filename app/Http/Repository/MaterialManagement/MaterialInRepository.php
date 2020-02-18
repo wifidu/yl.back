@@ -3,13 +3,13 @@
 
 namespace App\Http\Repository\MaterialManagement;
 
-use App\Model\Material;
+use App\Model\MaterialIn;
 
-class MaterialRepository
+class MaterialInRepository
 {
     private $_redis;
 
-    const CACHE_KEY_RULE_PRE = 'material_';
+    const CACHE_KEY_RULE_PRE = 'material_in_';
 
     public function __construct()
     {
@@ -27,8 +27,7 @@ class MaterialRepository
     public function store($params)
     {
         $id = $params['id'] ?? '';
-
-        return Material::query()->updateOrCreate(['id' => $id], $params);
+        return MaterialIn::query()->updateOrCreate(['id' => $id], $params);
     }
 
     /**
@@ -46,7 +45,8 @@ class MaterialRepository
 
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)){
-            $query = Material::query()->where(['id' => $id])->first();
+            //
+            $query = MaterialIn::query()->where(['id' => $id])->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -67,7 +67,7 @@ class MaterialRepository
     public function list($page, $page_size)
     {
 
-        return Material::query()->paginate($page_size);
+        return MaterialIn::query()->paginate($page_size);
     }
 
     /**
@@ -83,7 +83,7 @@ class MaterialRepository
         //清除缓存
         $this->cleanCache($id);
 
-        return Material::query()->where('id', $id)->delete();
+        return MaterialIn::query()->where('id', $id)->delete();
     }
 
     /**
@@ -96,7 +96,7 @@ class MaterialRepository
      */
     public function batchDelete($ids)
     {
-        return Material::query()->whereIn('id', $ids)->delete();
+        return MaterialIn::query()->whereIn('id', $ids)->delete();
     }
 
     /**

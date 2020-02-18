@@ -8,10 +8,19 @@
         "php": ">=5.6.4",
         "barryvdh/laravel-ide-helper": "^2.6",
         "dingo/api": "^2.4",
+<<<<<<< HEAD
         "doctrine/dbal": " ~2.3",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "ext-json": "*"
+=======
+        "intervention/image": "^2.5",
+        "laravel/framework": "5.5.*",
+        "laravel/tinker": "~1.0",
+        "predis/predis": "^1.1",
+        "spatie/laravel-permission": "~2.7",
+        "tymon/jwt-auth": "1.0.0-rc.2"
+>>>>>>> material_management
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "~3.2",
