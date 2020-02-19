@@ -34,7 +34,7 @@ class MaterialRequest extends FormRequest
                     "price" => "required|numeric"
                 ];
                 break;
-            case "api.material.detele":
+            case "api.material.delete":
                 $rule = [
                     "ids"               => "required",
                 ];

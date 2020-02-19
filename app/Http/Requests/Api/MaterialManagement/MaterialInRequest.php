@@ -35,7 +35,7 @@ class MaterialInRequest extends FormRequest
                     "in_material"       => "required",
                 ];
                 break;
-            case "api.material.in.detele":
+            case "api.material.in.delete":
                 $rule = [
                     "ids"               => "required",
                 ];
