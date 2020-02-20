@@ -10,7 +10,6 @@ $factory->define(CreditManagement::class, function (Faker $faker) {
         'business_time' => $unix_time,
         'billing_date' => $unix_time,
         'member_name' => $faker->name,
-        'beds' => $beds,
         'payment_type' => $faker->numberBetween(0, 1),
         'amount_receivable' => $faker->randomFloat(2, 100, 90000),
         'account_balance' => $faker->randomFloat(2, 0, 5000),
