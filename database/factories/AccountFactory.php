@@ -18,5 +18,6 @@ $factory->define(Account::class, function (Faker $faker) {
       'other_cost' => $faker->randomFloat(2, 100, 500),
       'created_at' => $date_time,
       'updated_at' => $date_time,
+      'cd_card' => $faker->regexify('[2-5]{1}[0-9]{17}'),
     ];
 });

@@ -20,4 +20,9 @@ class Refund extends Model
         'refund_status',  // 退款状态
         'refund_date',  // 退款日期
     ];
+
+    public function account()
+    {
+        return $this->belongsTo('App\Model\Account');
+    }
 }

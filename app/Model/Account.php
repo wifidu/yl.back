@@ -21,4 +21,14 @@ class Account extends Model
       'nursing_cost',
       'other_cost'
     ];
+
+    public function creditManagement()
+    {
+        return $this->hasMany('App\Model\CreditManagement');
+    }
+
+    public function refund()
+    {
+        return $this->hasMany('App\Model\Refund');
+    }
 }

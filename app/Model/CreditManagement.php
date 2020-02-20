@@ -33,4 +33,8 @@ class CreditManagement extends Model
     /*     $this->attributes['billing_date'] = strtotime($value); */
     /* } */
 
+    public function account()
+    {
+        return $this->belongsTo('App\Model\Account');
+    }
 }
