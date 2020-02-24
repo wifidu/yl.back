@@ -26,13 +26,13 @@ class CreditManagementRequest extends FormRequest
         return [
             "business_time"     => "required",
             "voucher_no"        => "required",
-            "member_name"       => "required",
-            "beds"              => "required",
+            /* "member_name"       => "required", */
             "payment_type"      => "required|integer|in:0,1",
             "amount_receivable" => "required",
             "account_balance"   => "required",
             "billing_date"      => "required",
-            "if_pay"            => "required"
+            "if_pay"            => "required",
+            "account_id"        => "required"
         ];
     }
 
@@ -41,15 +41,15 @@ class CreditManagementRequest extends FormRequest
       return [
           "business_time.required"     => "业务时间必须",
           "voucher_no.required"        => "账单号必须",
-          "member_name.required"       => "会员名称必须",
-          "beds.required"              => "床位必须",
+          /* "member_name.required"    => "会员名称必须", */
           "payment_type.required"      => "收款类型必须",
           "amount_receivable.required" => "应收款必须",
           "account_balance.required"   => "账户余额必须",
           "billing_date.required"      => "账单时间必须",
           "if_pay.required"            => "是否交款必须",
           "payment_type.in"            => "0入住收费，1变更收费",
-          "payment_type.integer"       => "收费类型必须为整数"
+          "payment_type.integer"       => "收费类型必须为整数",
+          'account_id.required'        => "会员id必须"
         ];
     }
 }

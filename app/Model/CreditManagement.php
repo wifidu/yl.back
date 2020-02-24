@@ -21,6 +21,7 @@ class CreditManagement extends Model
           "account_balance",
           "billing_date",
           "if_pay",
+          "account_id",
     ];
 
     /* public function setBusinessTimeAttribute($value) */
