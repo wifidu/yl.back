@@ -12,6 +12,7 @@ class MaterialIn extends Model
 
     protected $fillable = [
         'warehouse_name',       //仓库名称
+        'in_number',            //入库单号
         'origin',               //来源
         'batch_number',         //批号
         'in_time',              //入库时间
@@ -23,8 +24,4 @@ class MaterialIn extends Model
     public function setInMaterialAttribute($value) {
         $this->attributes['in_material'] = json_encode($value);
     }
-
-//    public function getInMaterialAttribute($value) {
-//        $this->attributes['in_material'] = json_decode($value);
-//    }
 }
