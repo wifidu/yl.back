@@ -3,13 +3,13 @@
 
 namespace App\Http\Repository\MaterialManagement;
 
-use App\Model\MaterialIn;
+use App\Model\MaterialOut;
 
-class MaterialInRepository
+class MaterialOutRepository
 {
     private $_redis;
 
-    const CACHE_KEY_RULE_PRE = 'material_in_';
+    const CACHE_KEY_RULE_PRE = 'material_out_';
 
     public function __construct()
     {
@@ -17,26 +17,26 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资入库数据存储或更新
-     * describe 物资入库数据存储或更新
+     * function 物资出库数据存储或更新
+     * describe 物资出库数据存储或更新
      * @param $params
      * @return \Illuminate\Database\Eloquent\Model
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:12
+     * 2020/2/24 上午11:12
      */
     public function store($params)
     {
         $id = $params['id'] ?? '';
-        return MaterialIn::query()->updateOrCreate(['id' => $id], $params);
+        return MaterialOut::query()->updateOrCreate(['id' => $id], $params);
     }
 
     /**
-     * function 物资入库数据详情
-     * describe 物资入库数据详情
+     * function 物资出库数据详情
+     * describe 物资出库数据详情
      * @param $id 物资项id
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:15
+     * 2020/2/24 上午11:15
      */
     public function item($id)
     {
@@ -46,7 +46,7 @@ class MaterialInRepository
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)){
             //
-            $query = MaterialIn::query()->where(['id' => $id])->first();
+            $query = MaterialOut::query()->where(['id' => $id])->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -56,39 +56,39 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资入库数据列表
-     * describe 物资入库数据列表
+     * function 物资出库数据列表
+     * describe 物资出库数据列表
      * @param $page 当前页数
      * @param $page_size 页面大小
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:17
+     * 2020/2/24 上午11:17
      */
     public function list($page, $page_size)
     {
 
-        return MaterialIn::query()->paginate($page_size);
+        return MaterialOut::query()->paginate($page_size);
     }
 
     /**
-     * function 物资入库数据删除
-     * describe 物资入库数据删除
+     * function 物资出库数据删除
+     * describe 物资出库数据删除
      * @param $id 物资项id
      * @return mixed
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:21
+     * 2020/2/24 上午11:21
      */
     public function delete($id)
     {
         //清除缓存
         $this->cleanCache($id);
 
-        return MaterialIn::query()->where('id', $id)->delete();
+        return MaterialOut::query()->where('id', $id)->delete();
     }
 
     /**
-     * function 物资入库数据批量删除
-     * describe 物资入库数据批量删除
+     * function 物资出库数据批量删除
+     * describe 物资出库数据批量删除
      * @param $ids 物资项id
      * @return mixed
      * @author ZhaoDaYuan
@@ -96,7 +96,7 @@ class MaterialInRepository
      */
     public function batchDelete($ids)
     {
-        return MaterialIn::query()->whereIn('id', $ids)->delete();
+        return MaterialOut::query()->whereIn('id', $ids)->delete();
     }
 
     /**

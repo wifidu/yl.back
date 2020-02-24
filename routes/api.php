@@ -106,7 +106,30 @@ $api->version('v1', [
 
             // 物资入库数据列表
             $api->get('/list', 'MaterialManagement\MaterialInController@list');
-        });
 
+            // 物资入库单号获取
+            $api->get('/odd_number','MaterialManagement\MaterialInController@RKoddNumber');
+        });
+        $api->group(["prefix" => "material-out"], function ($api) {
+            // 物资出库数据存储
+            $api->post('/', 'MaterialManagement\MaterialOutController@store')->name('api.material.out.store');
+
+            // 物资出库数据详情
+            $api->get('/{id}', 'MaterialManagement\MaterialOutController@detail')
+                ->where(['id' => '\d+']);
+
+            // 物资出库数据删除
+            $api->delete('/{id}', 'MaterialManagement\MaterialOutController@delete')
+                ->where(['id' => '\d+']);
+
+            // 物资出库数据批量删除
+            $api->delete('/', 'MaterialManagement\MaterialOutController@batchDelete')->name('api.material.out.delete');
+
+            // 物资出库数据列表
+            $api->get('/list', 'MaterialManagement\MaterialOutController@list');
+
+            // 物资出库单号获取
+            $api->get('/odd_number','MaterialManagement\MaterialOutController@CKoddNumber');
+        });
     });
 });
