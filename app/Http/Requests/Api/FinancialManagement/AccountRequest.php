@@ -33,6 +33,7 @@ class AccountRequest extends FormRequest
             'meal_cost'       => 'required',
             'nursing_cost'    => 'required',
             'other_cost'      => 'required',
+            'cd_card'         => 'required',
         ];
     }
 
@@ -52,6 +53,7 @@ class AccountRequest extends FormRequest
             'meal_cost.required'       => '餐费必须',
             'nursing_cost.required'    => '护理费必须',
             'other_cost.required'      => '其他月度费必须',
+            'cd_card.required'         => '身份证必须',
         ];
     }
 }

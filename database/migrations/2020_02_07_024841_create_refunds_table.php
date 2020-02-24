@@ -34,7 +34,6 @@ class CreateRefundsTable extends Migration
     }
 
     /**
-            $table-><++>;
      * Reverse the migrations.
      *
      * @return void

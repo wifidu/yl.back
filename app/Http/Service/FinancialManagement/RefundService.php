@@ -132,8 +132,8 @@ class RefundService
         }
       }else{
           $refunds['business_time'] = strtotime($refunds['business_time']);
-          $refunds['refund_date'] == null ? : $refunds['refund_date'] = strtotime($refunds['refund_date']);
-
+          // 如果未退款就讲退款日期设置成-1,这里换成null
+          $refunds['refund_date'] = $refunds['refund_date'] == -1 ? null :strtotime($refunds['refund_date']);
           // 将数字转换为收费类型，0：变更收费、1：请假退费、2：押金退费、3：退院退费 4：直接退费
       }
 
