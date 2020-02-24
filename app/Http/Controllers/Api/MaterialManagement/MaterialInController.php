@@ -17,12 +17,12 @@ class MaterialInController
     }
 
     /**
-     * function 物资数据存储或更新
-     * describe 物资数据存储或更新
+     * function 物资入库数据存储或更新
+     * describe 物资入库数据存储或更新
      * @param MaterialRequest $request
      * @return array
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:11
+     * 2020/2/18 上午11:11
      */
     public function store(MaterialInRequest $request)
     {
@@ -31,12 +31,12 @@ class MaterialInController
     }
 
     /**
-     * function 物资数据详情
-     * describe 物资数据详情
+     * function 物资入库数据详情
+     * describe 物资入库数据详情
      * @param $id 物资项id
      * @return array
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:13
+     * 2020/2/18 上午11:13
      */
     public function detail($id)
     {
@@ -44,12 +44,12 @@ class MaterialInController
     }
 
     /**
-     * function 物资数据列表
-     * describe 物资数据列表
+     * function 物资入库数据列表
+     * describe 物资入库数据列表
      * @param Request $request 包含$page,$page_size
      * @return array
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:15
+     * 2020/2/18 上午11:15
      */
     public function list(Request $request)
     {
@@ -59,12 +59,12 @@ class MaterialInController
     }
 
     /**
-     * function 物资数据删除
-     * describe 物资数据删除
+     * function 物资入库数据删除
+     * describe 物资入库数据删除
      * @param $id 物资项id
      * @return array
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:21
+     * 2020/2/18 上午11:21
      */
     public function delete($id)
     {
@@ -72,17 +72,29 @@ class MaterialInController
     }
 
     /**
-     * function 物资数据批量删除
-     * describe 物资数据批量删除
+     * function 物资入库数据批量删除
+     * describe 物资入库数据批量删除
      * @param MaterialRequest $request 多个物资项id
      * @return array
      * @author ZhaoDaYuan
-     * 2020/2/11 上午11:22
+     * 2020/2/18 上午11:22
      */
     public function batchDelete(MaterialInRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];
         return $this->_materialInService->batchDelete($ids);
+    }
+
+    /**
+     * function 物资入库单号获取
+     * describe 物资入库单号获取
+     * @return string
+     * @author ZhaoDaYuan
+     * 2020/2/24 上午11:46
+     */
+    public function RKoddNumber()
+    {
+        return 'RK'.date('Ymd').time();
     }
 }

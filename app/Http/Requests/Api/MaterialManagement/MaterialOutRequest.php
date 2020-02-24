@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\MaterialManagement;
 
 use Dingo\Api\Http\FormRequest;
 
-class MaterialInRequest extends FormRequest
+class MaterialOutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,18 +25,18 @@ class MaterialInRequest extends FormRequest
     {
         $routeName = $this->route()->getName();
         switch ($routeName) {
-            case "api.material.in.store":
+            case "api.material.out.store":
                 $rule = [
                     "warehouse_name"    => "required",
-                    "in_number"         => "required",
-                    "origin"            => "required",
-                    "batch_number"      => "required",
-                    "in_time"           => "required|integer",
+                    "out_number"        => "required",
+                    "whereabouts"       => "required",
+                    "user"              => "required",
+                    "out_time"          => "required|integer",
                     "operator"          => "required",
-                    "in_material"       => "required",
+                    "out_material"      => "required",
                 ];
                 break;
-            case "api.material.in.delete":
+            case "api.material.out.delete":
                 $rule = [
                     "ids"               => "required",
                 ];
@@ -52,14 +52,14 @@ class MaterialInRequest extends FormRequest
     public function messages()
     {
         return [
-            'warehouse_name.required'        => '仓库名称 必须',
-            'in_number.required'             => '入库单号 必须',
-            'origin.required'                => '来源 必须',
-            'batch_number.required'          => '批号 必须',
-            'in_time.required'               => '入库时间 必须',
-            'operator.required'              => '操作人 必须',
-            'in_material.required'           => '入库清单 必须',
-            'ids.required'                   => '删除id 必须',
+            'warehouse_name.required'       => '仓库名称 必须',
+            'out_number.required'           => '入库单号 必须',
+            'whereabouts.required'          => '去向 必须',
+            'user.required'                 => '领用人 必须',
+            'out_time.required'             => '出库时间 必须',
+            'operator.required'             => '操作人 必须',
+            'out_material.required'         => '入库清单 必须',
+            'ids.required'                  => '删除id 必须',
         ];
     }
 }
