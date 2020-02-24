@@ -27,7 +27,6 @@ class PositionManageController
      */
     public function store(PositionManageRequest $request)
     {
-        exit(print_r($request->all()));
         $params = $request->post();
         return $this->_positionManageService->store($params);
     }

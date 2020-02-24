@@ -179,7 +179,9 @@ $api->version('v1', [
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
     });
+    //人事管理
     $api->group(["prefix" => "personnel-manage"], function ($api) {
+        //部门管理
         $api->group(["prefix" => "department-manage"], function ($api) {
 
             // 新增或编辑部门数据
@@ -200,6 +202,7 @@ $api->version('v1', [
             $api->get('/list', 'PersonnelManage\DepartmentManageController@list');
 
         });
+        //员工管理
         $api->group(["prefix" => "staff-manage"], function ($api) {
 
             // 新增或编辑员工数据
@@ -220,6 +223,7 @@ $api->version('v1', [
             $api->get('/list', 'PersonnelManage\StaffManageController@list');
 
         });
+        //岗位管理
         $api->group(["prefix" => "position-manage"], function ($api) {
             // 新增或编辑岗位数据
             $api->post('/', 'PersonnelManage\PositionManageController@store')->name('api.position-manage.store');
@@ -237,6 +241,26 @@ $api->version('v1', [
 
             // 岗位数据列表
             $api->get('/list', 'PersonnelManage\PositionManageController@list');
+        });
+
+        //团队管理
+        $api->group(["prefix" => "team-manage"], function ($api) {
+            // 新增或编辑团队数据
+            $api->post('/', 'PersonnelManage\TeamManageController@store')->name('api.team-manage.store');
+
+            // 团队数据详情
+            $api->get('/{id}', 'PersonnelManage\TeamManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 团队数据删除
+            $api->delete('/{id}', 'PersonnelManage\TeamManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 团队数据批量删除
+            $api->delete('/', 'PersonnelManage\TeamManageController@batchDelete');
+
+            // 团队数据列表
+            $api->get('/list', 'PersonnelManage\TeamManageController@list');
         });
 
     });
