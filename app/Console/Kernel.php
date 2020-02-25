@@ -17,7 +17,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-
         \App\Console\Commands\GenerateToken::class,
         \App\Console\Commands\AddModule::class,
     ];

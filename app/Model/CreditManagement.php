@@ -21,6 +21,7 @@ class CreditManagement extends Model
           "account_balance",
           "billing_date",
           "if_pay",
+          "account_id",
     ];
 
     /* public function setBusinessTimeAttribute($value) */
@@ -33,4 +34,8 @@ class CreditManagement extends Model
     /*     $this->attributes['billing_date'] = strtotime($value); */
     /* } */
 
+    public function account()
+    {
+        return $this->belongsTo('App\Model\Account');
+    }
 }

@@ -14,25 +14,25 @@ class RefundRespository
 
     public function show($page, $page_size)
     {
-        return $this->refund->paginate($page_size);
+        return $this->refund->with('account')->paginate($page_size);
     }
 
     public function showWithType($type, $page, $page_size)
     {
-        return $this->refund->where('refund_type', $type)->paginate($page_size);
+        return $this->refund->where('refund_type', $type)->with('account')->paginate($page_size);
     }
 
     public function showWithStatus($status, $page, $page_size)
     {
         return $this->refund
-                    ->where('refund_status', $status)
+                    ->where('refund_status', $status)->with('account')
                     ->paginate($page_size);
     }
 
     public function showWithNo($no)
     {
         return $this->refund
-                    ->where('refund_no', $no)
+                    ->where('refund_no', $no)->with('account')
                     ->get();
     }
 

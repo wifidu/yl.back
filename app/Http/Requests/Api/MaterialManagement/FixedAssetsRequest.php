@@ -33,7 +33,7 @@ class FixedAssetsRequest extends FormRequest
                     "install_date" => "required|integer"
                 ];
                 break;
-            case "api.fixed-assets.detele":
+            case "api.fixed-assets.delete":
                 $rule = [
                     "ids"               => "required",
                 ];

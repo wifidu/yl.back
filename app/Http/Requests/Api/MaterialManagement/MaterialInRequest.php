@@ -28,6 +28,7 @@ class MaterialInRequest extends FormRequest
             case "api.material.in.store":
                 $rule = [
                     "warehouse_name"    => "required",
+                    "in_number"         => "required",
                     "origin"            => "required",
                     "batch_number"      => "required",
                     "in_time"           => "required|integer",
@@ -35,7 +36,7 @@ class MaterialInRequest extends FormRequest
                     "in_material"       => "required",
                 ];
                 break;
-            case "api.material.in.detele":
+            case "api.material.in.delete":
                 $rule = [
                     "ids"               => "required",
                 ];
@@ -52,6 +53,7 @@ class MaterialInRequest extends FormRequest
     {
         return [
             'warehouse_name.required'        => '仓库名称 必须',
+            'in_number.required'             => '入库单号 必须',
             'origin.required'                => '来源 必须',
             'batch_number.required'          => '批号 必须',
             'in_time.required'               => '入库时间 必须',

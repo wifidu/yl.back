@@ -106,8 +106,31 @@ $api->version('v1', [
 
             // 物资入库数据列表
             $api->get('/list', 'MaterialManagement\MaterialInController@list');
-        });
 
+            // 物资入库单号获取
+            $api->get('/odd_number','MaterialManagement\MaterialInController@RKoddNumber');
+        });
+        $api->group(["prefix" => "material-out"], function ($api) {
+            // 物资出库数据存储
+            $api->post('/', 'MaterialManagement\MaterialOutController@store')->name('api.material.out.store');
+
+            // 物资出库数据详情
+            $api->get('/{id}', 'MaterialManagement\MaterialOutController@detail')
+                ->where(['id' => '\d+']);
+
+            // 物资出库数据删除
+            $api->delete('/{id}', 'MaterialManagement\MaterialOutController@delete')
+                ->where(['id' => '\d+']);
+
+            // 物资出库数据批量删除
+            $api->delete('/', 'MaterialManagement\MaterialOutController@batchDelete')->name('api.material.out.delete');
+
+            // 物资出库数据列表
+            $api->get('/list', 'MaterialManagement\MaterialOutController@list');
+
+            // 物资出库单号获取
+            $api->get('/odd_number','MaterialManagement\MaterialOutController@CKoddNumber');
+        });
     });
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
@@ -156,7 +179,9 @@ $api->version('v1', [
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
     });
+    //人事管理
     $api->group(["prefix" => "personnel-manage"], function ($api) {
+        //部门管理
         $api->group(["prefix" => "department-manage"], function ($api) {
 
             // 新增或编辑部门数据
@@ -177,6 +202,7 @@ $api->version('v1', [
             $api->get('/list', 'PersonnelManage\DepartmentManageController@list');
 
         });
+        //员工管理
         $api->group(["prefix" => "staff-manage"], function ($api) {
 
             // 新增或编辑员工数据
@@ -197,6 +223,7 @@ $api->version('v1', [
             $api->get('/list', 'PersonnelManage\StaffManageController@list');
 
         });
+        //岗位管理
         $api->group(["prefix" => "position-manage"], function ($api) {
             // 新增或编辑岗位数据
             $api->post('/', 'PersonnelManage\PositionManageController@store')->name('api.position-manage.store');
@@ -214,6 +241,26 @@ $api->version('v1', [
 
             // 岗位数据列表
             $api->get('/list', 'PersonnelManage\PositionManageController@list');
+        });
+
+        //团队管理
+        $api->group(["prefix" => "team-manage"], function ($api) {
+            // 新增或编辑团队数据
+            $api->post('/', 'PersonnelManage\TeamManageController@store')->name('api.team-manage.store');
+
+            // 团队数据详情
+            $api->get('/{id}', 'PersonnelManage\TeamManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 团队数据删除
+            $api->delete('/{id}', 'PersonnelManage\TeamManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 团队数据批量删除
+            $api->delete('/', 'PersonnelManage\TeamManageController@batchDelete');
+
+            // 团队数据列表
+            $api->get('/list', 'PersonnelManage\TeamManageController@list');
         });
 
     });

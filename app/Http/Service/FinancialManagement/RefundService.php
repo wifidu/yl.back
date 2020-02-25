@@ -105,29 +105,36 @@ class RefundService
               case 3:
                 $refund->refund_type = '退院退费';
                 break;
+              case 4:
+                $refund->refund_type = '直接退费';
+                break;
           }
+
+          switch ($refund->spending_way)
+          {
+              case 0:
+                $refund->spending_way = '现金';
+                break;
+              case 1:
+                $refund->spending_way = '刷卡';
+                break;
+              case 2:
+                $refund->spending_way = '转账';
+                break;
+              case 3:
+                $refund->spending_way = '微信';
+                break;
+              case 4:
+                $refund->spending_way = '支付宝';
+                break;
+          }
+          $refund->refund_status = $refund->refund_status == 1 ? '已退款' : '未退款';
         }
       }else{
           $refunds['business_time'] = strtotime($refunds['business_time']);
-          $refunds['refund_date'] == null ? : $refunds['refund_date'] = strtotime($refunds['refund_date']);
-
-          // 将数字转换为收费类型，0：变更收费、1：请假退费、2：押金退费、3：退院退费
-
-          switch ($refunds['refund_type'])
-          {
-              case '变更收费':
-                $refunds['refund_type'] = 0;
-                break;
-              case '请假退费':
-                $refunds['refund_type'] = 1;
-                break;
-              case '押金退费':
-                $refunds['refund_type'] = 2;
-                break;
-              case '退院退费':
-                $refunds['refund_type'] = 3;
-                break;
-          }
+          // 如果未退款就讲退款日期设置成-1,这里换成null
+          $refunds['refund_date'] = $refunds['refund_date'] == -1 ? null :strtotime($refunds['refund_date']);
+          // 将数字转换为收费类型，0：变更收费、1：请假退费、2：押金退费、3：退院退费 4：直接退费
       }
 
       return $refunds;

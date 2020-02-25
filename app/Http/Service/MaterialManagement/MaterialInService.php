@@ -19,8 +19,8 @@ class MaterialInService
     }
 
     /**
-     * function 物资数据存储或更新
-     * describe 物资数据存储或更新
+     * function 物资入库数据存储或更新
+     * describe 物资入库数据存储或更新
      * @param $params
      * @return array
      * @author ZhaoDaYuan
@@ -39,8 +39,8 @@ class MaterialInService
     }
 
     /**
-     * function 物资数据详情
-     * describe 物资数据详情
+     * function 物资入库数据详情
+     * describe 物资入库数据详情
      * @param $id 物资项id
      * @return array
      * @author ZhaoDaYuan
@@ -58,8 +58,8 @@ class MaterialInService
     }
 
     /**
-     * function 物资数据列表
-     * describe 物资数据列表
+     * function 物资入库数据列表
+     * describe 物资入库数据列表
      * @param $page  当前页数
      * @param $page_size 页面大小
      * @return array
@@ -74,8 +74,8 @@ class MaterialInService
     }
 
     /**
-     * function 物资数据删除
-     * describe 物资数据删除
+     * function 物资入库数据删除
+     * describe 物资入库数据删除
      * @param $id 物资项id
      * @return array
      * @author ZhaoDaYuan
@@ -93,8 +93,8 @@ class MaterialInService
     }
 
     /**
-     * function 物资数据批量删除
-     * describe 物资数据批量删除
+     * function 物资入库数据批量删除
+     * describe 物资入库数据批量删除
      * @param $ids 多个物资项id
      * @return array
      * @author ZhaoDaYuan

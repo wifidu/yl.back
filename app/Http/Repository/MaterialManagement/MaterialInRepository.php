@@ -17,8 +17,8 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资数据存储或更新
-     * describe 物资数据存储或更新
+     * function 物资入库数据存储或更新
+     * describe 物资入库数据存储或更新
      * @param $params
      * @return \Illuminate\Database\Eloquent\Model
      * @author ZhaoDaYuan
@@ -31,8 +31,8 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资数据详情
-     * describe 物资数据详情
+     * function 物资入库数据详情
+     * describe 物资入库数据详情
      * @param $id 物资项id
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
      * @author ZhaoDaYuan
@@ -56,8 +56,8 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资数据列表
-     * describe 物资数据列表
+     * function 物资入库数据列表
+     * describe 物资入库数据列表
      * @param $page 当前页数
      * @param $page_size 页面大小
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
@@ -71,8 +71,8 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资数据删除
-     * describe 物资数据删除
+     * function 物资入库数据删除
+     * describe 物资入库数据删除
      * @param $id 物资项id
      * @return mixed
      * @author ZhaoDaYuan
@@ -87,8 +87,8 @@ class MaterialInRepository
     }
 
     /**
-     * function 物资数据批量删除
-     * describe 物资数据批量删除
+     * function 物资入库数据批量删除
+     * describe 物资入库数据批量删除
      * @param $ids 物资项id
      * @return mixed
      * @author ZhaoDaYuan

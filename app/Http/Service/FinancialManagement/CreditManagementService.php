@@ -95,12 +95,13 @@ class CreditManagementService
 
                 // 将0/1 转换为退费类型
                 $credit->payment_type = 1 == $credit->payment_type ? '变更收费' : '入住收费';
+                $credit->if_pay = $credit->if_pay == 1 ? '已支付' : '未支付';
             }
           return $credits;
       }else{
           $bill['business_time'] = strtotime( $bill['business_time'] );
           $bill['billing_date'] = strtotime( $bill['billing_date'] );
-          $bill['payment_type'] = $bill['payment_type'] == '变更收费' ? 1 : 0 ;
+          /* $bill['payment_type'] = $bill['payment_type'] == '变更收费' ? 1 : 0 ; */
           return $bill;
       }
     }

@@ -19,6 +19,17 @@ class Account extends Model
       'beds_cost',
       'meal_cost',
       'nursing_cost',
-      'other_cost'
+      'other_cost',
+      'cd_card'
     ];
+
+    public function creditManagement()
+    {
+        return $this->hasMany('App\Model\CreditManagement');
+    }
+
+    public function refund()
+    {
+        return $this->hasMany('App\Model\Refund');
+    }
 }
