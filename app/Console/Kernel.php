@@ -17,11 +17,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-<<<<<<< HEAD
-=======
+
         \App\Console\Commands\GenerateToken::class,
         \App\Console\Commands\AddModule::class,
->>>>>>> material_management
     ];
 
     /**

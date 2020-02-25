@@ -224,9 +224,6 @@ return [
             'indent_size'  => env('API_JSON_FORMAT_INDENT_SIZE', 2),
         ],
     ],
-<<<<<<< HEAD
-=======
-
     /*
      * 接口频率限制
      */
@@ -243,5 +240,4 @@ return [
         ],
     ],
 
->>>>>>> material_management
 ];

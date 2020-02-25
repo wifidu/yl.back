@@ -285,5 +285,26 @@ $api->version('v1', [
             $api->delete('/', 'MemberManagement\CheckInManageController@batchDelete');
 
         });
+
+        // 退住登记
+        $api->group(["prefix" => "check-out"], function ($api){
+            $api->post('/', 'MemberManagement\CheckOutController@store')->name('api.member-manage.check-out.store');
+
+            //退住登记详情
+            $api->get('/{id}', 'MemberManagement\CheckOutController@detail')->where(['id' => '\d+']);
+
+            //退住登记删除
+            $api->delete('/{id}', 'MemberManagement\CheckOutController@delete')->where(['id' => '\d+']);
+
+            //退住登记列表
+            $api->get('/list', 'MemberManagement\CheckOutController@list');
+
+            //退住登记搜索
+            $api->get('/search', 'MemberManagement\CheckOutController@search');
+
+            //退住登记批量删除
+            $api->delete('/', 'MemberManagement\CheckOutController@batchDelete');
+
+        });
     });
 });

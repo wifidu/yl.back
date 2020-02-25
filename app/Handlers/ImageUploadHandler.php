@@ -2,7 +2,7 @@
 
 namespace App\Handlers;
 
-use Image;
+use App\Model\Image;
 
 class ImageUploadHandler
 {
