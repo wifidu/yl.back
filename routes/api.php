@@ -316,6 +316,9 @@ $api->version('v1', [
 
             $api->post('/upload', 'MemberManagement\CheckInManageController@upload');
 
+            // 入住登记修改
+            $api->post('/change', 'MemberManagement\CheckInManageController@change');
+
             //入住登记详情
             $api->get('/{id}', 'MemberManagement\CheckInManageController@detail')->where(['id' => '\d+']);
 

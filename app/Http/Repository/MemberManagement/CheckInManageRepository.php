@@ -89,10 +89,46 @@ class CheckInManageRepository
             ->delete();
     }
 
+    /**
+     * 上传文件处理
+     * @param $id
+     * @param $path
+     * @return int
+     */
     public function upload($id, $path)
     {
         return CheckInManage::query()
             ->where('id', '=', $id)
             ->update(['medical_port_path' => $path]);
+    }
+
+    /**
+     * 业务变更以及膳食变更
+     * @param $params
+     * @return int|null
+     */
+    public function change($params)
+    {
+        if (isset($params['bed_cost'])) {
+            $params['bed_cost'] = json_encode($params['bed_cost']);
+            return CheckInManage::query()
+                ->where('id', '=', $params['id'])
+                ->update([
+                    'business_change_reason' => $params['reason'],
+                    'business_change_date'   => $params['date'],
+                    'bed_cost'               => $params['bed_cost']
+                    ]);
+        } elseif (isset($params['meal_cost'])) {
+            $params['meal_cost'] = json_encode($params['meal_cost']);
+            return CheckInManage::query()
+                ->where('id', '=', $params['id'])
+                ->update([
+                    'meal_change_reason' => $params['reason'],
+                    'meal_change_date'   => $params['date'],
+                    'meal_cost'          => $params['meal_cost']
+                ]);
+        } else {
+            return null;
+        }
     }
 }

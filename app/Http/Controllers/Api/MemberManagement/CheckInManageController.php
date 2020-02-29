@@ -95,4 +95,15 @@ class CheckInManageController extends Controller
         return $this->_checkInManage->upload($id, $file);
     }
 
+
+    /**
+     * 膳食变更以及业务变更
+     * @param CheckInManageRequest $request
+     * @return array
+     */
+    public function change(CheckInManageRequest $request)
+    {
+        $params = $request->post();
+        return $this->_checkInManage->change($params);
+    }
 }

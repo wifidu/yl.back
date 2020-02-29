@@ -130,4 +130,19 @@ class CheckInManageService
         return $this->apiReturn('', CodeEnum::FAIL);
     }
 
+    /**
+     * 业务变更以及膳食变更 api
+     * @param $params
+     * @return array
+     */
+    public function change($params)
+    {
+        $ok = $this->_checkInManageRepository->change($params);
+        if ($ok) {
+            return $this->apiReturn('', CodeEnum::SUCCESS);
+        }
+
+        return $this->apiReturn('', CodeEnum::FAIL);
+    }
+
 }

@@ -21,6 +21,10 @@ class CreateRegistrationFormTable extends Migration {
 			$table->text('bed_cost')->comment('床位费(床位号、房间标准、收费标准)');
 			$table->text('meal_cost')->comment('膳食费(类型、套餐名称、收费标准)');
 			$table->text('one-time_cost')->comment('一次性费(类型、项目名称、收费标准)');
+			$table->text('business_change_reason');
+			$table->text('meal_change_reason');
+			$table->integer('meal_change_date');
+			$table->integer('business_change_date');
 			$table->softDeletes()->comment('软删除设置');
 			$table->timestamps();
 			$table->string('medical_port_path', 128)->default('')->comment('体检报告路径');
