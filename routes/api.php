@@ -155,6 +155,13 @@ $api->version('v1', [
             $api->patch('/', 'FinancialManagement\AccountController@update');
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
+        // 机构账户
+        $api->group(["prefix" => "agency"], function ($api){
+            $api->get('/', 'FinancialManagement\AgencyController@show');
+            $api->post('/', 'FinancialManagement\AgencyController@store');
+            $api->patch('/', 'FinancialManagement\AgencyController@update');
+            $api->delete('/{business_number}', 'FinancialManagement\AgencyController@destory');
+        });
     });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
