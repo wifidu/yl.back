@@ -19,6 +19,7 @@ class MaterialIn extends Model
         'operator',             //操作人
         'remarks',              //备注
         'in_material',          //入库清单
+        'inventory_id',         //盘点id
     ];
 
     public function setInMaterialAttribute($value) {

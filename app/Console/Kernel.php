@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\GenerateToken::class,
         \App\Console\Commands\AddModule::class,
+        \App\Console\Commands\GenerateInventory::class,
     ];
 
     /**
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('p_o:add-module')->everyThirtyMinutes();
+        $schedule->command('p_o:generate-inventory')->monthly();
     }
 
     /**
