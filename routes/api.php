@@ -131,6 +131,35 @@ $api->version('v1', [
             // 物资出库单号获取
             $api->get('/odd_number','MaterialManagement\MaterialOutController@CKoddNumber');
         });
+        $api->group(["prefix" => "inventory-management"], function ($api) {
+            // 生成上个月盘点数据
+            $api->post('/generate', 'MaterialManagement\InventoryManagementController@generate');
+
+            // 盘点管理-盘点
+            $api->post('/', 'MaterialManagement\InventoryManagementController@store')->name('api.inventory.store');
+
+            // 盘点管理-数据详情
+            $api->get('/{id}', 'MaterialManagement\InventoryManagementController@detail')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理-盘点详情
+            $api->get('/inventoryDetail/{id}', 'MaterialManagement\InventoryManagementController@inventoryDetail')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理-搜索
+//            $api->post('/search', 'MaterialManagement\InventoryManagementController@search')->name('api.inventory.search');
+            $api->post('/search', 'MaterialManagement\InventoryManagementController@search');
+
+            // 盘点管理数据删除
+            $api->delete('/{id}', 'MaterialManagement\InventoryManagementController@delete')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理数据批量删除
+            $api->delete('/', 'MaterialManagement\InventoryManagementController@batchDelete')->name('api.inventory.management.delete');
+
+            // 盘点管理数据列表
+            $api->get('/list', 'MaterialManagement\InventoryManagementController@list');
+        });
     });
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
