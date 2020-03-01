@@ -40,7 +40,7 @@ class InventoryManagementController
         return $this->_inventoryManagementService->delete($id);
     }
 
-    public function batchDelete(FixedAssetsRequest $request)
+    public function batchDelete(InventoryManagementRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];

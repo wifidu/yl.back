@@ -87,14 +87,14 @@ class MaterialInController
     }
 
     /**
-     * function 物资入库单号获取
-     * describe 物资入库单号获取
-     * @return string
-     * @author ZhaoDaYuan
-     * 2020/2/24 上午11:46
-     */
+ * function 物资入库单号获取
+ * describe 物资入库单号获取
+ * @return string
+ * @author ZhaoDaYuan
+ * 2020/2/24 上午11:46
+ */
     public function RKoddNumber()
     {
-        return 'RK'.date('Ymd').time();
+        return $this->_materialInService->RKoddNumber();
     }
 }

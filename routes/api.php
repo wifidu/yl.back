@@ -147,7 +147,6 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
             // 盘点管理-搜索
-//            $api->post('/search', 'MaterialManagement\InventoryManagementController@search')->name('api.inventory.search');
             $api->post('/search', 'MaterialManagement\InventoryManagementController@search');
 
             // 盘点管理数据删除

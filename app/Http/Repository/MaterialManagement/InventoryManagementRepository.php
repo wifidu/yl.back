@@ -186,7 +186,7 @@ class InventoryManagementRepository
         if ($time_range=='all'){
             return DB::select("select * from inventory_management where $search_index like '%$content%'");
         }else{
-            return DB::select("select * from inventory_management where inventory_time > DateAdd(year,$time_range,getdate()) $search_index like '%$content%' ");
+            return DB::select("select * from inventory_management where year(now())-$time_range < inventory_time and $search_index like '%$content%' ");
         }
 
     }
