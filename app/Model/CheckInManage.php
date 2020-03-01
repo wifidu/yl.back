@@ -29,6 +29,10 @@ class CheckInManage extends Model
         "bed_cost",
         "meal_cost",
         "one-time_cost",
+        "business_change_reason",
+        "business_change_date",
+        "meal_change_date",
+        "meal_change_reason"
     ];
 
 }

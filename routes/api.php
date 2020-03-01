@@ -131,6 +131,35 @@ $api->version('v1', [
             // 物资出库单号获取
             $api->get('/odd_number','MaterialManagement\MaterialOutController@CKoddNumber');
         });
+        $api->group(["prefix" => "inventory-management"], function ($api) {
+            // 生成上个月盘点数据
+            $api->post('/generate', 'MaterialManagement\InventoryManagementController@generate');
+
+            // 盘点管理-盘点
+            $api->post('/', 'MaterialManagement\InventoryManagementController@store')->name('api.inventory.store');
+
+            // 盘点管理-数据详情
+            $api->get('/{id}', 'MaterialManagement\InventoryManagementController@detail')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理-盘点详情
+            $api->get('/inventoryDetail/{id}', 'MaterialManagement\InventoryManagementController@inventoryDetail')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理-搜索
+//            $api->post('/search', 'MaterialManagement\InventoryManagementController@search')->name('api.inventory.search');
+            $api->post('/search', 'MaterialManagement\InventoryManagementController@search');
+
+            // 盘点管理数据删除
+            $api->delete('/{id}', 'MaterialManagement\InventoryManagementController@delete')
+                ->where(['id' => '\d+']);
+
+            // 盘点管理数据批量删除
+            $api->delete('/', 'MaterialManagement\InventoryManagementController@batchDelete')->name('api.inventory.management.delete');
+
+            // 盘点管理数据列表
+            $api->get('/list', 'MaterialManagement\InventoryManagementController@list');
+        });
     });
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
@@ -323,6 +352,9 @@ $api->version('v1', [
 
             $api->post('/upload', 'MemberManagement\CheckInManageController@upload');
 
+            // 入住登记修改
+            $api->post('/change', 'MemberManagement\CheckInManageController@change');
+
             //入住登记详情
             $api->get('/{id}', 'MemberManagement\CheckInManageController@detail')->where(['id' => '\d+']);
 
@@ -337,6 +369,27 @@ $api->version('v1', [
 
             //入住登记批量删除
             $api->delete('/', 'MemberManagement\CheckInManageController@batchDelete');
+
+        });
+
+        // 退住登记
+        $api->group(["prefix" => "check-out"], function ($api){
+            $api->post('/', 'MemberManagement\CheckOutController@store')->name('api.member-manage.check-out.store');
+
+            //退住登记详情
+            $api->get('/{id}', 'MemberManagement\CheckOutController@detail')->where(['id' => '\d+']);
+
+            //退住登记删除
+            $api->delete('/{id}', 'MemberManagement\CheckOutController@delete')->where(['id' => '\d+']);
+
+            //退住登记列表
+            $api->get('/list', 'MemberManagement\CheckOutController@list');
+
+            //退住登记搜索
+            $api->get('/search', 'MemberManagement\CheckOutController@search');
+
+            //退住登记批量删除
+            $api->delete('/', 'MemberManagement\CheckOutController@batchDelete');
 
         });
     });
