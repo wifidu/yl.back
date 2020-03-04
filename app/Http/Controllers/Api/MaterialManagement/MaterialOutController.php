@@ -95,6 +95,6 @@ class MaterialOutController
      */
     public function CKoddNumber()
     {
-        return 'CK'.date('Ymd').time();
+        return $this->_materialOutService->CKoddNumber();
     }
 }

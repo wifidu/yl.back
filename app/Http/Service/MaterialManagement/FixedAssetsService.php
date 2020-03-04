@@ -54,7 +54,7 @@ class FixedAssetsService
             return $this->apiReturn($data, CodeEnum::SUCCESS);
         }
 
-        return $this->apiReturn('', CodeEnum::FAIL);
+        return $this->apiReturn('', CodeEnum::NON_EXISTENT);
     }
 
     /**
