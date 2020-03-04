@@ -19,5 +19,6 @@ $factory->define(Account::class, function (Faker $faker) {
       'created_at' => $date_time,
       'updated_at' => $date_time,
       'cd_card' => $faker->regexify('[2-5]{1}[0-9]{17}'),
+      'deposit' => $faker->randomFloat(2, 10, 2000),
     ];
 });

@@ -150,7 +150,7 @@ $api->version('v1', [
         // 会员账户
         $api->group(["prefix" => "account"], function ($api) {
             $api->get('/', 'FinancialManagement\AccountController@show');
-            $api->get('/{no}', 'FinancialManagement\AccountController@showWithNo');
+            $api->get('/deposit', 'FinancialManagement\AccountController@showDeposit');
             $api->post('/', 'FinancialManagement\AccountController@store');
             $api->patch('/', 'FinancialManagement\AccountController@update');
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
