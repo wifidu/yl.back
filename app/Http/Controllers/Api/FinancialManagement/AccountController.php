@@ -35,15 +35,14 @@ class AccountController extends Controller
 
     public function show(Request $request)
     {
-      $page = $request->page ?? 1;
-      $page_size = $request->page_size ?? 15;
-      return $this->accountService->show($page, $page_size);
+        if ($request->filled('no'))
+          return $this->accountService->showWithNo($request->get('no'), $request->get('page', 1), $request->get('page_size', 15));
+        return $this->accountService->show($request->get('page', 1), $request->get('page_size', 15));
     }
 
-    public function showWithNo($no, Request $request)
+    public function showDeposit(Request $request)
     {
-      $page = $request->page ?? 1;
-      $page_size = $request->page_size ?? 15;
-      return $this->accountService->showWithNo($no, $page, $page_size);
+      return $this->accountService
+                  ->showDeposit($request->get('member_name', 'null'),$request->get('page', 1), $request->get('page_size', 15));
     }
 }

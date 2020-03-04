@@ -49,5 +49,19 @@ class AccountService
         $accounts = $this->accountRespository->showWithNo($no, $page, $page_size);
         return $this->apiReturn($accounts, CodeEnum::SUCCESS);
     }
+
+    /**
+     * function showDeposit
+     * describe 查询押金
+     * @param   $menmber_name, $page, $page_size
+     * @return  Array
+     * @author  DuWeifan
+     * date     2020-03-04 16:29:S
+     */
+    public function showDeposit($menmber_name, $page, $page_size)
+    {
+        $deposit = $this->accountRespository->showDeposit($menmber_name, $page, $page_size);
+        return $this->apiReturn($deposit, CodeEnum::SUCCESS);
+    }
 }
 ?>
