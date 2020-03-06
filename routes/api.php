@@ -348,6 +348,31 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
         });
+        //套餐管理
+        $api->group(["prefix" => "package-manage"], function ($api) {
+
+            // 新增或编辑套餐数据
+            $api->post('/', 'DietManage\PackageManageController@store')->name('api.package-manage.store');
+
+            // 套餐数据详情
+            $api->get('/{id}', 'DietManage\PackageManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 套餐数据删除
+            $api->delete('/{id}', 'DietManage\PackageManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 套餐数据批量删除
+            $api->delete('/', 'DietManage\PackageManageController@batchDelete');
+
+            // 单品数据列表
+            $api->get('/list', 'DietManage\PackageManageController@list');
+
+            // 预定套餐
+            $api->get('/order/{id}', 'DietManage\PackageManageController@order')
+                ->where(['id' => '\d+']);
+
+        });
     });
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
