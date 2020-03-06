@@ -1,0 +1,226 @@
+<?php
+
+
+namespace App\Http\Repository\MaterialManagement;
+
+use Excel;
+use App\Enum\CodeEnum;
+use App\Model\WareHouseLog;
+use Illuminate\Support\Facades\DB;
+
+class WareHouseLogRepository
+{
+    private $_redis;
+
+    const CACHE_KEY_RULE_PRE = 'ware_house_log_';
+
+    public function __construct()
+    {
+        $this->_redis = app('redis');
+    }
+
+    /**
+     * function 仓库日志数据列表
+     * describe 仓库日志数据列表
+     * @param $page 当前页数
+     * @param $page_size 页面数据大小
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:07
+     */
+    public function list($page, $page_size)
+    {
+
+        return WareHouseLog::query()->paginate($page_size);
+    }
+
+    /**
+     * function 仓库日志-数据详情
+     * describe 仓库日志-数据详情
+     * @param $id 仓库日志id
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|mixed|object|null
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:09
+     */
+    public function item($id)
+    {
+        //查询缓存
+        $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $id));
+
+        //缓存为空则查询数据库并将数据存入缓存
+        if (empty($cache)) {
+            //
+            $query = WareHouseLog::query()->where(['id' => $id])->first();
+            $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
+
+            return $query;
+        }
+
+        return $cache;
+    }
+
+    /**
+     * function 仓库日志数据删除
+     * describe 仓库日志数据删除
+     * @param $id
+     * @return mixed
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:06
+     */
+    public function delete($id)
+    {
+        //清除缓存
+        $this->cleanCache($id);
+
+        return WareHouseLog::query()->where('id', $id)->delete();
+    }
+
+    /**
+     * function 仓库日志数据批量删除
+     * describe 仓库日志数据批量删除
+     * @param $ids
+     * @return mixed
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:06
+     */
+    public function batchDelete($ids)
+    {
+        return WareHouseLog::query()->whereIn('id', $ids)->delete();
+    }
+
+    /**
+     * function 清除缓存
+     * describe 清除缓存
+     * @param $id 仓库日志id
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:05
+     */
+    private function cleanCache($id)
+    {
+        $keys = $this->_redis->keys(self::CACHE_KEY_RULE_PRE . $id);
+        // 缓存也删除
+        if ($keys) {
+            $this->_redis->del($keys);
+        }
+    }
+
+    /**
+     * function 仓库日志-搜索
+     * describe 仓库日志-搜索
+     * @param $search_index 搜索索引
+     * @param $time_range 搜索时间范围
+     * @param $operator_type 操作类型
+     * @param $warehouse_name 仓库名称
+     * @param $content 搜索内容
+     * @return mixed
+     * @author ZhaoDaYuan
+     * 2020/3/6 上午11:04
+     */
+    public function search($search_index, $time_range, $operator_type, $warehouse_name, $content)
+    {
+        switch ($warehouse_name){
+            case 'all':
+                switch ($operator_type){
+                    case 'all':
+                        switch ($time_range){
+                            case 'all':
+                                var_dump(1);
+                                return DB::select("select * from warehouse_log where $search_index like '%$content%' ");
+                                break;
+                            default:
+                                var_dump(2);
+                                return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and $search_index like '%$content%' ");
+                                break;
+                        }
+                        break;
+                    default:
+                        switch ($time_range){
+                            case 'all':
+                                var_dump(3);
+                                return DB::select("select * from warehouse_log where `type`= $operator_type and $search_index like '%$content%' ");
+                                break;
+                            default:
+                                var_dump(4);
+                                return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and $search_index like '%$content%' ");
+                                break;
+                        }
+                        break;
+                }
+            default:
+                switch ($operator_type){
+                    case 'all':
+                        switch ($time_range){
+                            case 'all':
+                                var_dump(5);
+                                return DB::select("select * from warehouse_log where `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                break;
+                            default:
+                                var_dump(6);
+                                return DB::select("select * from warehouse_log where `operator_time` > DateAdd(year,$time_range,getdate()) and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                break;
+                        }
+                        break;
+                    default:
+                        switch ($time_range){
+                            case 'all':
+                                var_dump(7);
+                                return DB::select("select * from warehouse_log where `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                break;
+                            default:
+                                var_dump(8);
+                                return DB::select("select * from warehouse_log where  `operator_time` > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                break;
+                        }
+                        break;
+                }
+        }
+    }
+
+    /**
+     * function 导出仓库日志EXCELl
+     * describe 导出仓库日志EXCELl
+     * @return mixed
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午11:52
+     */
+    public function excelExport()
+    {
+
+        $data = WareHouseLog::query()->get()->toArray();
+
+        return Excel::create('仓库日志导出', function($excel) use ($data) {
+            $excel->sheet('仓库日志导出', function($sheet) use ($data)
+            {
+                $sheet->cell('A1', function($cell) {$cell->setValue('单号');   });
+                $sheet->cell('B1', function($cell) {$cell->setValue('操作类型');   });
+                $sheet->cell('C1', function($cell) {$cell->setValue('仓库名称');   });
+                $sheet->cell('D1', function($cell) {$cell->setValue('物资名称'); });
+                $sheet->cell('E1', function($cell) {$cell->setValue('品牌规格'); });
+                $sheet->cell('F1', function($cell) {$cell->setValue('供应商'); });
+                $sheet->cell('G1', function($cell) {$cell->setValue('单位'); });
+                $sheet->cell('H1', function($cell) {$cell->setValue('单价'); });
+                $sheet->cell('I1', function($cell) {$cell->setValue('操作数量'); });
+                $sheet->cell('J1', function($cell) {$cell->setValue('金额(元)'); });
+                $sheet->cell('K1', function($cell) {$cell->setValue('操作人'); });
+                $sheet->cell('L1', function($cell) {$cell->setValue('变动时间'); });
+                if (!empty($data)) {
+                    foreach ($data as $key => $value) {
+                        $i= $key+2;
+                        $sheet->cell('A'.$i, $value['odd_number']);
+                        $sheet->cell('B'.$i, CodeEnum::WareHouseLog[$value['type']]);
+                        $sheet->cell('C'.$i, $value['warehouse_name']);
+                        $sheet->cell('D'.$i, $value['material_name']);
+                        $sheet->cell('E'.$i, $value['brand']);
+                        $sheet->cell('F'.$i, $value['supplier']);
+                        $sheet->cell('G'.$i, CodeEnum::UNIT[$value['unit']]);
+                        $sheet->cell('H'.$i, $value['price']);
+                        $sheet->cell('I'.$i, $value['number']);
+                        $sheet->cell('J'.$i, $value['total']);
+                        $sheet->cell('K'.$i, $value['operator']);
+                        $sheet->cell('L'.$i, Date('Y-m-d h:i:s',$value['operator_time']));
+                    }
+                }
+            });
+        })->download('xls');
+    }
+}
