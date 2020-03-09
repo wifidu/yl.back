@@ -31,7 +31,6 @@ class MaterialRequest extends FormRequest
                     "brand" => "required",
                     "model" => "required",
                     "unit" => "required|integer|in:0,1,2",
-                    "price" => "required|numeric"
                 ];
                 break;
             case "api.material.delete":
@@ -56,8 +55,6 @@ class MaterialRequest extends FormRequest
             'unit.required'                 => '入库单位 unit 必须',
             'unit.integer'                  => '入库单位 unit 必须是整型',
             'unit.in'                       => '入库单位 可选0-支,1-个,2-包',
-            'price.required'                => '单价 price 必须',
-            'price.numeric'                 => '数量 price 必须是数值',
             'ids.required'                  => '删除id 必须',
         ];
     }

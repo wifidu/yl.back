@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Api\MaterialManagement;
 
+use App\Events\WarehouseLog;
 use App\Http\Service\MaterialManagement\MaterialOutService;
 use App\Http\Requests\Api\MaterialManagement\MaterialOutRequest;
 use Dingo\Api\Contract\Http\Request;
@@ -27,6 +28,7 @@ class MaterialOutController
     public function store(MaterialOutRequest $request)
     {
         $params = $request->post();
+        event(new WarehouseLog($params));
         return $this->_materialOutService->store($params);
     }
 
@@ -95,6 +97,6 @@ class MaterialOutController
      */
     public function CKoddNumber()
     {
-        return 'CK'.date('Ymd').time();
+        return $this->_materialOutService->CKoddNumber();
     }
 }

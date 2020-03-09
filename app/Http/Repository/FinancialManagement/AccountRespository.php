@@ -22,6 +22,24 @@ class AccountRespository
         return $this->account->where('account_number', $no)->get();
     }
 
+    /**
+     * function showDeposit
+     * describe 查询用户押金
+     * @param   $member_name, $page, $page_size
+     * @return  Array
+     * @author  DuWeifan
+     * date     2020-03-04 16:25:S
+     */
+    public function showDeposit($member_name = null, $page, $page_size)
+    {
+      $finder = $this->account->select('member_name', 'beds', 'cd_card', 'deposit');
+      if (isset($member_name))
+          return $finder->paginate($page_size);
+      else 
+          return $finder->where('member_name', $member_name)
+                        ->get();
+    }
+
     public function store($account)
     {
         return $this->account->fill($account)->save();

@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Api\MaterialManagement;
 
+use App\Events\WarehouseLog;
 use App\Http\Service\MaterialManagement\MaterialInService;
 use App\Http\Requests\Api\MaterialManagement\MaterialInRequest;
 use Dingo\Api\Contract\Http\Request;
@@ -27,6 +28,7 @@ class MaterialInController
     public function store(MaterialInRequest $request)
     {
         $params = $request->post();
+        event(new WarehouseLog($params));
         return $this->_materialInService->store($params);
     }
 
@@ -87,14 +89,14 @@ class MaterialInController
     }
 
     /**
-     * function 物资入库单号获取
-     * describe 物资入库单号获取
-     * @return string
-     * @author ZhaoDaYuan
-     * 2020/2/24 上午11:46
-     */
+ * function 物资入库单号获取
+ * describe 物资入库单号获取
+ * @return string
+ * @author ZhaoDaYuan
+ * 2020/2/24 上午11:46
+ */
     public function RKoddNumber()
     {
-        return 'RK'.date('Ymd').time();
+        return $this->_materialInService->RKoddNumber();
     }
 }

@@ -106,4 +106,17 @@ class MaterialInService
 
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }
+
+    /**
+     * function 物资入库单号获取
+     * describe 物资入库单号获取
+     * @return string
+     * @author ZhaoDaYuan
+     * 2020/2/24 上午11:46
+     */
+    public function RKoddNumber()
+    {
+        $RKOddNumber =  'RK'.date('Ymd').time();
+        return $this->apiReturn(['RKoddNumber'=>$RKOddNumber],CodeEnum::SUCCESS);
+    }
 }

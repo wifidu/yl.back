@@ -106,4 +106,17 @@ class MaterialOutService
 
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }
+
+    /**
+     * function 物资出库单号获取
+     * describe 物资出库单号获取
+     * @return string
+     * @author ZhaoDaYuan
+     * 2020/2/24 上午11:47
+     */
+    public function CKoddNumber()
+    {
+        $RKOddNumber =  'CK'.date('Ymd').time();
+        return $this->apiReturn(['CKoddNumber'=>$RKOddNumber],CodeEnum::SUCCESS);
+    }
 }

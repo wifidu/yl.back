@@ -20,7 +20,8 @@ class Account extends Model
       'meal_cost',
       'nursing_cost',
       'other_cost',
-      'cd_card'
+      'cd_card',
+      'deposit'
     ];
 
     public function creditManagement()
