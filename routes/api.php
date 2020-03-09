@@ -356,5 +356,26 @@ $api->version('v1', [
             $api->delete('/', 'MemberManagement\CheckOutController@batchDelete');
 
         });
+
+        // 外出管理
+        $api->group(["prefix" => "out-manage"], function ($api){
+            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.check-out.store');
+
+            //退住登记详情
+            $api->get('/{id}', 'MemberManagement\OutManageController@detail')->where(['id' => '\d+']);
+
+            //退住登记删除
+            $api->delete('/{id}', 'MemberManagement\OutManageController@delete')->where(['id' => '\d+']);
+
+            //退住登记列表
+            $api->get('/list', 'MemberManagement\OutManageController@list');
+
+            //退住登记搜索
+            $api->get('/search', 'MemberManagement\OutManageController@search');
+
+            //退住登记批量删除
+            $api->delete('/', 'MemberManagement\OutManageController@batchDelete');
+
+        });
     });
 });
