@@ -159,6 +159,27 @@ $api->version('v1', [
             // 盘点管理数据列表
             $api->get('/list', 'MaterialManagement\InventoryManagementController@list');
         });
+        $api->group(["prefix" => "warehouse-log"], function ($api) {
+            // 仓库日志-数据详情
+            $api->get('/{id}', 'MaterialManagement\WareHouseLogController@detail')
+                ->where(['id' => '\d+']);
+
+            // 仓库日志-搜索
+            $api->post('/search', 'MaterialManagement\WareHouseLogController@search');
+
+            // 仓库日志数据删除
+            $api->delete('/{id}', 'MaterialManagement\WareHouseLogController@delete')
+                ->where(['id' => '\d+']);
+
+            // 仓库日志数据批量删除
+            $api->delete('/', 'MaterialManagement\WareHouseLogController@batchDelete')->name('api.warehouse.log.delete');
+
+            // 仓库日志数据列表
+            $api->get('/list', 'MaterialManagement\WareHouseLogController@list');
+
+            // 导出仓库日志
+            $api->get('/execl','MaterialManagement\WareHouseLogController@excelExport');
+        });
     });
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
@@ -318,6 +339,31 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
         });
+        //套餐管理
+        $api->group(["prefix" => "package-manage"], function ($api) {
+
+            // 新增或编辑套餐数据
+            $api->post('/', 'DietManage\PackageManageController@store')->name('api.package-manage.store');
+
+            // 套餐数据详情
+            $api->get('/{id}', 'DietManage\PackageManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 套餐数据删除
+            $api->delete('/{id}', 'DietManage\PackageManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 套餐数据批量删除
+            $api->delete('/', 'DietManage\PackageManageController@batchDelete');
+
+            // 单品数据列表
+            $api->get('/list', 'DietManage\PackageManageController@list');
+
+            // 预定套餐
+            $api->get('/order/{id}', 'DietManage\PackageManageController@order')
+                ->where(['id' => '\d+']);
+
+        });
     });
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
@@ -409,6 +455,27 @@ $api->version('v1', [
 
             //退住登记批量删除
             $api->delete('/', 'MemberManagement\CheckOutController@batchDelete');
+
+        });
+
+        // 外出管理
+        $api->group(["prefix" => "out-manage"], function ($api){
+            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.check-out.store');
+
+            //退住登记详情
+            $api->get('/{id}', 'MemberManagement\OutManageController@detail')->where(['id' => '\d+']);
+
+            //退住登记删除
+            $api->delete('/{id}', 'MemberManagement\OutManageController@delete')->where(['id' => '\d+']);
+
+            //退住登记列表
+            $api->get('/list', 'MemberManagement\OutManageController@list');
+
+            //退住登记搜索
+            $api->get('/search', 'MemberManagement\OutManageController@search');
+
+            //退住登记批量删除
+            $api->delete('/', 'MemberManagement\OutManageController@batchDelete');
 
         });
     });

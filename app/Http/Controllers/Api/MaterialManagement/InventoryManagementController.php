@@ -17,17 +17,41 @@ class InventoryManagementController
         $this->_inventoryManagementService = $inventoryManagementService;
     }
 
+    /**
+     * function 盘点管理-盘点
+     * describe 盘点管理-盘点
+     * @param InventoryManagementRequest $request
+     * @return array
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午4:58
+     */
     public function store(InventoryManagementRequest $request)
     {
         $params = $request->post();
         return $this->_inventoryManagementService->store($params);
     }
 
+    /**
+     * function 盘点管理-数据详情
+     * describe 盘点管理-数据详情
+     * @param $id 盘点数据id
+     * @return array
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午4:59
+     */
     public function detail($id)
     {
         return $this->_inventoryManagementService->detail($id);
     }
 
+    /**
+     * function 盘点管理数据列表
+     * describe 盘点管理数据列表
+     * @param Request $request
+     * @return array
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午4:59
+     */
     public function list(Request $request)
     {
         $page      = $request->page ?? 1;
@@ -35,11 +59,28 @@ class InventoryManagementController
         return $this->_inventoryManagementService->list($page, $page_size);
     }
 
+    /**
+     * function 盘点管理数据删除
+     * describe 盘点管理数据删除
+     * @param $id
+     * @return array
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午4:59
+     */
     public function delete($id)
     {
         return $this->_inventoryManagementService->delete($id);
     }
 
+
+    /**
+     * function 盘点管理数据批量删除
+     * describe 盘点管理数据批量删除
+     * @param FixedAssetsRequest $request
+     * @return array
+     * @author ZhaoDaYuan
+     * 2020/3/5 下午5:00
+     */
     public function batchDelete(InventoryManagementRequest $request)
     {
         $params = $request->all();

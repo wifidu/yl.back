@@ -55,6 +55,7 @@ class InventoryManagementRequest extends FormRequest
             'inventory_surplus.required'    => '盘盈 必须',
             'inventory_surplus.integer'     => '盘盈 类型必须为整型',
             'check_person.required'         => '盘点人 必须',
+            'ids.required'                  => '删除主键 ids 必须',
         ];
     }
 }

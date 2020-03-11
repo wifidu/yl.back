@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Events\WarehouseLog;
 use App\Model\MaterialIn;
 use App\Model\MaterialOut;
 use Illuminate\Console\Command;
@@ -53,13 +54,26 @@ class GenerateInventory extends Command
         $data['number']             =   $number;
         $data['total']              =   $total;
         $inventory                  =   InventoryManagement::query()->create($data);
+        unset($data);
 
         foreach ($inventory_detail as $item) {
             $from    = substr($item->operator_number,0,2);
             if ($from=='CK'){
-                MaterialOut::query()->updateOrCreate(['out_number'=>$item->operator_number],['inventory_id'=>$inventory->id]);
+                $detail = MaterialOut::query()->updateOrCreate(['out_number'=>$item->operator_number],['inventory_id'=>$inventory->id]);
+                $data['warehouse_name']     = $detail['warehouse_name'];
+                $data['material_detail']    = $detail['out_material'];
+                $data['operator']           = $detail['operator'];
+                $data['odd_number']         = $name;
+                $data['type']               = 'PD';
+                event(new WarehouseLog($data));
             }else{
-                MaterialIn::query()->updateOrCreate(['in_number'=>$item->operator_number],['inventory_id'=>$inventory->id]);
+                $detail = MaterialIn::query()->updateOrCreate(['in_number'=>$item->operator_number],['inventory_id'=>$inventory->id]);
+                $data['warehouse_name']     = $detail['warehouse_name'];
+                $data['material_detail']    = $detail['in_material'];
+                $data['operator']           = $detail['operator'];
+                $data['odd_number']         = $name;
+                $data['type']               = 'PD';
+                event(new WarehouseLog($data));
             }
         }
     }
