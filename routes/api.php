@@ -130,20 +130,11 @@ $api->version('v1', [
             $api->patch('/', 'FinancialManagement\CreditManagementController@update');
         });
 
-        // 收款账单
+        // 退款账单
         $api->group(["prefix" => "refund"], function ($api) {
             $api->get('/', 'FinancialManagement\RefundController@show');
-
-            $api->get('/no/{no}', 'FinancialManagement\RefundController@showWithNo');
-
-            $api->get('/status/{status}', 'FinancialManagement\RefundController@showWithStatus');
-
-            $api->get('/type/{type}', 'FinancialManagement\RefundController@showWithType');
-
             $api->post('/', 'FinancialManagement\RefundController@store');
-
             $api->patch('/', 'FinancialManagement\RefundController@update');
-
             $api->delete('/{no}', 'FinancialManagement\RefundController@destory');
         });
 

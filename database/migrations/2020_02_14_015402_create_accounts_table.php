@@ -26,7 +26,7 @@ class CreateAccountsTable extends Migration
             $table->decimal('nursing_cost', 10, 2)->comment('护理费');
             $table->decimal('other_cost', 10, 2)->comment('其他月度费');
             $table->char('cd_card', 24)->comment('身份证');
-            $table->decimal('deposit', 10, 2)->comment('押金');
+            $table->decimal('deposit', 10, 2)->nullable()->comment('押金');
         });
     }
 

@@ -18,34 +18,13 @@ class RefundController extends Controller
 
     public function show(Request $request)
     {
-        $page = $request->page ?? 1;
-        $page_size = $request->page_size ?? 15;
-        $results = $this->refundService->show($page, $page_size);
+        $results = $this->refundService->show($request->get('page', 1),
+                                              $request->get('page_size', 15),
+                                              $request->get('type', null),
+                                              $request->get('status', null),
+                                              $request->get('no', null));
 
         return $results;
-    }
-
-    public function showWithType($type, Request $request)
-    {
-        $page = $request->page ?? 1;
-        $page_size = $request->page_size ?? 15;
-        $refunds = $this->refundService->showWithType($type, $page, $page_size);
-
-        return $refunds;
-    }
-
-    public function showWithStatus($status, Request $request)
-    {
-        $page = $request->page ?? 1;
-        $page_size = $request->page_size ?? 15;
-        $refunds = $this->refundService->showWithStatus($status, $page, $page_size);
-
-        return $refunds;
-    }
-
-    public function showWithNo($no, Request $request)
-    {
-        return  $this->refundService->showWithNo($no);
     }
 
     public function store(RefundRequest $request)
@@ -59,7 +38,7 @@ class RefundController extends Controller
         return $this->refundService->destory($no);
     }
 
-    public function update(RefundRequest $request)
+    public function update(Request $request)
     {
         $refund = $request->all();
         return $this->refundService->update($refund);

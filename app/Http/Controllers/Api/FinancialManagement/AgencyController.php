@@ -60,7 +60,7 @@ class AgencyController extends Controller
      * @author  DuWeifan
      * date     2020-03-01 13:12:S
      */
-    public function update(AgencyRequest $request)
+    public function update(Request $request)
     {
         $agency = $request->all();
         return $this->agencyService->update($agency);
