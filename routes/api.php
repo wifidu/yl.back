@@ -364,6 +364,27 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
         });
+        //膳食管理
+        $api->group(["prefix" => "recipes-manage"], function ($api) {
+
+            // 新增或编辑膳食数据
+            $api->post('/', 'DietManage\RecipesManageController@store')->name('api.recipes-manage.store');
+
+            // 膳食数据详情
+            $api->get('/{id}', 'DietManage\RecipesManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据删除
+            $api->delete('/{id}', 'DietManage\RecipesManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据批量删除
+            $api->delete('/', 'DietManage\RecipesManageController@batchDelete');
+
+            // 膳食数据列表
+            $api->get('/list', 'DietManage\RecipesManageController@list');
+
+        });
     });
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
