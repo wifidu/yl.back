@@ -378,10 +378,10 @@ $api->version('v1', [
         // 会员档案路由注册
         $api->group(["prefix" => "member-profile"], function ($api) {
             //新增会员
-            $api->post('/', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store');
+            $api->post('/', 'MemberManagement\MemberProfileController@store')->name('api.member-manage.member-profile.store');
 
             //会员信息修改
-            $api->post('/{id}', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+            $api->post('/{id}', 'MemberManagement\MemberProfileController@store')->name('api.member-manage.member-profile.store')->where(['id' => '\d+']);
 
             //会员详情
             $api->get('/{id}', 'MemberManagement\MemberProfileController@detail')->where(['id' => '\d+']);
@@ -399,10 +399,10 @@ $api->version('v1', [
         // 预约占床
         $api->group(["prefix" => "book-bed"], function ($api) {
             //新增预约订单
-            $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-profile.store');
+            $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-manage.book-bed.store');
 
             //预约订单信息修改
-            $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+            $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-manage.book-bed.store')->where(['id' => '\d+']);
 
             //预约订单详情
             $api->get('/{id}', 'MemberManagement\BookBedController@detail')->where(['id' => '\d+']);
@@ -469,7 +469,7 @@ $api->version('v1', [
 
         // 外出管理
         $api->group(["prefix" => "out-manage"], function ($api){
-            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.check-out.store');
+            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.out-manage.store');
 
             //退住登记详情
             $api->get('/{id}', 'MemberManagement\OutManageController@detail')->where(['id' => '\d+']);
@@ -485,6 +485,22 @@ $api->version('v1', [
 
             //退住登记批量删除
             $api->delete('/', 'MemberManagement\OutManageController@batchDelete');
+
+        });
+
+        // 死亡登记
+        $api->group(["prefix" => "death-registration"], function ($api){
+            $api->post('/', 'MemberManagement\DeathRegistrationController@store')->name('api.member-manage.death-registration.store');
+
+            $api->get('/{id}', 'MemberManagement\DeathRegistrationController@detail')->where(['id' => '\d+']);
+
+            $api->delete('/{id}', 'MemberManagement\DeathRegistrationController@delete')->where(['id' => '\d+']);
+
+            $api->get('/list', 'MemberManagement\DeathRegistrationController@list');
+
+            $api->get('/search', 'MemberManagement\DeathRegistrationController@search');
+
+            $api->delete('/', 'MemberManagement\DeathRegistrationController@batchDelete');
 
         });
     });

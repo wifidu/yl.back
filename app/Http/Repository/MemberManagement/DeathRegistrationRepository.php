@@ -3,24 +3,18 @@
 
 namespace App\Http\Repository\MemberManagement;
 
+
 use App\Common\CommonFunc;
-use App\MemberProfile;
+use App\Model\DeathRegistration;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
-/**
- * Class MemberProfileRepository
- * 会员档案处理资源类
- * @package App\Http\Repository\MemberProfileController
- * @author YanJiGang
- */
-class MemberProfileRepository
+class DeathRegistrationRepository
 {
-
     /**
-     * 新增会员或者更新会员相关信息
+     * 新增或者更新死亡登记信息
      * @param $params
      * @return Model
      */
@@ -28,24 +22,21 @@ class MemberProfileRepository
     {
         $id = $params['id'] ?? '';
 
-        return MemberProfile::query()
+        return DeathRegistration::query()
             ->updateOrCreate(['id' => $id], $params);
     }
 
     /**
-     * 查询单个用户信息
+     * 查询单个死亡登记信息
      * @param $id
      * @return Builder|Model|object|null
      */
     public function item($id)
     {
-        $msg =  MemberProfile::query()
+        return DeathRegistration::query()
             ->where('id', '=', $id)
-            ->where('is_del', '=', 0)
             ->first();
-        return $msg;
     }
-
 
     /**
      * 分页显示结果
@@ -54,41 +45,43 @@ class MemberProfileRepository
      */
     public function list($pageSize)
     {
-        return MemberProfile::query()
-            ->where('is_del', '=', '0')
+        return DeathRegistration::query()
             ->paginate($pageSize);
     }
 
-
     /**
-     * 软删除一个会员
+     * 删除单条记录
      * @param $id
      * @return int
      */
     public function delete($id)
     {
-        return MemberProfile::query()
+        return DeathRegistration::query()
             ->where('id', $id)
-            ->update(['is_del' => 1 ]);
+            ->delete();
     }
 
-
     /**
-     * 根据人名或者手机号搜索会员
+     * 根据人名或者手机号搜索死亡登记
      * @param $params
      * @return Builder[]|Collection
      */
     public function search($params)
     {
-        return MemberProfile::query()
-            ->when(isset($params['member_name']), function ($query) use ($params) {
-                return $query->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params['member_name']).'%');
-            })
-            ->when(isset($params['phone_number']), function ($query) use ($params) {
-                return $query->where('phone_number', '=', $params['phone_number']);
-            })
+        return DeathRegistration::query()
+            ->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params).'%')
             ->get();
+    }
 
+    /**
+     * @param $ids
+     * @return mixed
+     */
+    public function batchDelete($ids)
+    {
+        return DeathRegistration::query()
+            ->whereIn('id', $ids)
+            ->delete();
     }
 
 }

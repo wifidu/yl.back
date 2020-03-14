@@ -61,10 +61,10 @@ class CheckOutController extends Controller
 
     /**
      * 搜索一个入住登记
-     * @param CheckInManageRequest $request
+     * @param CheckOutRequest $request
      * @return array
      */
-    public function search(CheckInManageRequest $request)
+    public function search(CheckOutRequest $request)
     {
         $params = $request->get('member_name');
         return $this->_checkOut->search($params);
@@ -72,10 +72,10 @@ class CheckOutController extends Controller
 
     /**
      * 批量删除入住登记表
-     * @param CheckInManageRequest $request
+     * @param CheckOutRequest $request
      * @return array
      */
-    public function batchDelete(CheckInManageRequest $request)
+    public function batchDelete(CheckOutRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];
