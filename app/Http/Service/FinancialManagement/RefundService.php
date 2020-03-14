@@ -16,46 +16,14 @@ class RefundService
         $this->refundRespository = $refundRespository;
     }
 
-    public function show($page, $page_size)
+    public function show($page, $page_size, $type, $status, $no)
     {
-        $refunds = $this->refundRespository->show($page, $page_size);
+        $refunds = $this->refundRespository->show($page, $page_size, $type, $status, $no);
 
         // 格式化数据
-        
         $refunds = $this->formatting($refunds);
 
         return $this->apiReturn($refunds, CodeEnum::SUCCESS);
-    }
-
-    public function showWithType($type, $page, $page_size)
-    {
-        $refunds = $this->refundRespository->showWithType($type, $page, $page_size);
-
-        // formatting
-
-        $refunds = $this->formatting($refunds);
-
-        return $this->apiReturn($refunds, CodeEnum::SUCCESS);
-    }
-
-    public function showWithStatus($status, $page, $page_size)
-    {
-        $refunds = $this->refundRespository->showWithStatus($status, $page, $page_size);
-
-        // formatting
-        $refunds = $this->formatting($refunds);
-
-        return $refunds = $this->apiReturn($refunds, CodeEnum::SUCCESS);
-    }
-
-    public function showWithNo($no)
-    {
-        $refunds = $this->refundRespository->showWithNo($no);
-
-        // formatting
-        $refunds = $this->formatting($refunds);
-
-        return $refunds = $this->apiReturn($refunds, CodeEnum::SUCCESS);
     }
 
     public function update($refund)
