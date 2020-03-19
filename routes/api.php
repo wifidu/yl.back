@@ -18,7 +18,6 @@ $api->version('v1', [
 //        'limit' => config('api.rate_limits.sign.limit'),
 //        'expires' => config('api.rate_limits.sign.expires'),
     ], function($api) {
-
         // 用户注册
         $api->post('users', 'UsersController@store')
             ->name('api.users.store');
@@ -52,6 +51,7 @@ $api->version('v1', [
         });
     });
 
+    //物资管理
     $api->group(['prefix' => "material-management"],function ($api) {
         $api->group(["prefix" => "fixed-assets"], function ($api) {
             // 固定资产数据存储
@@ -178,9 +178,10 @@ $api->version('v1', [
             $api->get('/list', 'MaterialManagement\WareHouseLogController@list');
 
             // 导出仓库日志
-            $api->get('/execl','MaterialManagement\WareHouseLogController@excelExport');
+            $api->get('/excel','MaterialManagement\WareHouseLogController@excelExport');
         });
     });
+    //财务管理
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
             // 收款账单查询
@@ -297,6 +298,10 @@ $api->version('v1', [
 
             // 岗位数据列表
             $api->get('/list', 'PersonnelManage\PositionManageController@list');
+
+            // 岗位权限管理
+            $api->get('/list', 'PersonnelManage\PositionManageController@list');
+
         });
 
         //团队管理
@@ -320,7 +325,6 @@ $api->version('v1', [
         });
 
     });
-
     //膳食管理
     $api->group(["prefix" => "diet-manage"], function ($api) {
         //单品管理
@@ -349,6 +353,7 @@ $api->version('v1', [
 
         });
     });
+    //会员管理
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
         $api->group(["prefix" => "member-profile"], function ($api) {

@@ -25,7 +25,7 @@ class RolePermissionController extends Controller
     public function addRole(Request $request,Role $role)
     {
         $role_name    = $request->all()['name'];
-        $result       = $role::create(['name' => $role_name,'guard_name' => "web"]);
+        $result       = $role::findOrCreate($role_name,"web");
         return $this->apiReturn($result,CodeEnum::INC_SUCCESS);
     }
 
@@ -56,8 +56,11 @@ class RolePermissionController extends Controller
         $role_id    = $request->all()['id'];
         $permission = $request->all()['permission'];
         $role       = $role::find($role_id);
-        $result     = $role->givePermissionTo($permission);
-        return $this->apiReturn($result,CodeEnum::SUCCESS);
+        if ($role){
+            $result     = $role->givePermissionTo($permission);
+            return $this->apiReturn($result,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 
     /**
@@ -74,8 +77,11 @@ class RolePermissionController extends Controller
         $role_id    = $request->all()['id'];
         $permission = $request->all()['permission'];
         $role       = $role::find($role_id);
-        $result     = $role->revokePermissionTo($permission);
-        return $this->apiReturn($result,CodeEnum::SUCCESS);
+        if ($role){
+            $result     = $role->revokePermissionTo($permission);
+            return $this->apiReturn($result,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 
     /**
@@ -91,7 +97,10 @@ class RolePermissionController extends Controller
     {
         $role_id    = $request->all()['id'];
         $role       = $role::find($role_id);
-        $permisson  = $role->getAllPermissions();
-        return $this->apiReturn($permisson,CodeEnum::SUCCESS);
+        if ($role){
+            $permisson  = $role->getAllPermissions();
+            return $this->apiReturn($permisson,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 }

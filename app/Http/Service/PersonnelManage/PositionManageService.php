@@ -3,6 +3,7 @@
 
 namespace App\Http\Service\PersonnelManage;
 
+use App\Events\PositionManage;
 use App\Http\Repository\PersonnelManage\PositionManageRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
@@ -19,7 +20,7 @@ class PositionManageService
     }
 
     /**
-     * function 新增、编辑职位信息
+     * function 新增,编辑职位信息
      * describe 新增的id自增，编辑中的数据中需要包含编辑的id
      * @param $params
      * @return array
@@ -32,6 +33,8 @@ class PositionManageService
 
         $id = $this->_positionManageRepository->store($params);
         if ($id) {
+            event(new PositionManage($params));
+
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 

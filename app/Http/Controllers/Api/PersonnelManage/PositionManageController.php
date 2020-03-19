@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Api\PersonnelManage;
 
+use App\Events\PositionManage;
 use App\Http\Service\PersonnelManage\PositionManageService;
 use App\Http\Requests\Api\PersonnelManage\PositionManageRequest;
 use Dingo\Api\Contract\Http\Request;

@@ -19,6 +19,7 @@ class PositionManage extends Model
         'rank_name',	               //职级名称
         'rank_salary',                 //职级薪水(元/每单)
         'position_description',	       //岗位描述
+        'role_id',                     //角色id
 
     ];
 }

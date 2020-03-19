@@ -20,6 +20,12 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\WarehouseLog' => [
             'App\Listeners\WarehouseLogListener',
         ],
+        'App\Events\PositionManage' => [
+            'App\Listeners\PositionManageListener',
+        ],
+        'App\Events\StaffManage' => [
+            'App\Listeners\StaffManageListener',
+        ],
     ];
 
     /**

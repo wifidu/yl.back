@@ -14,6 +14,9 @@ class CreateAccountsTable extends Migration {
 	{
 		Schema::create('accounts', function(Blueprint $table)
 		{
+            if (Schema::hasTable('accounts')){
+                return;
+            }
 			$table->increments('id');
 			$table->timestamps();
 			$table->char('account_number', 128)->comment('账户编号');
