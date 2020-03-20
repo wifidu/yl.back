@@ -154,6 +154,14 @@ $api->version('v1', [
             $api->delete('/{business_number}', 'FinancialManagement\AgencyController@destory');
         });
     });
+    $api->group(["prefix" => "daily-management"], function ($api) {
+        $api->group(["prefix" => "accident"], function ($api) {
+            $api->get('/', 'DailyManagement\AccidentController@show');
+            $api->post('/', 'DailyManagement\AccidentController@store');
+            $api->patch('/', 'DailyManagement\AccidentController@update');
+            $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
+        });
+    });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
 

@@ -19,7 +19,7 @@ class CreateRefundsTable extends Migration
             $table->integer('business_time')->comment('业务时间');
             $table->char('refund_no', 128)->comment('退款单号');
             /* $table->char('member_name', 32)->comment('会员姓名'); */
-            $table->integer('account_id')->comment('账户id');
+            $table->integer('account_id')->unsigned()->index()->comment('账户id');
             $table->tinyInteger('refund_type')->comment('退款类型：0变更退费，1请假退费，2押金退费，3退院退费，4直接退费');
             $table->decimal('refund_amount', 10, 2)->comment('退款金额');
             $table->tinyInteger('spending_way')->comment('支出方式：0现金，1刷卡，2转账，3微信，4支付宝');
