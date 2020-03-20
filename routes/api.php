@@ -227,6 +227,14 @@ $api->version('v1', [
         });
     });
     //人事管理
+    $api->group(["prefix" => "daily-management"], function ($api) {
+        $api->group(["prefix" => "accident"], function ($api) {
+            $api->get('/', 'DailyManagement\AccidentController@show');
+            $api->post('/', 'DailyManagement\AccidentController@store');
+            $api->patch('/', 'DailyManagement\AccidentController@update');
+            $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
+        });
+    });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         //部门管理
         $api->group(["prefix" => "department-manage"], function ($api) {
