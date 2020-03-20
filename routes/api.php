@@ -503,4 +503,19 @@ $api->version('v1', [
 
         });
     });
+    $api->group(["prefix" => "medicine-manage"], function ($api) {
+        $api->group(["prefix" => "drug-information"], function ($api) {
+            $api->post('/', 'MedicineManage\DrugInformationController@store')->name('api.medicine-manage.drug-information.store');
+
+            $api->get('/{id}', 'MedicineManage\DrugInformationController@detail')->where(['id' => '\d+']);
+
+            $api->delete('/{id}', 'MedicineManage\DrugInformationController@delete')->where(['id' => '\d+']);
+
+            $api->get('/list', 'MedicineManage\DrugInformationController@list');
+
+            $api->get('/search', 'MedicineManage\DrugInformationController@search');
+
+            $api->delete('/', 'MedicineManage\DrugInformationController@batchDelete');
+        });
+    });
 });
