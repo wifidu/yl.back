@@ -35,7 +35,7 @@ class AccountService
     {
         $result = $this->accountRespository->update($account);
         $result = $result == true ? CodeEnum::SUCCESS : CodeEnum::FAIL;
-        return $this->apiReturn(['account_number' => $account['account_number']], $result);
+        return $this->apiReturn(['id' => $account['id']], $result);
     }
 
     public function show($page, $page_size)
@@ -62,6 +62,13 @@ class AccountService
     {
         $deposit = $this->accountRespository->showDeposit($menmber_name, $page, $page_size);
         return $this->apiReturn($deposit, CodeEnum::SUCCESS);
+    }
+
+    public function updateBalance($id, $money)
+    {
+        $result = $this->accountRespository->updateBalance($id, $money);
+        $result = $result == true ? CodeEnum::SUCCESS : CodeEnum::FAIL;
+        return $this->apiReturn(['id' => $id], $result);
     }
 }
 ?>
