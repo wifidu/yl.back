@@ -17,5 +17,6 @@ class Material extends Model
         'unit',             //入库单位
         'supplier',         //供应商
         'price',            //价格
+        'number',           //数量
     ];
 }

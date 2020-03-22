@@ -26,14 +26,14 @@ class AccountRequest extends FormRequest
         return [
             'account_number'  => 'required|unique:accounts',
             'member_number'   => 'required|unique:accounts',
-            'member_name'     => 'required|unique:accounts',
-            'beds'            => 'required|unique:accounts',
-            'account_balance' => 'required',
-            'beds_cost'       => 'required',
-            'meal_cost'       => 'required',
-            'nursing_cost'    => 'required',
-            'other_cost'      => 'required',
-            'cd_card'         => 'required',
+            'member_name'     => 'required',
+            'beds'            => 'unique:accounts',
+//            'account_balance' => 'required',
+//            'beds_cost'       => 'required',
+//            'meal_cost'       => 'required',
+//            'nursing_cost'    => 'required',
+//            'other_cost'      => 'required',
+//            'cd_card'         => 'required',
         ];
     }
 

@@ -26,6 +26,27 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\StaffManage' => [
             'App\Listeners\StaffManageListener',
         ],
+        'App\Events\MaterialIn' => [
+            'App\Listeners\MaterialInListener'
+        ],
+        'App\Events\MaterialOut' => [
+            'App\Listeners\MaterialOutListener'
+        ],
+        'App\Events\MemberProfile' => [
+            'App\Listeners\MemberProfileListener'
+        ],
+        'App\Events\BookBed' => [
+            'App\Listeners\BookBedListener'
+        ],
+        'App\Events\CheckIn' => [
+            'App\Listeners\CheckInListener',
+        ],
+        'App\Events\CheckInChange' => [
+            'App\Listeners\CheckInChangeListener',
+        ],
+        'App\Events\CheckOut' => [
+            'App\Listeners\CheckOutListener',
+        ],
     ];
 
     /**
