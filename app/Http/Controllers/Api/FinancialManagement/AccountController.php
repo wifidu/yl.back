@@ -27,7 +27,7 @@ class AccountController extends Controller
         return $this->accountService->destory($id);
     }
 
-    public function update(Request $request)
+    public function update(AccountRequest $request)
     {
         $account = $request->all();
         return $this->accountService->update($account);
@@ -44,5 +44,11 @@ class AccountController extends Controller
     {
       return $this->accountService
                   ->showDeposit($request->get('member_name', 'null'),$request->get('page', 1), $request->get('page_size', 15));
+    }
+
+    public function updateBalance(AccountRequest $request)
+    {
+        return $this->accountService
+                    ->updateBalance($request->input('id'), $request->input('money'));
     }
 }
