@@ -216,6 +216,7 @@ $api->version('v1', [
             $api->get('/deposit', 'FinancialManagement\AccountController@showDeposit');
             $api->post('/', 'FinancialManagement\AccountController@store');
             $api->patch('/', 'FinancialManagement\AccountController@update');
+            $api->patch('/balance', 'FinancialManagement\AccountController@updateBalance');
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
         // 机构账户
@@ -227,6 +228,14 @@ $api->version('v1', [
         });
     });
     //人事管理
+    $api->group(["prefix" => "daily-management"], function ($api) {
+        $api->group(["prefix" => "accident"], function ($api) {
+            $api->get('/', 'DailyManagement\AccidentController@show');
+            $api->post('/', 'DailyManagement\AccidentController@store');
+            $api->patch('/', 'DailyManagement\AccidentController@update');
+            $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
+        });
+    });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         //部门管理
         $api->group(["prefix" => "department-manage"], function ($api) {
@@ -390,10 +399,10 @@ $api->version('v1', [
         // 会员档案路由注册
         $api->group(["prefix" => "member-profile"], function ($api) {
             //新增会员
-            $api->post('/', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store');
+            $api->post('/', 'MemberManagement\MemberProfileController@store')->name('api.member-manage.member-profile.store');
 
             //会员信息修改
-            $api->post('/{id}', 'MemberManagement\MemberProfileController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+            $api->post('/{id}', 'MemberManagement\MemberProfileController@store')->name('api.member-manage.member-profile.store')->where(['id' => '\d+']);
 
             //会员详情
             $api->get('/{id}', 'MemberManagement\MemberProfileController@detail')->where(['id' => '\d+']);
@@ -411,10 +420,10 @@ $api->version('v1', [
         // 预约占床
         $api->group(["prefix" => "book-bed"], function ($api) {
             //新增预约订单
-            $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-profile.store');
+            $api->post('/', 'MemberManagement\BookBedController@store')->name('api.member-manage.book-bed.store');
 
             //预约订单信息修改
-            $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-profile.store')->where(['id' => '\d+']);
+            $api->post('/{id}', 'MemberManagement\BookBedController@store')->name('api.member-manage.book-bed.store')->where(['id' => '\d+']);
 
             //预约订单详情
             $api->get('/{id}', 'MemberManagement\BookBedController@detail')->where(['id' => '\d+']);
@@ -481,7 +490,7 @@ $api->version('v1', [
 
         // 外出管理
         $api->group(["prefix" => "out-manage"], function ($api){
-            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.check-out.store');
+            $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.out-manage.store');
 
             //退住登记详情
             $api->get('/{id}', 'MemberManagement\OutManageController@detail')->where(['id' => '\d+']);
@@ -498,6 +507,37 @@ $api->version('v1', [
             //退住登记批量删除
             $api->delete('/', 'MemberManagement\OutManageController@batchDelete');
 
+        });
+
+        // 死亡登记
+        $api->group(["prefix" => "death-registration"], function ($api){
+            $api->post('/', 'MemberManagement\DeathRegistrationController@store')->name('api.member-manage.death-registration.store');
+
+            $api->get('/{id}', 'MemberManagement\DeathRegistrationController@detail')->where(['id' => '\d+']);
+
+            $api->delete('/{id}', 'MemberManagement\DeathRegistrationController@delete')->where(['id' => '\d+']);
+
+            $api->get('/list', 'MemberManagement\DeathRegistrationController@list');
+
+            $api->get('/search', 'MemberManagement\DeathRegistrationController@search');
+
+            $api->delete('/', 'MemberManagement\DeathRegistrationController@batchDelete');
+
+        });
+    });
+    $api->group(["prefix" => "medicine-manage"], function ($api) {
+        $api->group(["prefix" => "drug-information"], function ($api) {
+            $api->post('/', 'MedicineManage\DrugInformationController@store')->name('api.medicine-manage.drug-information.store');
+
+            $api->get('/{id}', 'MedicineManage\DrugInformationController@detail')->where(['id' => '\d+']);
+
+            $api->delete('/{id}', 'MedicineManage\DrugInformationController@delete')->where(['id' => '\d+']);
+
+            $api->get('/list', 'MedicineManage\DrugInformationController@list');
+
+            $api->get('/search', 'MedicineManage\DrugInformationController@search');
+
+            $api->delete('/', 'MedicineManage\DrugInformationController@batchDelete');
         });
     });
 });

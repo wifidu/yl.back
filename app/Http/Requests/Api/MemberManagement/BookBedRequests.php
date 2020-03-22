@@ -27,7 +27,7 @@ class BookBedRequests extends FormRequest
     {
         $routeName = $this->route()->getName();
         switch ($routeName) {
-            case "api.book-bed.store":
+            case "api.member-manage.book-bed.store":
                 $rule = [
                     "bed_number"        => "required",
                     "bed_cost"          => "required|numeric",

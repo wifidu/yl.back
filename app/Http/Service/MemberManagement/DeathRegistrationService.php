@@ -5,18 +5,19 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Http\Repository\MemberManagement\DeathRegistrationRepository;
 use App\Http\Repository\MemberManagement\OutManageRepository;
 use App\Traits\ApiTraits;
 use Log;
 
-class OutManageService
+class DeathRegistrationService
 {
     use ApiTraits;
-    private OutManageRepository $_outManageRepository;
+    private $_deathRegistration;
 
-    public function __construct(OutManageRepository $outManageRepository)
+    public function __construct(DeathRegistrationRepository $deathRegistrationRepository)
     {
-        $this->_outManageRepository = $outManageRepository;
+        $this->_deathRegistration = $deathRegistrationRepository;
     }
 
     /**
@@ -27,7 +28,7 @@ class OutManageService
     public function store($params)
     {
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
-        $id = $this->_outManageRepository->store($params);
+        $id = $this->_deathRegistration->store($params);
         if ($id) {
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
@@ -42,7 +43,7 @@ class OutManageService
      */
     public function detail($id)
     {
-        $data = $this->_outManageRepository->item($id);
+        $data = $this->_deathRegistration->item($id);
 
         if ($data) {
             return $this->apiReturn($data, CodeEnum::SUCCESS);
@@ -58,7 +59,7 @@ class OutManageService
      */
     public function list($page_size)
     {
-        $data = $this->_outManageRepository->list($page_size);
+        $data = $this->_deathRegistration->list($page_size);
         return $this->apiReturn($data, CodeEnum::SUCCESS);
     }
 
@@ -70,12 +71,12 @@ class OutManageService
      */
     public function delete($id)
     {
-        $result = $this->_outManageRepository->item($id);
+        $result = $this->_deathRegistration->item($id);
         if (!$result) {
             return $this->apiReturn('', CodeEnum::NON_EXISTENT);
         }
 
-        $res = $this->_outManageRepository->delete($id);
+        $res = $this->_deathRegistration->delete($id);
         if (!$res) {
             return $this->apiReturn('', CodeEnum::FAIL);
         }
@@ -90,7 +91,7 @@ class OutManageService
      */
     public function search($params)
     {
-        $result = $this->_outManageRepository->search($params);
+        $result = $this->_deathRegistration->search($params);
         if (!$result) {
             return $this->apiReturn('', CodeEnum::NON_EXISTENT);
         }
@@ -104,7 +105,7 @@ class OutManageService
      */
     public function batchDelete($ids)
     {
-        $this->_outManageRepository->batchDelete($ids);
+        $this->_deathRegistration->batchDelete($ids);
 
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }

@@ -1,22 +1,23 @@
 <?php
 
 
-namespace App\Http\Service\MemberManagement;
+namespace App\Http\Service\MedicineManage;
 
 
 use App\Enum\CodeEnum;
+use App\Http\Repository\MedicineManage\DrugInformationRepository;
 use App\Http\Repository\MemberManagement\OutManageRepository;
 use App\Traits\ApiTraits;
 use Log;
 
-class OutManageService
-{
+class DrugInformationService
+{ 
     use ApiTraits;
-    private OutManageRepository $_outManageRepository;
+    private DrugInformationRepository $_drugInformationRepository;
 
-    public function __construct(OutManageRepository $outManageRepository)
+    public function __construct(DrugInformationRepository $drugInformationRepository)
     {
-        $this->_outManageRepository = $outManageRepository;
+        $this->_drugInformationRepository = $drugInformationRepository;
     }
 
     /**
@@ -27,7 +28,7 @@ class OutManageService
     public function store($params)
     {
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
-        $id = $this->_outManageRepository->store($params);
+        $id = $this->_drugInformationRepository->store($params);
         if ($id) {
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
@@ -42,7 +43,7 @@ class OutManageService
      */
     public function detail($id)
     {
-        $data = $this->_outManageRepository->item($id);
+        $data = $this->_drugInformationRepository->item($id);
 
         if ($data) {
             return $this->apiReturn($data, CodeEnum::SUCCESS);
@@ -58,24 +59,24 @@ class OutManageService
      */
     public function list($page_size)
     {
-        $data = $this->_outManageRepository->list($page_size);
+        $data = $this->_drugInformationRepository->list($page_size);
         return $this->apiReturn($data, CodeEnum::SUCCESS);
     }
 
 
     /**
-     * 取消预约
+     * 删除一条药品信息
      * @param $id
      * @return array
      */
     public function delete($id)
     {
-        $result = $this->_outManageRepository->item($id);
+        $result = $this->_drugInformationRepository->item($id);
         if (!$result) {
             return $this->apiReturn('', CodeEnum::NON_EXISTENT);
         }
 
-        $res = $this->_outManageRepository->delete($id);
+        $res = $this->_drugInformationRepository->delete($id);
         if (!$res) {
             return $this->apiReturn('', CodeEnum::FAIL);
         }
@@ -84,13 +85,13 @@ class OutManageService
     }
 
     /**
-     * 通过手机号或人名搜索预约床位信息
+     * 通过药品搜索药品信息
      * @param $params
      * @return array
      */
     public function search($params)
     {
-        $result = $this->_outManageRepository->search($params);
+        $result = $this->_drugInformationRepository->search($params);
         if (!$result) {
             return $this->apiReturn('', CodeEnum::NON_EXISTENT);
         }
@@ -104,9 +105,10 @@ class OutManageService
      */
     public function batchDelete($ids)
     {
-        $this->_outManageRepository->batchDelete($ids);
+        $this->_drugInformationRepository->batchDelete($ids);
 
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }
+
 
 }

@@ -6,27 +6,29 @@ namespace App\Http\Controllers\Api\MemberManagement;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\MemberManagement\CheckInManageRequest;
+use App\Http\Requests\Api\MemberManagement\DeathRegistrationRequests;
 use App\Http\Requests\Api\MemberManagement\OutManageRequest;
+use App\Http\Service\MemberManagement\DeathRegistrationService;
 use App\Http\Service\MemberManagement\OutManageService;
 use Dingo\Api\Http\Request;
 
-class OutManageController extends Controller
+class DeathRegistrationController extends Controller
 {
-    private $_outMange;
-    public function __construct(OutManageService $outMangeService)
+    private $_deathRegistration;
+    public function __construct(DeathRegistrationService $deathRegistrationService)
     {
-        $this->_outMange = $outMangeService;
+        $this->_deathRegistration = $deathRegistrationService;
     }
 
     /**
      * 新增或修改入住登记相关信息
-     * @param OutManageRequest $request
+     * @param DeathRegistrationRequests $request
      * @return array
      */
-    public function store(OutManageRequest $request)
+    public function store(DeathRegistrationRequests $request)
     {
         $params = $request->post();
-        return $this->_outMange->store($params);
+        return $this->_deathRegistration->store($params);
     }
     /**
      * 入住登记详情
@@ -35,7 +37,7 @@ class OutManageController extends Controller
      */
     public function detail($id)
     {
-        return $this->_outMange->detail($id);
+        return $this->_deathRegistration->detail($id);
     }
 
     /**
@@ -46,7 +48,7 @@ class OutManageController extends Controller
     public function list(Request $request)
     {
         $page_size = $request->page_size ?? 25;
-        return $this->_outMange->list($page_size);
+        return $this->_deathRegistration->list($page_size);
     }
 
     /**
@@ -56,30 +58,29 @@ class OutManageController extends Controller
      */
     public function delete($id)
     {
-        return $this->_outMange->delete($id);
+        return $this->_deathRegistration->delete($id);
     }
 
     /**
      * 搜索一个入住登记
-     * @param OutManageRequest $request
+     * @param DeathRegistrationRequests $request
      * @return array
      */
-    public function search(OutManageRequest $request)
+    public function search(DeathRegistrationRequests $request)
     {
         $params = $request->get('member_name');
-        return $this->_outMange->search($params);
+        return $this->_deathRegistration->search($params);
     }
 
     /**
      * 批量删除入住登记表
-     * @param OutManageRequest $request
+     * @param DeathRegistrationRequests $request
      * @return array
      */
-    public function batchDelete(OutManageRequest $request)
+    public function batchDelete(DeathRegistrationRequests $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];
-        return $this->_outMange->batchDelete($ids);
+        return $this->_deathRegistration->batchDelete($ids);
     }
-
 }

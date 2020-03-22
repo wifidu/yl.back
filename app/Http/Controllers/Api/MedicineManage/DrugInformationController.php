@@ -1,77 +1,76 @@
 <?php
 
 
-namespace App\Http\Controllers\Api\MemberManagement;
+namespace App\Http\Controllers\Api\MedicineManage;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\MemberManagement\CheckInManageRequest;
 use App\Http\Requests\Api\MemberManagement\OutManageRequest;
-use App\Http\Service\MemberManagement\OutManageService;
+use App\Http\Service\MedicineManage\DrugInformationService;
 use Dingo\Api\Http\Request;
 
-class OutManageController extends Controller
+class DrugInformationController extends Controller
 {
-    private $_outMange;
-    public function __construct(OutManageService $outMangeService)
+    private DrugInformationService $_drugInformation;
+    public function __construct(DrugInformationService $drugInformationService)
     {
-        $this->_outMange = $outMangeService;
+        $this->_drugInformation = $drugInformationService;
     }
 
     /**
-     * 新增或修改入住登记相关信息
+     * 新增或修改相关信息
      * @param OutManageRequest $request
      * @return array
      */
     public function store(OutManageRequest $request)
     {
         $params = $request->post();
-        return $this->_outMange->store($params);
+        return $this->_drugInformation->store($params);
     }
     /**
-     * 入住登记详情
+     * 详情
      * @param $id
      * @return array
      */
     public function detail($id)
     {
-        return $this->_outMange->detail($id);
+        return $this->_drugInformation->detail($id);
     }
 
     /**
-     * 分页显示入住登记
+     * 分页显示
      * @param Request $request
      * @return array
      */
     public function list(Request $request)
     {
         $page_size = $request->page_size ?? 25;
-        return $this->_outMange->list($page_size);
+        return $this->_drugInformation->list($page_size);
     }
 
     /**
-     * 删除入住登记记录
+     * 删除记录
      * @param $id
      * @return array
      */
     public function delete($id)
     {
-        return $this->_outMange->delete($id);
+        return $this->_drugInformation->delete($id);
     }
 
     /**
-     * 搜索一个入住登记
+     * 搜索
      * @param OutManageRequest $request
      * @return array
      */
     public function search(OutManageRequest $request)
     {
-        $params = $request->get('member_name');
-        return $this->_outMange->search($params);
+        $params = $request->get('drug_name');
+        return $this->_drugInformation->search($params);
     }
 
     /**
-     * 批量删除入住登记表
+     * 批量删除
      * @param OutManageRequest $request
      * @return array
      */
@@ -79,7 +78,8 @@ class OutManageController extends Controller
     {
         $params = $request->all();
         $ids    = $params['ids'];
-        return $this->_outMange->batchDelete($ids);
+        return $this->_drugInformation->batchDelete($ids);
     }
 
+    
 }

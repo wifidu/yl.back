@@ -28,7 +28,7 @@ class MemberProfileRequests extends FormRequest
     {
         $routeName = $this->route()->getName();
         switch ($routeName) {
-            case "api.member-profile.store":
+            case "api.member-manage.member-profile.store":
                 $rule = [
                     "member_name" => "required|max:32",
                     "member_ID" => "sometimes|max:24",
