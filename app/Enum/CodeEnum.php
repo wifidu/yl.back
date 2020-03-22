@@ -22,6 +22,7 @@ class CodeEnum
     const PARAMS_MISS           = [997, '参数缺失'];
     const ERR_NAME_OR_PASSWORD  = [996, '用户名或密码错误'];
     const NOT_PERMISSION        = [401, '权限不足'];
+    const REPEAT_OPERATE        = [995, '操作重复'];
 
     const WareHouseLog          =[0=>'盘点',1=>'出库',2=>'入库'];
     const UNIT                  =[0=>'支',1=>'个',2=>'包'];

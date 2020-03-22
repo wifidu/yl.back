@@ -394,6 +394,30 @@ $api->version('v1', [
             $api->get('/list', 'DietManage\RecipesManageController@list');
 
         });
+        //配送管理
+        $api->group(["prefix" => "delivery-manage"], function ($api) {
+
+            // 新增或编辑配送数据
+            $api->post('/', 'DietManage\DeliveryManageController@store')->name('api.delivery-manage.store');
+
+            // 配送数据详情
+            $api->get('/{id}', 'DietManage\DeliveryManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 配送数据删除
+            $api->delete('/{id}', 'DietManage\DeliveryManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 配送数据批量删除
+            $api->delete('/', 'DietManage\DeliveryManageController@batchDelete');
+
+            // 配送数据列表
+            $api->get('/list', 'DietManage\DeliveryManageController@list');
+
+            // 配送
+            $api->get('/delivery/{id}', 'DietManage\DeliveryManageController@delivery');
+
+        });
     });
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
