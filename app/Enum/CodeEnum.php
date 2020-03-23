@@ -18,14 +18,17 @@ class CodeEnum
     const INC_SUCCESS           = [201, '新增成功'];
     const NOT_PERMISSION        = [401, '权限不足'];
     const NON_EXISTENT          = [500, '信息不存在'];
+    const FAIL                  = [999, '操作失败'];
+    const DATA_EMPTY            = [998, '信息为空'];
+    const PARAMS_MISS           = [997, '参数缺失'];
     const ERR_NAME_OR_PASSWORD  = [996, '用户名或密码错误'];
     const USER_NOT_EXISTENT     = [995, '用户不存在'];
-    const PARAMS_MISS           = [997, '参数缺失'];
-    const DATA_EMPTY            = [998, '信息为空'];
-    const FAIL                  = [999, '操作失败'];
+    const REPEAT_OPERATE        = [994, '操作重复'];
+    const PARAMES_ERROR         = [993, '参数错误'];
 
     const WareHouseLog          = [0=>'盘点',1=>'出库',2=>'入库'];
     const UNIT                  = [0=>'支',1=>'个',2=>'包'];
     const EXPENSE_ITEM          = [0=>'床位费',1=>'膳食费',2=>'护理费',3=>'一次性收费',4=>'押金'];
     const IS_CHARGES            = [0=>'未收款',1=>'已收款'];
+    const MYSQL_TIME_RANGE      = ['day'=>'%Y-%m-%d','month'=>'%Y-%m','year'=>'%Y'];
 }

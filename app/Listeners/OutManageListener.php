@@ -50,22 +50,28 @@ class OutManageListener implements ShouldQueue
         if (isset($beds_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$beds_cost_actual_refund);
             WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('beds_cost',$beds_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->decrement('total_expenses',$beds_cost_actual_refund);
         }
         if (isset($meal_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$meal_cost_actual_refund);
             WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('meal_cost',$meal_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->decrement('total_expenses',$meal_cost_actual_refund);
         }
         if (isset($nursing_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$nursing_cost_actual_refund);
             WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('nursing_cost',$nursing_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->decrement('total_expenses',$nursing_cost_actual_refund);
+
         }
         if (isset($other_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$other_cost_actual_refund);
             WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('other_cost',$other_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->decrement('total_expenses',$other_cost_actual_refund);
         }
         if (isset($deposit_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$deposit_actual_refund);
             WaitingCharges::query()->where(['member_name'=> $member_name])->increment('deposit',$deposit_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->decrement('total_expenses',$deposit_actual_refund);
         }
     }
 }

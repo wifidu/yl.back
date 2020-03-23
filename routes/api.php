@@ -377,6 +377,51 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
         });
+        //膳食管理
+        $api->group(["prefix" => "recipes-manage"], function ($api) {
+
+            // 新增或编辑膳食数据
+            $api->post('/', 'DietManage\RecipesManageController@store')->name('api.recipes-manage.store');
+
+            // 膳食数据详情
+            $api->get('/{id}', 'DietManage\RecipesManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据删除
+            $api->delete('/{id}', 'DietManage\RecipesManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据批量删除
+            $api->delete('/', 'DietManage\RecipesManageController@batchDelete');
+
+            // 膳食数据列表
+            $api->get('/list', 'DietManage\RecipesManageController@list');
+
+        });
+        //配送管理
+        $api->group(["prefix" => "delivery-manage"], function ($api) {
+
+            // 新增或编辑配送数据
+            $api->post('/', 'DietManage\DeliveryManageController@store')->name('api.delivery-manage.store');
+
+            // 配送数据详情
+            $api->get('/{id}', 'DietManage\DeliveryManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 配送数据删除
+            $api->delete('/{id}', 'DietManage\DeliveryManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 配送数据批量删除
+            $api->delete('/', 'DietManage\DeliveryManageController@batchDelete');
+
+            // 配送数据列表
+            $api->get('/list', 'DietManage\DeliveryManageController@list');
+
+            // 配送
+            $api->get('/delivery/{id}', 'DietManage\DeliveryManageController@delivery');
+
+        });
     });
     //会员管理
     $api->group(["prefix" => "member-manage"], function ($api) {
@@ -548,6 +593,31 @@ $api->version('v1', [
 
             // 导出待收费报表
             $api->get('/excel','ReportManagement\WaitingChargesController@excelExport');
+
+            // 待收费报表收款退款
+            $api->post('/receipt_or_refund','ReportManagement\WaitingChargesController@receiptOrRefund')->name('api.waiting.charges.receipt_or_refund');
+        });
+        //月度报表
+        $api->group(["prefix" => "monthly_charges"], function ($api) {
+            // 待收费报表-数据详情
+            $api->get('/{id}', 'ReportManagement\MonthlyChargesController@detail')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表-搜索
+            $api->post('/search', 'ReportManagement\MonthlyChargesController@search');
+
+            // 待收费报表数据删除
+            $api->delete('/{id}', 'ReportManagement\MonthlyChargesController@delete')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表数据批量删除
+            $api->delete('/', 'ReportManagement\MonthlyChargesController@batchDelete')->name('api.monthly.charges.delete');
+
+            // 待收费报表数据列表
+            $api->get('/list', 'ReportManagement\MonthlyChargesController@list');
+
+            // 导出待收费报表
+            $api->get('/excel','ReportManagement\MonthlyChargesController@excelExport');
         });
     });
 });

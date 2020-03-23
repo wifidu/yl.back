@@ -52,4 +52,13 @@ class WaitingChargesController
     {
         return $this->_waitingChargesService->excelExport();
     }
+
+    public function receiptOrRefund(WaitingChargesRequest $chargesRequest)
+    {
+        $params = $chargesRequest->post();
+        $id     = $params['id'];
+        $amount = $params['amount'];
+        $time   = time();
+        return $this->_waitingChargesService->receiptOrRefund($id,$amount,$time);
+    }
 }

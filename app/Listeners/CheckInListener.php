@@ -54,5 +54,7 @@ class CheckInListener implements ShouldQueue
             'other_cost'            => $one_time_cost['cost'],
         ];
         WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name],$data);
+        WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])
+            ->increment('total_expenses',$bed_cost['number']+$meal_cost['cost']+$one_time_cost['cost']);
     }
 }

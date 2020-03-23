@@ -50,6 +50,7 @@ class CheckInChangeListener implements ShouldQueue
                     'beds_cost'             => $bed_cost['cost'],
                 ];
                 WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
+                WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->increment('total_expenses',$bed_cost['cost']);
             }
             if (isset($params['meal_cost'])){
                 $meal_cost = $params['meal_cost'];
@@ -64,6 +65,7 @@ class CheckInChangeListener implements ShouldQueue
                     'meal_cost'         => $meal_cost['cost'],
                 ];
                 WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
+                WaitingCharges::query()->where(['member_name'=> $member_name['member_name']])->increment('total_expenses',$meal_cost['cost']);
             }
         }
     }

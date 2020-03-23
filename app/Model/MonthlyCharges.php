@@ -4,13 +4,14 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class WaitingCharges extends Model
+class MonthlyCharges extends Model
 {
-    protected $table='waiting_charges';
+    protected $table='monthly_charges';
 
     public $timestamps = true;
 
     protected $fillable = [
+        'waiting_charges_id',       //待收费报表id
         'bed_number',               //床位编号
         'member_name',              //姓名
         'charges_time',             //收款时间
@@ -26,7 +27,5 @@ class WaitingCharges extends Model
         'invoice_expenses',         //开票收费
         'total_expenses',           //合计收费
         'mark',                     //备注
-        'is_ charges',              //收款状态（0-未收款 1-已收款）
-        'member_profile_id',        //会员档案id
     ];
 }

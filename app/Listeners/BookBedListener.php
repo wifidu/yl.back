@@ -41,5 +41,6 @@ class BookBedListener implements ShouldQueue
             'deposit'       => $params['appoint_deposit'] ?? 0,
         ];
         WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name],$data);
+        WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('total_expenses',$params['appoint_deposit']);
     }
 }

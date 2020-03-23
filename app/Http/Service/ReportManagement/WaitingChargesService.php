@@ -6,7 +6,6 @@ namespace App\Http\Service\ReportManagement;
 use App\Http\Repository\ReportManagement\WaitingChargesRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
-use Log;
 
 class WaitingChargesService
 {
@@ -62,5 +61,14 @@ class WaitingChargesService
     public function excelExport()
     {
         return $this->_waitingChargesRepository->excelExport();
+    }
+
+    public function receiptOrRefund($id,$amount,$time)
+    {
+        $data = $this->_waitingChargesRepository->receiptOrRefund($id,$amount,$time);
+        if ($data){
+            return $this->apiReturn($data,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::FAIL);
     }
 }

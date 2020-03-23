@@ -5,14 +5,14 @@ namespace App\Http\Repository\ReportManagement;
 
 use Excel;
 use App\Enum\CodeEnum;
-use App\Model\WaitingCharges;
+use App\Model\MonthlyCharges;
 use Illuminate\Support\Facades\DB;
 
-class WaitingChargesRepository
+class MonthlyChargesRepository
 {
     private $_redis;
 
-    const CACHE_KEY_RULE_PRE = 'waiting_charges_';
+    const CACHE_KEY_RULE_PRE = 'monthly_charges_';
 
     public function __construct()
     {
@@ -22,7 +22,7 @@ class WaitingChargesRepository
     public function list($page, $page_size)
     {
 
-        return WaitingCharges::query()->paginate($page_size);
+        return MonthlyCharges::query()->paginate($page_size);
     }
 
     public function item($id)
@@ -33,7 +33,7 @@ class WaitingChargesRepository
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)) {
             //
-            $query = WaitingCharges::query()->where(['id' => $id])->first();
+            $query = MonthlyCharges::query()->where(['id' => $id])->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -47,12 +47,12 @@ class WaitingChargesRepository
         //清除缓存
         $this->cleanCache($id);
 
-        return WaitingCharges::query()->where('id', $id)->delete();
+        return MonthlyCharges::query()->where('id', $id)->delete();
     }
 
     public function batchDelete($ids)
     {
-        return WaitingCharges::query()->whereIn('id', $ids)->delete();
+        return MonthlyCharges::query()->whereIn('id', $ids)->delete();
     }
 
     private function cleanCache($id)
@@ -64,17 +64,30 @@ class WaitingChargesRepository
         }
     }
 
-    public function search($search_index,$content)
+    public function search($time_type,$time_range)
     {
-        return DB::select("select * from waiting_charges where $search_index like '%$content%' ");
+        if(strtolower($time_type)=='year'){
+            $time_range .='-01-01 00:00:00';
+        }elseif(strtolower($time_type)=='month'){
+            $time_range .='-01 00:00:00';
+        }else{
+            $time_range .=' 00:00:00';
+        }
+        $count = substr_count($time_range,'-');
+        if($count<>2){
+            $GLOBALS['monthly_charges_search_error'] = true;
+            return '';
+        }
+
+        return DB::select("select * from monthly_charges where refund_time > UNIX_TIMESTAMP('$time_range')");
     }
 
     public function excelExport()
     {
-        $data = WaitingCharges::query()->get()->toArray();
+        $data = MonthlyCharges::query()->get()->toArray();
 
-        return Excel::create('待收费报表导出', function($excel) use ($data) {
-            $excel->sheet('待收费报表导出', function($sheet) use ($data)
+        return Excel::create('月度报表导出', function($excel) use ($data) {
+            $excel->sheet('月度报表导出', function($sheet) use ($data)
             {
                 $sheet->cell('A1', function($cell) {$cell->setValue('床位编号');   });
                 $sheet->cell('B1', function($cell) {$cell->setValue('姓名');   });
@@ -91,7 +104,6 @@ class WaitingChargesRepository
                 $sheet->cell('M1', function($cell) {$cell->setValue('开票费用'); });
                 $sheet->cell('N1', function($cell) {$cell->setValue('合计费用'); });
                 $sheet->cell('O1', function($cell) {$cell->setValue('备注'); });
-                $sheet->cell('P1', function($cell) {$cell->setValue('收款状态'); });
                 if (!empty($data)) {
                     foreach ($data as $key => $value) {
                         $i= $key+2;
@@ -110,22 +122,9 @@ class WaitingChargesRepository
                         $sheet->cell('M'.$i, $value['invoice_expenses']);
                         $sheet->cell('N'.$i, $value['total_expenses']);
                         $sheet->cell('O'.$i, $value['mark']);
-                        $sheet->cell('P'.$i, CodeEnum::IS_CHARGES[$value['is_ charges']]);
                     }
                 }
             });
         })->download('xls');
-    }
-
-    public function receiptOrRefund($id,$amount,$time)
-    {
-        $waitingChargesItem = WaitingCharges::query()->where(['id'=>$id])->first();
-        if ($amount>=0){
-            //amount大于0，为收款，合计金额减去收款金额
-            return WaitingCharges::query()->updateOrCreate(['id'=>$id],['charges_time'=>$time,'total_expenses'=>$waitingChargesItem['total_expenses']-$amount]);
-        }else{
-            //amount小于0，为退款，合计金额加上退款金额
-            return WaitingCharges::query()->updateOrCreate(['id'=>$id],['refund_time'=>$time,'total_expenses'=>$waitingChargesItem['total_expenses']-$amount]);
-        }
     }
 }
