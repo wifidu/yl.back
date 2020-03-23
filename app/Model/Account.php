@@ -41,4 +41,9 @@ class Account extends Model
     {
         return $this->hasMany('App\Model\Refund');
     }
+
+    public function accidents()
+    {
+        return $this->hasMany('App\Model\Accident');
+    }
 }

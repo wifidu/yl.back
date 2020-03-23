@@ -24,7 +24,8 @@ class CodeEnum
     const DATA_EMPTY            = [998, '信息为空'];
     const FAIL                  = [999, '操作失败'];
 
-    const WareHouseLog          =[0=>'盘点',1=>'出库',2=>'入库'];
-    const UNIT                  =[0=>'支',1=>'个',2=>'包'];
-    const EXPENSE_ITEM          =[0=>'床位费',1=>'膳食费',2=>'护理费',3=>'一次性收费',4=>'押金'];
+    const WareHouseLog          = [0=>'盘点',1=>'出库',2=>'入库'];
+    const UNIT                  = [0=>'支',1=>'个',2=>'包'];
+    const EXPENSE_ITEM          = [0=>'床位费',1=>'膳食费',2=>'护理费',3=>'一次性收费',4=>'押金'];
+    const IS_CHARGES            = [0=>'未收款',1=>'已收款'];
 }

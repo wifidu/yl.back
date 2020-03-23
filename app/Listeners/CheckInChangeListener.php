@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\CheckInChange;
 use App\Model\Account;
 use App\Model\CheckInManage;
+use App\Model\WaitingCharges;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -43,6 +44,12 @@ class CheckInChangeListener implements ShouldQueue
                     'account_balance'       => $accout_detail['account_balance']+$accout_detail['beds_cost_left']-$bed_cost['cost'],
                 ];
                 Account::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
+
+                $data = [
+                    'bed_number'            => $bed_cost['number'],
+                    'beds_cost'             => $bed_cost['cost'],
+                ];
+                WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
             }
             if (isset($params['meal_cost'])){
                 $meal_cost = $params['meal_cost'];
@@ -52,6 +59,11 @@ class CheckInChangeListener implements ShouldQueue
                     'account_balance'   => $accout_detail['account_balance']+$accout_detail['meal_cost_left']-$meal_cost['cost'],
                 ];
                 Account::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
+
+                $data = [
+                    'meal_cost'         => $meal_cost['cost'],
+                ];
+                WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name['member_name']],$data);
             }
         }
     }

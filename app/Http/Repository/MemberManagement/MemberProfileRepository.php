@@ -82,12 +82,10 @@ class MemberProfileRepository
     {
         return MemberProfile::query()
             ->when(isset($params['member_name']), function ($query) use ($params) {
-                return $query->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params['member_name']).'%')
-                    ->where('is_cancel', '=', '0');
+                return $query->where('member_name', 'like', '%'.CommonFunc::escapeLikeStr($params['member_name']).'%');
             })
             ->when(isset($params['phone_number']), function ($query) use ($params) {
-                return $query->where('phone_number', '=', $params['phone_number'])
-                    ->where('is_cancel', '=', '0');
+                return $query->where('phone_number', '=', $params['phone_number']);
             })
             ->get();
 

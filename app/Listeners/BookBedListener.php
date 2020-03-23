@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\BookBed;
 use App\Model\Account;
+use App\Model\WaitingCharges;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -35,5 +36,10 @@ class BookBedListener implements ShouldQueue
             'cd_card'       => $params['elderly_ID'] ?? '',
         ];
         Account::query()->updateOrCreate(['member_name'=> $member_name],$data);
+
+        $data = [
+            'deposit'       => $params['appoint_deposit'] ?? 0,
+        ];
+        WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name],$data);
     }
 }

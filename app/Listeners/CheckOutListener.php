@@ -6,6 +6,7 @@ use App\Enum\CodeEnum;
 use App\Events\CheckOut;
 use App\Model\Account;
 use App\Model\CheckInManage;
+use App\Model\WaitingCharges;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -48,18 +49,23 @@ class CheckOutListener implements ShouldQueue
         }
         if (isset($beds_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$beds_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('beds_cost',$beds_cost_actual_refund);
         }
         if (isset($meal_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$meal_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('meal_cost',$meal_cost_actual_refund);
         }
         if (isset($nursing_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$nursing_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name])->decrement('nursing_cost',$nursing_cost_actual_refund);
         }
         if (isset($other_cost_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$other_cost_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name])->increment('other_cost',$other_cost_actual_refund);
         }
         if (isset($deposit_actual_refund)){
             Account::query()->where(['member_name'=> $member_name])->increment('account_balance',$deposit_actual_refund);
+            WaitingCharges::query()->where(['member_name'=> $member_name])->increment('deposit',$deposit_actual_refund);
         }
     }
 }

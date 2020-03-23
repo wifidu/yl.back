@@ -12,28 +12,18 @@ class RefundRespository
         $this->refund = $refund;
     }
 
-    public function show($page, $page_size)
+    public function show($page, $page_size, $type = null, $status = null, $no = null)
     {
-        return $this->refund->with('account')->paginate($page_size);
-    }
-
-    public function showWithType($type, $page, $page_size)
-    {
-        return $this->refund->where('refund_type', $type)->with('account')->paginate($page_size);
-    }
-
-    public function showWithStatus($status, $page, $page_size)
-    {
-        return $this->refund
-                    ->where('refund_status', $status)->with('account')
-                    ->paginate($page_size);
-    }
-
-    public function showWithNo($no)
-    {
-        return $this->refund
-                    ->where('refund_no', $no)->with('account')
-                    ->get();
+        $finder = $this->refund;
+        if (isset($no))
+            return $finder->where('refund_no', $no)
+                          ->with('account')
+                          ->get();
+        if (isset($type))
+            $finder = $finder->where('refund_type', $type);
+        if (isset($status))
+            $finder = $finder->where('refund_status', $status);
+        return $finder->with('account')->paginate($page_size);
     }
 
     public function store($refund)

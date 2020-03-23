@@ -39,7 +39,6 @@ class MemberProfileService
             event(new MemberProfile($id));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
-
         return $this->apiReturn('', CodeEnum::FAIL);
     }
 

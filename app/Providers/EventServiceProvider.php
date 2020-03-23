@@ -47,6 +47,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\CheckOut' => [
             'App\Listeners\CheckOutListener',
         ],
+        'App\Events\OutManage' => [
+            'App\Listeners\OutManageListener',
+        ],
     ];
 
     /**

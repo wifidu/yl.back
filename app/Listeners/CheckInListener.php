@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\CheckIn;
 use App\Model\Account;
+use App\Model\WaitingCharges;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -45,5 +46,13 @@ class CheckInListener implements ShouldQueue
             'other_cost_start_time' => time(),
         ];
         Account::query()->updateOrCreate(['member_name'=> $member_name],$data);
+
+        $data = [
+            'bed_number'            => $bed_cost['number'],
+            'beds_cost'             => $bed_cost['cost'],
+            'meal_cost'             => $meal_cost['cost'],
+            'other_cost'            => $one_time_cost['cost'],
+        ];
+        WaitingCharges::query()->updateOrCreate(['member_name'=> $member_name],$data);
     }
 }

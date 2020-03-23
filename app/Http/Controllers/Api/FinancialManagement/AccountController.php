@@ -27,7 +27,7 @@ class AccountController extends Controller
         return $this->accountService->destory($id);
     }
 
-    public function update(AccountRequest $request)
+    public function update(Request $request)
     {
         $account = $request->all();
         return $this->accountService->update($account);
