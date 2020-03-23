@@ -216,6 +216,7 @@ $api->version('v1', [
             $api->get('/deposit', 'FinancialManagement\AccountController@showDeposit');
             $api->post('/', 'FinancialManagement\AccountController@store');
             $api->patch('/', 'FinancialManagement\AccountController@update');
+            $api->patch('/balance', 'FinancialManagement\AccountController@updateBalance');
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
         // 机构账户
