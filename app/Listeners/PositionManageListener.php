@@ -16,9 +16,11 @@ class PositionManageListener implements ShouldQueue
      *
      * @return void
      */
+    public $_role;
+
     public function __construct()
     {
-        //
+        $this->_role = new Role();
     }
 
     /**
@@ -29,9 +31,8 @@ class PositionManageListener implements ShouldQueue
      */
     public function handle(PositionManageEvent $event)
     {
-        $role           = new Role();
         $position_name  = $event->_positionManage['position_name'];
-        $result         = $role::findOrCreate($position_name,"web");
+        $result         = $this->_role::findOrCreate($position_name,"web");
         \Log::info("添加或更新岗位：".json_encode($result,JSON_UNESCAPED_UNICODE));
         if ($result){
             PositionManageModel::query()->updateOrCreate(['position_name'=>$position_name],['role_id'=>$result->id]);

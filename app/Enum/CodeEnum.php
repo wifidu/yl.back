@@ -16,6 +16,7 @@ class CodeEnum
 {
     const SUCCESS               = [200, '操作成功'];
     const INC_SUCCESS           = [201, '新增成功'];
+    const DELETE_SUCCESS        = [204, '删除成功'];
     const NOT_PERMISSION        = [401, '权限不足'];
     const NON_EXISTENT          = [500, '信息不存在'];
     const FAIL                  = [999, '操作失败'];
@@ -30,5 +31,5 @@ class CodeEnum
     const UNIT                  = [0=>'支',1=>'个',2=>'包'];
     const EXPENSE_ITEM          = [0=>'床位费',1=>'膳食费',2=>'护理费',3=>'一次性收费',4=>'押金'];
     const IS_CHARGES            = [0=>'未收款',1=>'已收款'];
-    const MYSQL_TIME_RANGE      = ['day'=>'%Y-%m-%d','month'=>'%Y-%m','year'=>'%Y'];
+    const IMAGE_TYPE            = ['avatar'=>0,'other'=>1];
 }

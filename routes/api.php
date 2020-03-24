@@ -20,7 +20,7 @@ $api->version('v1', [
     ], function($api) {
         // 用户注册
         $api->post('users', 'UsersController@store')
-            ->name('api.users.store');
+            ->name('api.user.store');
         // 获取token
         $api->post('authorizations', 'AuthorizationsController@login')
             ->name('api.authorizations.login');
@@ -32,6 +32,12 @@ $api->version('v1', [
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
+            // 修改用户密码
+            $api->post('user/password', 'UsersController@changePassword')
+                ->name('api.user.password');
+            // 删除用户
+            $api->delete('users', 'UsersController@delete')
+                ->name('api.user.delete');
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
@@ -44,7 +50,7 @@ $api->version('v1', [
                 // 取消角色权限
                 $api->post('revokepermisstorole','RolePermissionController@revokePermissionToRole');
                 // 获取当前角色权限
-                $api->post('rolehavepermisson','RolePermissionController@roleHavePermisson');
+                $api->get('rolehavepermisson','RolePermissionController@roleHavePermisson');
                 // 添加角色
                 $api->post('addrole','RolePermissionController@addRole');
             });

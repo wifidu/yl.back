@@ -50,6 +50,15 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\OutManage' => [
             'App\Listeners\OutManageListener',
         ],
+        'App\Events\Users' => [
+            'App\Listeners\UsersListener',
+        ],
+        'App\Events\UsersDelete' => [
+            'App\Listeners\UsersDeleteListener',
+        ],
+        'App\Events\ChangeUsersName' => [
+            'App\Listeners\ChangeUsersNameListener',
+        ],
     ];
 
     /**

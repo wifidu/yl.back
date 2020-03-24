@@ -4,6 +4,7 @@
 namespace App\Http\Service\MaterialManagement;
 
 use App\Http\Repository\MaterialManagement\MaterialInRepository;
+use App\Jobs\MaterialIn;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 use Log;
@@ -32,6 +33,7 @@ class MaterialInService
 
         $id = $this->_materialInRepository->store($params);
         if ($id) {
+            MaterialIn::dispatch($params);
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 

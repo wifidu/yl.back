@@ -39,7 +39,12 @@ class RolePermissionController extends Controller
      */
     public function list(Permission $permission)
     {
-        return $this->apiReturn($permission::all(),CodeEnum::SUCCESS);
+        $all_permission = $permission::all();
+        $name_CN = config('module');
+        foreach ($all_permission as $key => $value){
+            $all_permission[$key]['name_CN'] = $name_CN[$value['name']];
+        }
+        return $this->apiReturn($all_permission,CodeEnum::SUCCESS);
     }
 
     /**
@@ -99,6 +104,10 @@ class RolePermissionController extends Controller
         $role       = $role::find($role_id);
         if ($role){
             $permisson  = $role->getAllPermissions();
+            $module = config('module');
+            foreach ($permisson as $key=>$value){
+                $permisson[$key]['name_CN'] = $module[$value['name']];
+            }
             return $this->apiReturn($permisson,CodeEnum::SUCCESS);
         }
         return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
