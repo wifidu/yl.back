@@ -25,9 +25,9 @@ class CreateRegistrationFormTable extends Migration {
 			$table->text('meal_change_reason', 65535);
 			$table->integer('meal_change_date');
 			$table->integer('business_change_date');
+			$table->string('medical_port_path', 128)->default('')->comment('体检报告路径');
 			$table->softDeletes()->comment('软删除设置');
 			$table->timestamps();
-			$table->string('medical_port_path', 128)->default('')->comment('体检报告路径');
 		});
 	}
 

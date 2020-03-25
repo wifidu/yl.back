@@ -15,6 +15,7 @@ class CreatePositionManagementTable extends Migration {
 		Schema::create('position_management', function(Blueprint $table)
 		{
 			$table->increments('id')->comment('主键id');
+			$table->integer('role_id')->unsigned()->nullable()->index('position_management_fk_roles')->comment('角色id，岗位id');
 			$table->string('position_name', 64)->comment('岗位名称');
 			$table->boolean('position_type')->comment('岗位类型(0-行政岗1-财务岗2-护理岗3-管理岗)');
 			$table->decimal('position_salary', 10)->comment('岗位薪水(元/每单)');

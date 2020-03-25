@@ -19,6 +19,7 @@ class CreateMaterialTable extends Migration {
 			$table->string('brand', 64)->nullable()->comment('品牌');
 			$table->string('model', 64)->nullable()->comment('型号');
 			$table->boolean('unit')->nullable()->default(0)->comment('1(0-支 1-个 2-包)');
+			$table->integer('number')->unsigned()->nullable()->default(0)->comment('数量');
 			$table->string('supplier', 64)->nullable()->comment('供应商');
 			$table->timestamps();
 		});

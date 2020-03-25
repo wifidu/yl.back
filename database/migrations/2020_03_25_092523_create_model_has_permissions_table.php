@@ -17,8 +17,8 @@ class CreateModelHasPermissionsTable extends Migration {
 			$table->integer('permission_id')->unsigned();
 			$table->string('model_type');
 			$table->bigInteger('model_id')->unsigned();
-			$table->index(['model_id','model_type']);
 			$table->primary(['permission_id','model_id','model_type']);
+			$table->index(['model_id','model_type']);
 		});
 	}
 
