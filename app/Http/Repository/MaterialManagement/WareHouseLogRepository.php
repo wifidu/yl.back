@@ -124,11 +124,9 @@ class WareHouseLogRepository
                     case 'all':
                         switch ($time_range){
                             case 'all':
-                                var_dump(1);
                                 return DB::select("select * from warehouse_log where $search_index like '%$content%' ");
                                 break;
                             default:
-                                var_dump(2);
                                 return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and $search_index like '%$content%' ");
                                 break;
                         }
@@ -136,11 +134,9 @@ class WareHouseLogRepository
                     default:
                         switch ($time_range){
                             case 'all':
-                                var_dump(3);
                                 return DB::select("select * from warehouse_log where `type`= $operator_type and $search_index like '%$content%' ");
                                 break;
                             default:
-                                var_dump(4);
                                 return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and $search_index like '%$content%' ");
                                 break;
                         }
@@ -151,11 +147,9 @@ class WareHouseLogRepository
                     case 'all':
                         switch ($time_range){
                             case 'all':
-                                var_dump(5);
                                 return DB::select("select * from warehouse_log where `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                             default:
-                                var_dump(6);
                                 return DB::select("select * from warehouse_log where `operator_time` > DateAdd(year,$time_range,getdate()) and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                         }
@@ -163,11 +157,9 @@ class WareHouseLogRepository
                     default:
                         switch ($time_range){
                             case 'all':
-                                var_dump(7);
                                 return DB::select("select * from warehouse_log where `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                             default:
-                                var_dump(8);
                                 return DB::select("select * from warehouse_log where  `operator_time` > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                         }

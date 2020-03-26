@@ -3,6 +3,7 @@
 
 namespace App\Http\Service\PersonnelManage;
 
+use App\Events\StaffManage;
 use App\Http\Repository\PersonnelManage\StaffManageRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
@@ -19,7 +20,7 @@ class StaffManageService
     }
 
     /**
-     * function 新增、编辑员工信息
+     * function 新增,编辑员工信息
      * describe 新增的id自增，编辑中的数据中需要包含编辑的id
      * @param $params
      * @return array
@@ -32,6 +33,8 @@ class StaffManageService
 
         $id = $this->_staffManageRepository->store($params);
         if ($id) {
+            event(new StaffManage($params));
+
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 

@@ -48,7 +48,7 @@ class AccountRespository
     public function update($account)
     {
         return $this->account
-                    ->where('account_number', $account['account_number'])
+                    ->where('id', $account['id'])
                     ->update($account);
     }
 
@@ -57,6 +57,13 @@ class AccountRespository
         return $this->account
                     ->where('account_number', $id)
                     ->delete();
+    }
+
+    public function updateBalance($id, $money)
+    {
+        $this->account = $this->account->find($id);
+        $this->account->account_balance = $this->account->account_balance + $money;
+        return $this->account->save();
     }
 }
 ?>

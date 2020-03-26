@@ -18,10 +18,9 @@ $api->version('v1', [
 //        'limit' => config('api.rate_limits.sign.limit'),
 //        'expires' => config('api.rate_limits.sign.expires'),
     ], function($api) {
-
         // 用户注册
         $api->post('users', 'UsersController@store')
-            ->name('api.users.store');
+            ->name('api.user.store');
         // 获取token
         $api->post('authorizations', 'AuthorizationsController@login')
             ->name('api.authorizations.login');
@@ -33,6 +32,12 @@ $api->version('v1', [
             // 编辑登录用户信息
             $api->patch('user', 'UsersController@update')
                 ->name('api.user.update');
+            // 修改用户密码
+            $api->post('user/password', 'UsersController@changePassword')
+                ->name('api.user.password');
+            // 删除用户
+            $api->delete('users', 'UsersController@delete')
+                ->name('api.user.delete');
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
@@ -45,13 +50,13 @@ $api->version('v1', [
                 // 取消角色权限
                 $api->post('revokepermisstorole','RolePermissionController@revokePermissionToRole');
                 // 获取当前角色权限
-                $api->post('rolehavepermisson','RolePermissionController@roleHavePermisson');
+                $api->get('rolehavepermisson','RolePermissionController@roleHavePermisson');
                 // 添加角色
                 $api->post('addrole','RolePermissionController@addRole');
             });
         });
     });
-
+    //物资管理
     $api->group(['prefix' => "material-management"],function ($api) {
         $api->group(["prefix" => "fixed-assets"], function ($api) {
             // 固定资产数据存储
@@ -178,9 +183,10 @@ $api->version('v1', [
             $api->get('/list', 'MaterialManagement\WareHouseLogController@list');
 
             // 导出仓库日志
-            $api->get('/execl','MaterialManagement\WareHouseLogController@excelExport');
+            $api->get('/excel','MaterialManagement\WareHouseLogController@excelExport');
         });
     });
+    //财务管理
     $api->group(["prefix" => "financial-management"], function ($api) {
         $api->group(["prefix" => "collection"], function ($api) {
             // 收款账单查询
@@ -216,6 +222,7 @@ $api->version('v1', [
             $api->get('/deposit', 'FinancialManagement\AccountController@showDeposit');
             $api->post('/', 'FinancialManagement\AccountController@store');
             $api->patch('/', 'FinancialManagement\AccountController@update');
+            $api->patch('/balance', 'FinancialManagement\AccountController@updateBalance');
             $api->delete('/{no}', 'FinancialManagement\AccountController@destory');
         });
         // 机构账户
@@ -224,6 +231,15 @@ $api->version('v1', [
             $api->post('/', 'FinancialManagement\AgencyController@store');
             $api->patch('/', 'FinancialManagement\AgencyController@update');
             $api->delete('/{business_number}', 'FinancialManagement\AgencyController@destory');
+        });
+    });
+    //日常管理
+    $api->group(["prefix" => "daily-management"], function ($api) {
+        $api->group(["prefix" => "accident"], function ($api) {
+            $api->get('/', 'DailyManagement\AccidentController@show');
+            $api->post('/', 'DailyManagement\AccidentController@store');
+            $api->patch('/', 'DailyManagement\AccidentController@update');
+            $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
         });
     });
     //人事管理
@@ -288,6 +304,10 @@ $api->version('v1', [
 
             // 岗位数据列表
             $api->get('/list', 'PersonnelManage\PositionManageController@list');
+
+            // 岗位权限管理
+            $api->get('/list', 'PersonnelManage\PositionManageController@list');
+
         });
 
         //团队管理
@@ -311,7 +331,6 @@ $api->version('v1', [
         });
 
     });
-
     //膳食管理
     $api->group(["prefix" => "diet-manage"], function ($api) {
         //单品管理
@@ -364,7 +383,53 @@ $api->version('v1', [
                 ->where(['id' => '\d+']);
 
         });
+        //膳食管理
+        $api->group(["prefix" => "recipes-manage"], function ($api) {
+
+            // 新增或编辑膳食数据
+            $api->post('/', 'DietManage\RecipesManageController@store')->name('api.recipes-manage.store');
+
+            // 膳食数据详情
+            $api->get('/{id}', 'DietManage\RecipesManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据删除
+            $api->delete('/{id}', 'DietManage\RecipesManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 膳食数据批量删除
+            $api->delete('/', 'DietManage\RecipesManageController@batchDelete');
+
+            // 膳食数据列表
+            $api->get('/list', 'DietManage\RecipesManageController@list');
+
+        });
+        //配送管理
+        $api->group(["prefix" => "delivery-manage"], function ($api) {
+
+            // 新增或编辑配送数据
+            $api->post('/', 'DietManage\DeliveryManageController@store')->name('api.delivery-manage.store');
+
+            // 配送数据详情
+            $api->get('/{id}', 'DietManage\DeliveryManageController@detail')
+                ->where(['id' => '\d+']);
+
+            // 配送数据删除
+            $api->delete('/{id}', 'DietManage\DeliveryManageController@delete')
+                ->where(['id' => '\d+']);
+
+            // 配送数据批量删除
+            $api->delete('/', 'DietManage\DeliveryManageController@batchDelete');
+
+            // 配送数据列表
+            $api->get('/list', 'DietManage\DeliveryManageController@list');
+
+            // 配送
+            $api->get('/delivery/{id}', 'DietManage\DeliveryManageController@delivery');
+
+        });
     });
+    //会员管理
     $api->group(["prefix" => "member-manage"], function ($api) {
         // 会员档案路由注册
         $api->group(["prefix" => "member-profile"], function ($api) {
@@ -462,19 +527,19 @@ $api->version('v1', [
         $api->group(["prefix" => "out-manage"], function ($api){
             $api->post('/', 'MemberManagement\OutManageController@store')->name('api.member-manage.out-manage.store');
 
-            //退住登记详情
+            //外出管理详情
             $api->get('/{id}', 'MemberManagement\OutManageController@detail')->where(['id' => '\d+']);
 
-            //退住登记删除
+            //外出管理删除
             $api->delete('/{id}', 'MemberManagement\OutManageController@delete')->where(['id' => '\d+']);
 
-            //退住登记列表
+            //外出管理列表
             $api->get('/list', 'MemberManagement\OutManageController@list');
 
-            //退住登记搜索
+            //外出管理搜索
             $api->get('/search', 'MemberManagement\OutManageController@search');
 
-            //退住登记批量删除
+            //外出管理批量删除
             $api->delete('/', 'MemberManagement\OutManageController@batchDelete');
 
         });
@@ -495,6 +560,7 @@ $api->version('v1', [
 
         });
     });
+    //药品管理
     $api->group(["prefix" => "medicine-manage"], function ($api) {
         $api->group(["prefix" => "drug-information"], function ($api) {
             $api->post('/', 'MedicineManage\DrugInformationController@store')->name('api.medicine-manage.drug-information.store');
@@ -526,6 +592,56 @@ $api->version('v1', [
             $api->get('/search', 'MedicineManage\MedicineDepositController@search');
 
             $api->delete('/', 'MedicineManage\MedicineDepositController@batchDelete');
+        });
+    });
+    //报表管理
+    $api->group(['prefix' => "report-management"], function ($api){
+        //待收费报表
+        $api->group(["prefix" => "waiting_charges"], function ($api) {
+            // 待收费报表-数据详情
+            $api->get('/{id}', 'ReportManagement\WaitingChargesController@detail')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表-搜索
+            $api->post('/search', 'ReportManagement\WaitingChargesController@search');
+
+            // 待收费报表数据删除
+            $api->delete('/{id}', 'ReportManagement\WaitingChargesController@delete')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表数据批量删除
+            $api->delete('/', 'ReportManagement\WaitingChargesController@batchDelete')->name('api.waiting.charges.delete');
+
+            // 待收费报表数据列表
+            $api->get('/list', 'ReportManagement\WaitingChargesController@list');
+
+            // 导出待收费报表
+            $api->get('/excel','ReportManagement\WaitingChargesController@excelExport');
+
+            // 待收费报表收款退款
+            $api->post('/receipt_or_refund','ReportManagement\WaitingChargesController@receiptOrRefund')->name('api.waiting.charges.receipt_or_refund');
+        });
+        //月度报表
+        $api->group(["prefix" => "monthly_charges"], function ($api) {
+            // 待收费报表-数据详情
+            $api->get('/{id}', 'ReportManagement\MonthlyChargesController@detail')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表-搜索
+            $api->post('/search', 'ReportManagement\MonthlyChargesController@search');
+
+            // 待收费报表数据删除
+            $api->delete('/{id}', 'ReportManagement\MonthlyChargesController@delete')
+                ->where(['id' => '\d+']);
+
+            // 待收费报表数据批量删除
+            $api->delete('/', 'ReportManagement\MonthlyChargesController@batchDelete')->name('api.monthly.charges.delete');
+
+            // 待收费报表数据列表
+            $api->get('/list', 'ReportManagement\MonthlyChargesController@list');
+
+            // 导出待收费报表
+            $api->get('/excel','ReportManagement\MonthlyChargesController@excelExport');
         });
     });
 });

@@ -5,6 +5,8 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Events\CheckIn;
+use App\Events\CheckInChange;
 use App\Http\Repository\MemberManagement\BookBedRepository;
 use App\Http\Repository\MemberManagement\CheckInManageRepository;
 use App\Model\CheckInManage;
@@ -33,6 +35,7 @@ class CheckInManageService
 
         $id = $this->_checkInManageRepository->store($params);
         if ($id) {
+            event(new CheckIn($params));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 
@@ -139,6 +142,7 @@ class CheckInManageService
     {
         $ok = $this->_checkInManageRepository->change($params);
         if ($ok) {
+            event(new CheckInChange($params));
             return $this->apiReturn('', CodeEnum::SUCCESS);
         }
 

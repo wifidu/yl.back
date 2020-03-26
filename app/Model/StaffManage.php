@@ -26,7 +26,6 @@ class StaffManage extends Model
         'staff_status',	                //员工状态(0-在职 1-离职)
         'bank',                     	//开户行
         'bank_card_number',	            //银行卡号
-
-
+        'user_id',                      //用户id
     ];
 }

@@ -17,29 +17,42 @@ class AccountRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules()
     {
-        return [
-            'account_number'  => 'required|unique:accounts',
-            'member_number'   => 'required|unique:accounts',
-            'member_name'     => 'required|unique:accounts',
-            'beds'            => 'required|unique:accounts',
-            'account_balance' => 'required',
-            'beds_cost'       => 'required',
-            'meal_cost'       => 'required',
-            'nursing_cost'    => 'required',
-            'other_cost'      => 'required',
-            'cd_card'         => 'required',
-        ];
+        $patchRules = ['id' => 'required'];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'account_number'  => 'required|unique:accounts',
+                    'member_number'   => 'required|unique:accounts',
+                    'member_name'     => 'required',
+                    'beds'            => 'unique:accounts',
+        //            'account_balance' => 'required',
+        //            'beds_cost'       => 'required',
+        //            'meal_cost'       => 'required',
+        //            'nursing_cost'    => 'required',
+        //            'other_cost'      => 'required',
+        //            'cd_card'         => 'required',
+                ];
+            case 'PATCH':
+                if ($this->is('api/financial-management/account/balance'))
+                    $patchRules['money'] = 'required';
+                return $patchRules;
+            default:
+                return [];
+        }
     }
 
     public function messages()
     {
       return [
+            'id.required'              => 'id必须',
+            'money.required'           => '钱必须',
             'account_number.unique'    => '账户编号已经存在',
             'member_number.unique'     => '会员编号已经存在',
             'member_name.unique'       => '会员姓名已经存在',

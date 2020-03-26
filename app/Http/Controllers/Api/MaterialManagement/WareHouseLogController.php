@@ -3,15 +3,15 @@
 
 namespace App\Http\Controllers\Api\MaterialManagement;
 
-use App\Http\Service\MaterialManagement\WareHouseLogService;
-use App\Http\Requests\Api\MaterialManagement\WareHouseLogRequest;
+use App\Http\Service\MaterialManagement\WaitingChargesService;
+use App\Http\Requests\Api\MaterialManagement\WaitingChargesRequest;
 use Dingo\Api\Contract\Http\Request;
 
 class WareHouseLogController
 {
     private $_wareHouseLogService;
 
-    public function __construct(WareHouseLogService $wareHouseLogService)
+    public function __construct(WaitingChargesService $wareHouseLogService)
     {
         $this->_wareHouseLogService = $wareHouseLogService;
     }
@@ -60,12 +60,12 @@ class WareHouseLogController
     /**
      * function 仓库日志数据批量删除
      * describe 仓库日志数据批量删除
-     * @param WareHouseLogRequest $request
+     * @param WaitingChargesRequest $request
      * @return array
      * @author ZhaoDaYuan
      * 2020/3/6 上午11:11
      */
-    public function batchDelete(WareHouseLogRequest $request)
+    public function batchDelete(WaitingChargesRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];
@@ -75,12 +75,12 @@ class WareHouseLogController
     /**
      * function 仓库日志-搜索
      * describe 仓库日志-搜索
-     * @param WareHouseLogRequest $request
+     * @param WaitingChargesRequest $request
      * @return array
      * @author ZhaoDaYuan
      * 2020/3/6 上午11:10
      */
-    public function search(WareHouseLogRequest $request)
+    public function search(WaitingChargesRequest $request)
     {
         $search_index   = $request->post('search_index') ?? 'odd_number';
         $time_range     = $request->post('time_range') ?? 'all';

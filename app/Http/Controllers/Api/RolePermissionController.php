@@ -25,7 +25,7 @@ class RolePermissionController extends Controller
     public function addRole(Request $request,Role $role)
     {
         $role_name    = $request->all()['name'];
-        $result       = $role::create(['name' => $role_name,'guard_name' => "web"]);
+        $result       = $role::findOrCreate($role_name,"web");
         return $this->apiReturn($result,CodeEnum::INC_SUCCESS);
     }
 
@@ -39,7 +39,12 @@ class RolePermissionController extends Controller
      */
     public function list(Permission $permission)
     {
-        return $this->apiReturn($permission::all(),CodeEnum::SUCCESS);
+        $all_permission = $permission::all();
+        $name_CN = config('module');
+        foreach ($all_permission as $key => $value){
+            $all_permission[$key]['name_CN'] = $name_CN[$value['name']];
+        }
+        return $this->apiReturn($all_permission,CodeEnum::SUCCESS);
     }
 
     /**
@@ -56,8 +61,11 @@ class RolePermissionController extends Controller
         $role_id    = $request->all()['id'];
         $permission = $request->all()['permission'];
         $role       = $role::find($role_id);
-        $result     = $role->givePermissionTo($permission);
-        return $this->apiReturn($result,CodeEnum::SUCCESS);
+        if ($role){
+            $result     = $role->givePermissionTo($permission);
+            return $this->apiReturn($result,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 
     /**
@@ -74,8 +82,11 @@ class RolePermissionController extends Controller
         $role_id    = $request->all()['id'];
         $permission = $request->all()['permission'];
         $role       = $role::find($role_id);
-        $result     = $role->revokePermissionTo($permission);
-        return $this->apiReturn($result,CodeEnum::SUCCESS);
+        if ($role){
+            $result     = $role->revokePermissionTo($permission);
+            return $this->apiReturn($result,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 
     /**
@@ -91,7 +102,14 @@ class RolePermissionController extends Controller
     {
         $role_id    = $request->all()['id'];
         $role       = $role::find($role_id);
-        $permisson  = $role->getAllPermissions();
-        return $this->apiReturn($permisson,CodeEnum::SUCCESS);
+        if ($role){
+            $permisson  = $role->getAllPermissions();
+            $module = config('module');
+            foreach ($permisson as $key=>$value){
+                $permisson[$key]['name_CN'] = $module[$value['name']];
+            }
+            return $this->apiReturn($permisson,CodeEnum::SUCCESS);
+        }
+        return $this->apiReturn('',CodeEnum::USER_NOT_EXISTENT);
     }
 }

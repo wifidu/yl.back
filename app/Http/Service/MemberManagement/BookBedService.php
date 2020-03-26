@@ -5,6 +5,7 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Events\BookBed;
 use App\Http\Repository\MemberManagement\BookBedRepository;
 use App\Traits\ApiTraits;
 use Log;
@@ -29,6 +30,7 @@ class BookBedService
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
         $id = $this->_bookBedRepository->store($params);
         if ($id) {
+            event(new BookBed($params));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 

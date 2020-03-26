@@ -21,7 +21,15 @@ class Account extends Model
       'nursing_cost',
       'other_cost',
       'cd_card',
-      'deposit'
+      'deposit',
+      'beds_cost_start_time',
+      'meal_cost_start_time',
+      'nursing_cost_start_time',
+      'other_cost_start_time',
+      'beds_cost_left',
+      'meal_cost_left',
+      'nursing_cost_left',
+      'other_cost_left',
     ];
 
     public function creditManagement()
@@ -32,5 +40,10 @@ class Account extends Model
     public function refund()
     {
         return $this->hasMany('App\Model\Refund');
+    }
+
+    public function accidents()
+    {
+        return $this->hasMany('App\Model\Accident');
     }
 }

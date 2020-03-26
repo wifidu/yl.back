@@ -20,6 +20,45 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\WarehouseLog' => [
             'App\Listeners\WarehouseLogListener',
         ],
+        'App\Events\PositionManage' => [
+            'App\Listeners\PositionManageListener',
+        ],
+        'App\Events\StaffManage' => [
+            'App\Listeners\StaffManageListener',
+        ],
+        'App\Events\MaterialIn' => [
+            'App\Listeners\MaterialInListener'
+        ],
+        'App\Events\MaterialOut' => [
+            'App\Listeners\MaterialOutListener'
+        ],
+        'App\Events\MemberProfile' => [
+            'App\Listeners\MemberProfileListener'
+        ],
+        'App\Events\BookBed' => [
+            'App\Listeners\BookBedListener'
+        ],
+        'App\Events\CheckIn' => [
+            'App\Listeners\CheckInListener',
+        ],
+        'App\Events\CheckInChange' => [
+            'App\Listeners\CheckInChangeListener',
+        ],
+        'App\Events\CheckOut' => [
+            'App\Listeners\CheckOutListener',
+        ],
+        'App\Events\OutManage' => [
+            'App\Listeners\OutManageListener',
+        ],
+        'App\Events\Users' => [
+            'App\Listeners\UsersListener',
+        ],
+        'App\Events\UsersDelete' => [
+            'App\Listeners\UsersDeleteListener',
+        ],
+        'App\Events\ChangeUsersName' => [
+            'App\Listeners\ChangeUsersNameListener',
+        ],
     ];
 
     /**

@@ -18,7 +18,7 @@ class StaffManageController
     }
 
      /**
-      * function 新增、编辑员工信息
+      * function 新增,编辑员工信息
       * describe 新增的id自增，编辑中的数据中需要包含编辑的id
       * @param StaffManageRequest $request
       * @return array

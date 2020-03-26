@@ -5,6 +5,7 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Events\CheckOut;
 use App\Http\Repository\MemberManagement\BookBedRepository;
 use App\Http\Repository\MemberManagement\CheckOutRepository;
 use App\Traits\ApiTraits;
@@ -30,6 +31,7 @@ class CheckOutService
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
         $id = $this->_checkOutRepository->store($params);
         if ($id) {
+            event(new CheckOut($params));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 
