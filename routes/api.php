@@ -509,5 +509,23 @@ $api->version('v1', [
 
             $api->delete('/', 'MedicineManage\DrugInformationController@batchDelete');
         });
+
+        $api->group(["prefix" => "medicine-deposit"], function ($api) {
+            $api->post('/', 'MedicineManage\MedicineDepositController@store')->name('api.medicine-manage.medicine-deposit.store');
+
+            $api->post('/correct', 'MedicineManage\MedicineDepositController@store')->name('api.medicine-manage.medicine-deposit.correct');
+
+            $api->post('/warn', 'MedicineManage\MedicineDepositController@store')->name('api.medicine-manage.medicine-deposit.warn');
+
+            $api->get('/{id}', 'MedicineManage\MedicineDepositController@detail')->where(['id' => '\d+']);
+
+            $api->delete('/{id}', 'MedicineManage\MedicineDepositController@delete')->where(['id' => '\d+']);
+
+            $api->get('/list', 'MedicineManage\MedicineDepositController@list');
+
+            $api->get('/search', 'MedicineManage\MedicineDepositController@search');
+
+            $api->delete('/', 'MedicineManage\MedicineDepositController@batchDelete');
+        });
     });
 });

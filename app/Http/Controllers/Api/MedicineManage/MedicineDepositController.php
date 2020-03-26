@@ -4,30 +4,29 @@
 namespace App\Http\Controllers\Api\MedicineManage;
 
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\MedicineManage\DrugInformationRequest;
-use App\Http\Requests\Api\MemberManagement\OutManageRequest;
-use App\Http\Service\MedicineManage\DrugInformationService;
+use App\Http\Requests\Api\MedicineManage\MedicineDepositRequest;
+use App\Http\Service\MedicineManage\MedicineDepositService;
 use Dingo\Api\Http\Request;
 
-class DrugInformationController extends Controller
+class MedicineDepositController
 {
-    private DrugInformationService $_drugInformation;
-    public function __construct(DrugInformationService $drugInformationService)
+    private MedicineDepositService $_drugInformation;
+    public function __construct(MedicineDepositService $MedicineDepositService)
     {
-        $this->_drugInformation = $drugInformationService;
+        $this->_drugInformation = $MedicineDepositService;
     }
 
     /**
      * 新增或修改相关信息
-     * @param DrugInformationRequest $request
+     * @param  $request
      * @return array
      */
-    public function store(DrugInformationRequest $request)
+    public function store(MedicineDepositRequest $request)
     {
         $params = $request->post();
         return $this->_drugInformation->store($params);
     }
+
     /**
      * 详情
      * @param $id
@@ -61,26 +60,25 @@ class DrugInformationController extends Controller
 
     /**
      * 搜索
-     * @param DrugInformationRequest $request
+     * @param MedicineDepositRequest $request
      * @return array
      */
-    public function search(DrugInformationRequest $request)
+    public function search(MedicineDepositRequest $request)
     {
-        $params = $request->get('drug_name');
+        $params = $request->get('member_name');
         return $this->_drugInformation->search($params);
     }
 
     /**
      * 批量删除
-     * @param DrugInformationRequest $request
+     * @param MedicineDepositRequest $request
      * @return array
      */
-    public function batchDelete(DrugInformationRequest $request)
+    public function batchDelete(MedicineDepositRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];
         return $this->_drugInformation->batchDelete($ids);
     }
 
-    
 }
