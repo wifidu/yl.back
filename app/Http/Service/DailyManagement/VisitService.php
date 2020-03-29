@@ -2,7 +2,7 @@
 
 /*
  * @author weifan
- * Sunday 29th of March 2020 02:35:29 PM
+ * Sunday 29th of March 2020 04:13:55 PM
  */
 
 namespace App\Http\Service\DailyManagement;
@@ -24,7 +24,7 @@ class VisitService
     public function store($data)
     {
         $data['id'] = $this->visitRepository->store($this->fomatTrans($data));
-        $result = $this->resultIs($data['id']);
+        $result     = $this->resultIs($data['id']);
 
         return $this->apiReturn($data, $result);
     }
@@ -64,7 +64,7 @@ class VisitService
 
             return $data;
         }
-        foreach ($data as $visit){
+        foreach ($data as $visit) {
             $visit['visit_time'] = date('Y-m-d H:i:s', $visit['visit_time']);
         }
 

@@ -2,12 +2,11 @@
 
 /*
  * @author weifan
- * Sunday 29th of March 2020 02:19:04 PM
+ * Sunday 29th of March 2020 04:13:42 PM
  */
 
 namespace App\Http\Repository\DailyManagement;
 
-use App\Enum\CodeEnum;
 use App\Model\Visit;
 
 class VisitRepository
@@ -49,6 +48,4 @@ class VisitRepository
     {
         return $this->visit->where('id', $id)->delete();
     }
-
-
 }
