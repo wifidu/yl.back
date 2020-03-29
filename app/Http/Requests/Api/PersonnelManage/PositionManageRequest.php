@@ -27,7 +27,7 @@ class PositionManageRequest extends FormRequest
         switch ($routeName) {
             case "api.position-manage.store":
                 $rule = [
-                    "position_name"        => "required",
+                    "position_name"        => "required|unique:position_management",
                     "position_type"        => "required|integer|in:0,1,2,3",
                     "position_salary"      => "required",
                     "rank_name"            => "required",
@@ -46,6 +46,7 @@ class PositionManageRequest extends FormRequest
     {
         return [
             'position_name.required'                 => '岗位名称必须',
+            'position_name.unique'                   => '岗位名称必须唯一',
             'position_type.required'                 => '岗位类型必须',
             'position_type.integer'                  => '岗位类型必须为整型',
             'position_type.in'                       => '岗位类型参数可选0-行政岗/1-财务岗/2-护理岗/3-管理岗',

@@ -5,6 +5,7 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Events\MemberProfile;
 use App\Http\Repository\MemberManagement\MemberProfileRepository;
 use App\Traits\ApiTraits;
 use Log;
@@ -35,9 +36,9 @@ class MemberProfileService
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
         $id = $this->_memberProfileRepository->store($params);
         if ($id) {
+            event(new MemberProfile($id));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
-
         return $this->apiReturn('', CodeEnum::FAIL);
     }
 

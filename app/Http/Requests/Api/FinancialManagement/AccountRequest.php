@@ -31,13 +31,13 @@ class AccountRequest extends FormRequest
                     'account_number'  => 'required|unique:accounts',
                     'member_number'   => 'required|unique:accounts',
                     'member_name'     => 'required',
-                    'beds'            => 'required|unique:accounts',
-                    'account_balance' => 'required',
-                    'beds_cost'       => 'required',
-                    'meal_cost'       => 'required',
-                    'nursing_cost'    => 'required',
-                    'other_cost'      => 'required',
-                    'cd_card'         => 'required',
+                    'beds'            => 'unique:accounts',
+        //            'account_balance' => 'required',
+        //            'beds_cost'       => 'required',
+        //            'meal_cost'       => 'required',
+        //            'nursing_cost'    => 'required',
+        //            'other_cost'      => 'required',
+        //            'cd_card'         => 'required',
                 ];
             case 'PATCH':
                 if ($this->is('api/financial-management/account/balance'))
@@ -45,7 +45,6 @@ class AccountRequest extends FormRequest
                 return $patchRules;
             default:
                 return [];
-
         }
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\MedicineManage;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\MedicineManage\DrugInformationRequest;
 use App\Http\Requests\Api\MemberManagement\OutManageRequest;
 use App\Http\Service\MedicineManage\DrugInformationService;
 use Dingo\Api\Http\Request;
@@ -19,10 +20,10 @@ class DrugInformationController extends Controller
 
     /**
      * 新增或修改相关信息
-     * @param OutManageRequest $request
+     * @param DrugInformationRequest $request
      * @return array
      */
-    public function store(OutManageRequest $request)
+    public function store(DrugInformationRequest $request)
     {
         $params = $request->post();
         return $this->_drugInformation->store($params);
@@ -60,10 +61,10 @@ class DrugInformationController extends Controller
 
     /**
      * 搜索
-     * @param OutManageRequest $request
+     * @param DrugInformationRequest $request
      * @return array
      */
-    public function search(OutManageRequest $request)
+    public function search(DrugInformationRequest $request)
     {
         $params = $request->get('drug_name');
         return $this->_drugInformation->search($params);
@@ -71,10 +72,10 @@ class DrugInformationController extends Controller
 
     /**
      * 批量删除
-     * @param OutManageRequest $request
+     * @param DrugInformationRequest $request
      * @return array
      */
-    public function batchDelete(OutManageRequest $request)
+    public function batchDelete(DrugInformationRequest $request)
     {
         $params = $request->all();
         $ids    = $params['ids'];

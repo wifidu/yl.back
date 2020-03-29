@@ -68,7 +68,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('TIMEZONE','UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -128,6 +128,7 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'log_max_files' =>env('APP_LOG_MAX_FILES', 30),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
@@ -181,6 +182,8 @@ return [
         App\Providers\RouteServiceProvider::class,
         //Excel导入导出
         Maatwebsite\Excel\ExcelServiceProvider::class,
+        //保存图片
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -229,5 +232,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 ];

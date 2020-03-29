@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api\MemberManagement;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\MemberManagement\MemberProfileRequests;
 use App\Http\Service\MemberManagement\MemberProfileService;
 use Dingo\Api\Contract\Http\Request;
+use App\Http\Requests\Api\MemberManagement\MemberProfileRequests;
 
 /**
  * Class MemberProfileController
@@ -29,6 +29,7 @@ class MemberProfileController extends Controller
     public function store(MemberProfileRequests $request)
     {
         $params = $request->post();
+        \Log::info('112233');
         return $this->_memberProfile->store($params);
     }
     /**

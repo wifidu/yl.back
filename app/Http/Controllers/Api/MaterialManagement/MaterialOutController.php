@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Api\MaterialManagement;
 
+use App\Events\MaterialOut;
 use App\Events\WarehouseLog;
 use App\Http\Service\MaterialManagement\MaterialOutService;
 use App\Http\Requests\Api\MaterialManagement\MaterialOutRequest;
@@ -29,6 +30,7 @@ class MaterialOutController
     {
         $params = $request->post();
         event(new WarehouseLog($params));
+        event(new MaterialOut($params));
         return $this->_materialOutService->store($params);
     }
 

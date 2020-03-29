@@ -3,7 +3,6 @@
 
 namespace App\Http\Controllers\Api\MaterialManagement;
 
-use App\Events\WarehouseLog;
 use App\Http\Service\MaterialManagement\MaterialInService;
 use App\Http\Requests\Api\MaterialManagement\MaterialInRequest;
 use Dingo\Api\Contract\Http\Request;
@@ -28,7 +27,6 @@ class MaterialInController
     public function store(MaterialInRequest $request)
     {
         $params = $request->post();
-        event(new WarehouseLog($params));
         return $this->_materialInService->store($params);
     }
 

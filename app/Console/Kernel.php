@@ -20,6 +20,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\GenerateToken::class,
         \App\Console\Commands\AddModule::class,
         \App\Console\Commands\GenerateInventory::class,
+        \App\Console\Commands\GenerateMonthlyCharges::class,
     ];
 
     /**
@@ -31,6 +32,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('p_o:add-module')->everyThirtyMinutes();
         $schedule->command('p_o:generate-inventory')->monthly();
+        $schedule->command('p_o:generate-monthly-charges')->daily();
     }
 
     /**

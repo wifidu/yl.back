@@ -5,6 +5,7 @@ namespace App\Http\Service\MemberManagement;
 
 
 use App\Enum\CodeEnum;
+use App\Events\OutManage;
 use App\Http\Repository\MemberManagement\OutManageRepository;
 use App\Traits\ApiTraits;
 use Log;
@@ -12,7 +13,7 @@ use Log;
 class OutManageService
 {
     use ApiTraits;
-    private OutManageRepository $_outManageRepository;
+    private $_outManageRepository;
 
     public function __construct(OutManageRepository $outManageRepository)
     {
@@ -29,6 +30,7 @@ class OutManageService
         Log::info(json_encode($params, JSON_UNESCAPED_UNICODE));
         $id = $this->_outManageRepository->store($params);
         if ($id) {
+            event(new OutManage($params));
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }
 
