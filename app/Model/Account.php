@@ -38,4 +38,9 @@ class Account extends Model
     {
         return $this->hasMany('App\Model\Accident');
     }
+
+    public function visits()
+    {
+        return $this->hasMany('App\Model\Visit', 'member_name', 'member_name');
+    }
 }

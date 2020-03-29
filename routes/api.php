@@ -162,6 +162,13 @@ $api->version('v1', [
             $api->patch('/', 'DailyManagement\AccidentController@update');
             $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
         });
+
+        $api->group(["prefix" => "visit"], function ($api) {
+            $api->get('/', 'DailyManagement\VisitController@show');
+            $api->post('/', 'DailyManagement\VisitController@store');
+            $api->patch('/', 'DailyManagement\VisitController@update');
+            $api->delete('/{id}', 'DailyManagement\VisitController@destroy');
+        });
     });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
