@@ -10,6 +10,7 @@
         "barryvdh/laravel-ide-helper": "^2.6",
         "dingo/api": "^2.4",
         "doctrine/dbal": " ~2.3",
+        "fabpot/php-cs-fixer": "^2.16",
         "intervention/image": "^2.5",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",

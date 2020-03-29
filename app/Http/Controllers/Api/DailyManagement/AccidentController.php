@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * @author weifan
+ * Sunday 29th of March 2020 11:51:43 AM
+ */
+
 namespace App\Http\Controllers\Api\DailyManagement;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Service\DailyManagement\AccidentService;
 use App\Http\Requests\Api\DailyManagement\AccidentRequest;
+use App\Http\Service\DailyManagement\AccidentService;
+use Illuminate\Http\Request;
 
 class AccidentController extends Controller
 {
@@ -19,6 +24,7 @@ class AccidentController extends Controller
     public function store(AccidentRequest $request)
     {
         $data = $request->post();
+
         return $this->accidentService->store($data);
     }
 
@@ -34,12 +40,13 @@ class AccidentController extends Controller
 
     public function show(Request $request)
     {
-        return $this->accidentService->show($request->get('page', 1),
-                                            $request->get('page_size', 15),
-                                            $request->get('start_time'),
-                                            $request->get('end_time'),
-                                            $request->get('name'),
-                                            $request->get('id'));
+        return $this->accidentService->show(
+            $request->get('page', 1),
+            $request->get('page_size', 15),
+            $request->get('start_time'),
+            $request->get('end_time'),
+            $request->get('name'),
+            $request->get('id')
+        );
     }
-
 }

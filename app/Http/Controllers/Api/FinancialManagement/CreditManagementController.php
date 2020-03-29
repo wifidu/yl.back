@@ -1,11 +1,16 @@
 <?php
 
+/*
+ * @author weifan
+ * Sunday 29th of March 2020 11:53:49 AM
+ */
+
 namespace App\Http\Controllers\Api\FinancialManagement;
 
-use Illuminate\Http\Request;
-use App\Http\Service\FinancialManagement\CreditManagementService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\FinancialManagement\CreditManagementRequest;
+use App\Http\Service\FinancialManagement\CreditManagementService;
+use Illuminate\Http\Request;
 
 class CreditManagementController extends Controller
 {
@@ -18,9 +23,9 @@ class CreditManagementController extends Controller
 
     public function show(Request $request)
     {
-        $page = $request->page ?? 1;
+        $page      = $request->page      ?? 1;
         $page_size = $request->page_size ?? 15;
-        $results = $this->creditManagementService->show($page, $page_size);
+        $results   = $this->creditManagementService->show($page, $page_size);
 
         return $results;
     }
@@ -28,9 +33,9 @@ class CreditManagementController extends Controller
     // 根据收款类型返回收款单
     public function showWithType($type, Request $request)
     {
-        $page = $request->page ?? 1;
+        $page      = $request->page      ?? 1;
         $page_size = $request->page_size ?? 15;
-        $credits = $this->creditManagementService->showWithType($type, $page, $page_size);
+        $credits   = $this->creditManagementService->showWithType($type, $page, $page_size);
 
         return $credits;
     }
@@ -46,9 +51,9 @@ class CreditManagementController extends Controller
     // 根据是否已经收款查询
     public function showWithIfPay($ifPay, Request $request)
     {
-        $page = $request->page ?? 1;
+        $page      = $request->page      ?? 1;
         $page_size = $request->page_size ?? 15;
-        $credits = $this->creditManagementService->showWithIfPay($ifPay, $page, $page_size);
+        $credits   = $this->creditManagementService->showWithIfPay($ifPay, $page, $page_size);
 
         return $credits;
     }
@@ -56,9 +61,9 @@ class CreditManagementController extends Controller
     public function store(CreditManagementRequest $request)
     {
         $bill = $request->post();
+
         return $this->creditManagementService->store($bill);
     }
-
 
     public function destory($voucherNo)
     {
@@ -68,6 +73,7 @@ class CreditManagementController extends Controller
     public function update(Request $request)
     {
         $bill = $request->post();
+
         return $this->creditManagementService->update($bill);
     }
 }
