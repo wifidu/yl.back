@@ -41,7 +41,7 @@ class VisitRepository
             $query = $query->where('visit_time', '<=', strtotime($end_time));
         }
 
-        return $query->paginate();
+        return $query->paginate($page_size);
     }
 
     public function destroy($id)

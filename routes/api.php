@@ -169,6 +169,13 @@ $api->version('v1', [
             $api->patch('/', 'DailyManagement\VisitController@update');
             $api->delete('/{id}', 'DailyManagement\VisitController@destroy');
         });
+        $api->group(["prefix" => "consult"], function ($api) {
+            $api->get('/', 'DailyManagement\ConsultController@index');
+            $api->get('/{id}', 'DailyManagement\ConsultController@show');
+            $api->post('/', 'DailyManagement\ConsultController@store');
+            $api->patch('/', 'DailyManagement\ConsultController@update');
+            $api->delete('/{id}', 'DailyManagement\ConsultController@destroy');
+        });
     });
     $api->group(["prefix" => "personnel-manage"], function ($api) {
         $api->group(["prefix" => "department-manage"], function ($api) {
