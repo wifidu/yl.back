@@ -25,4 +25,20 @@ class AuthorizationsController extends Controller
             'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
         ],CodeEnum::SUCCESS);
     }
+
+    public function logout()
+    {
+        \Auth::guard('api')->logout();
+        return $this->apiReturn('',CodeEnum::LOGOUT_SUCCESS);
+    }
+
+    public function refresh()
+    {
+        $token = \Auth::guard('api')->refresh();
+        return $this->apiReturn([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'expires_in' => \Auth::guard('api')->factory()->getTTL() * 60
+        ],CodeEnum::SUCCESS);
+    }
 }

@@ -41,6 +41,12 @@ $api->version('v1', [
             // 图片资源
             $api->post('images', 'ImagesController@store')
                 ->name('api.images.store');
+            // 刷新Token
+            $api->post('authorizations/refresh', 'AuthorizationsController@refresh')
+                ->name('api.user.refresh');
+            // 退出登录
+            $api->post('authorizations/logout', 'AuthorizationsController@logout')
+                ->name('api.user.logout');
             //角色权限
             $api->group(['prefix' => 'role-permission'], function ($api){
                 // 所有权限列表

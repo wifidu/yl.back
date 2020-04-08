@@ -17,6 +17,7 @@ class CodeEnum
     const SUCCESS               = [200, '操作成功'];
     const INC_SUCCESS           = [201, '新增成功'];
     const DELETE_SUCCESS        = [204, '删除成功'];
+    const LOGOUT_SUCCESS        = [204, '登出成功'];
     const NOT_PERMISSION        = [401, '权限不足'];
     const NON_EXISTENT          = [500, '信息不存在'];
     const FAIL                  = [999, '操作失败'];
