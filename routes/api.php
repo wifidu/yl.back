@@ -81,6 +81,9 @@ $api->version('v1', [
 
             // 固定资产数据列表
             $api->get('/list', 'MaterialManagement\FixedAssetsController@list');
+
+            // 固定资产搜索
+            $api->post('/search', 'MaterialManagement\FixedAssetsController@search');
         });
         $api->group(["prefix" => "material"], function ($api) {
             // 物资数据存储

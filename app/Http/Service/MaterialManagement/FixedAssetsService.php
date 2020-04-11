@@ -105,4 +105,10 @@ class FixedAssetsService
 
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }
+
+    public function search($search_index,$content)
+    {
+        $search = $this->_fixedAssetsRepository->search($search_index,$content);
+        return $this->apiReturn($search,CodeEnum::SUCCESS);
+    }
 }

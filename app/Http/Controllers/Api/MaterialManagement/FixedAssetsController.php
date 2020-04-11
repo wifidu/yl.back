@@ -86,4 +86,12 @@ class FixedAssetsController
         $ids    = $params['ids'];
         return $this->_fixedAssetsService->batchDelete($ids);
     }
+
+    public function search(FixedAssetsRequest $request)
+    {
+        $search_index   = $request->post('search_index') ?? 'name';
+        $content        = $request->post('content') ?? '';
+
+        return $this->_fixedAssetsService->search($search_index,$content);
+    }
 }

@@ -3,6 +3,7 @@
 
 namespace App\Http\Repository\MaterialManagement;
 
+use DB;
 use App\Model\FixedAssets;
 
 class FixedAssetsRepository
@@ -114,5 +115,13 @@ class FixedAssetsRepository
         if ($keys) {
             $this->_redis->del($keys);
         }
+    }
+
+    public function search($search_index,$content)
+    {
+        if ($content == '') {
+            return DB::select("select * from fixed_assets");
+        }
+        return DB::select("select * from fixed_assets where $search_index like '%$content%'");
     }
 }
