@@ -149,7 +149,7 @@ class CreditManagementController extends Controller
          * @title 增加账单
          * @description 增加账单
          * @method POST  application/json
-         * @url {{host}}/api/financial-management/IfPay/{ifPay}
+         * @url {{host}}/api/financial-management/collection
          * @param business_time      是    char    业务时间，时间格式为：Y-m-d H:i:s      
          * @param voucher_no         是    char    收款单号                               
          * @param account_id         是    int     账户id                                 
