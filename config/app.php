@@ -239,4 +239,9 @@ return [
      * 允许的跨域请求
      */
     'allow' => env('ALLOW','*'),
+
+    /**
+     * showdoc_api 脚本文件目录
+     */
+    'showdoc_api_path' => env('SHOWDOC_API_PATH','/home/wwwroot/pension_operate/app/showdoc_api.sh'),
 ];

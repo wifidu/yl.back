@@ -23,7 +23,7 @@ class UsersController extends Controller
      * @catalog 接口文档/用户认证&权限管理
      * @title 用户注册
      * @description 用户注册的接口
-     * @method post  application/json
+     * @method `post`  `application/json`
      * @url {{host}}/api/users
      * @param username 必选 string 用户名 支持中文,英文,数字,横杆和下划线
      * @param password 必选 string 密码 长度最小为5
@@ -49,9 +49,9 @@ class UsersController extends Controller
      * @catalog 接口文档/用户认证&权限管理
      * @title 获取用户信息
      * @description 获取用户信息的接口
-     * @method get  application/json
+     * @method `get`
      * @url {{host}}/api/user
-     * @header Authorization 必选  string 应用认证token 格式 Bearer token
+     * @header Authorization 必选  string 应用认证token(Bearer类型)
      * @return {"status":200,"message":"操作成功","data":{"id":35,"roles_id":17,"name":"admin","email":null,"avatar":"http://59.110.212.116:32801/uploads/images/avatars/202004/06/35_1586153168_1kKRgZbUYK.jpeg","created_at":"2020-03-24 13:37:04","updated_at":"2020-04-06 14:07:24","mate":{"access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC81OS4xMTAuMjEyLjExNjozMjgwMVwvYXBpXC91c2VyIiwiaWF0IjoxNTg2MTUzMjUyLCJleHAiOjE1ODYxNTY4NTIsIm5iZiI6MTU4NjE1MzI1MiwianRpIjoiOFgxVmVnTE40YzU3UUZjYiIsInN1YiI6MzUsInBydiI6ImY2YjcxNTQ5ZGI4YzJjNDJiNzU4MjdhYTQ0ZjAyYjdlZTUyOWQyNGQifQ.y2Xo2DJjV6dwIy09uwDoySnfn1Dixxt6pIEFFFOxdwE","token_type":"Bearer","expires_in":3600},"permission":[{"id":1,"name":"material-management","guard_name":"web","created_at":"2020-03-24 11:03:12","updated_at":"2020-03-24 11:03:12","name_CN":"物资管理","pivot":{"role_id":12,"permission_id":1}},{"id":2,"name":"financial-management","guard_name":"web","created_at":"2020-03-24 11:03:13","updated_at":"2020-03-24 11:03:13","name_CN":"财务管理","pivot":{"role_id":12,"permission_id":2}},{"id":4,"name":"personnel-management","guard_name":"web","created_at":"2020-03-24 11:03:15","updated_at":"2020-03-24 11:03:15","name_CN":"人事管理","pivot":{"role_id":12,"permission_id":4}}]}}
      * @return_param id int 用户的id
      * @return_param name string 用户名
@@ -94,12 +94,12 @@ class UsersController extends Controller
      * @catalog 接口文档/用户认证&权限管理
      * @title 修改用户信息
      * @description 修改用户信息的接口
-     * @method patch  application/json
+     * @method `patch`  `application/json`
      * @url {{host}}/api/user
      * @param name 必选 string 用户名 支持中文,英文,数字,横杆和下划线
      * @param avatar_image_id 必选 string 头像id
      * @json_param {"name":"admin","avatar_image_id":6}
-     * @header Authorization 必选  string 应用认证token 格式 Bearer token
+     * @header Authorization 必选  string 应用认证token(Bearer类型)
      * @return {"status":200,"message":"操作成功","data":{"id":26,"roles_id":12,"name":"admin","email":null,"avatar":"http://59.110.212.116:32801/uploads/images/avatars/202003/24/26_1585036865_9XM0Sc19ZN.jpg","created_at":"2020-03-24 12:52:33","updated_at":"2020-03-24 16:52:50"}}
      * @return_param id int 用户的id
      * @return_param name string 用户名
@@ -132,18 +132,12 @@ class UsersController extends Controller
      * @catalog 接口文档/用户认证&权限管理
      * @title 用户删除
      * @description 删除用户息的接口
-     * @method patch  application/json
+     * @method `delete`  `application/json`
      * @url {{host}}/api/user
-     * @param name 必选 string 用户名 支持中文,英文,数字,横杆和下划线
-     * @param avatar_image_id 必选 string 头像id
-     * @json_param {"name":"admin","avatar_image_id":6}
-     * @header Authorization 必选  string 应用认证token 格式 Bearer token
-     * @return {"status":200,"message":"操作成功","data":{"id":26,"roles_id":12,"name":"admin","email":null,"avatar":"http://59.110.212.116:32801/uploads/images/avatars/202003/24/26_1585036865_9XM0Sc19ZN.jpg","created_at":"2020-03-24 12:52:33","updated_at":"2020-03-24 16:52:50"}}
-     * @return_param id int 用户的id
-     * @return_param name string 用户名
-     * @return_param email string 邮箱
-     * @return_param avatar string 用户头像地址
-     * @remark avatar_image_id 为调用图片上传接口上传图片后返回的图片主键id
+     * @param username 必选 string 用户名
+     * @json_param {"username":"admin"}
+     * @header Authorization 必选  string 应用认证token(Bearer类型)
+     * @return {"status":204,"message":"删除成功","data":""}
      */
     public function delete(UserRequest $request)
     {
@@ -155,6 +149,23 @@ class UsersController extends Controller
         return $this->apiReturn('',CodeEnum::DELETE_SUCCESS);
     }
 
+    /**
+     * showdoc
+     * @catalog 接口文档/用户认证&权限管理
+     * @title 修改用户密码
+     * @description 修改用户信息的接口
+     * @method `post`  `application/json`
+     * @url {{host}}/api/user/password
+     * @param username 必选 string 用户名
+     * @param password 必选 string 密码
+     * @json_param {"name":"admin","password":"admin"}
+     * @header Authorization 必选  string 应用认证token(Bearer类型)
+     * @return {"status":200,"message":"操作成功","data":{"id":26,"roles_id":12,"name":"admin","email":null,"avatar":"http://59.110.212.116:32801/uploads/images/avatars/202003/24/26_1585036865_9XM0Sc19ZN.jpg","created_at":"2020-03-24 12:52:33","updated_at":"2020-03-24 16:52:50"}}
+     * @return_param id int 用户的id
+     * @return_param name string 用户名
+     * @return_param email string 邮箱
+     * @return_param avatar string 用户头像地址
+     */
     public function changePassword(UserRequest $request)
     {
         $user = User::query()->updateOrCreate(['name' => $request->username],['password' => bcrypt($request->password)]);
