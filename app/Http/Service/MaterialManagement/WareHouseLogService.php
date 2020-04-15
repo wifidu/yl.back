@@ -3,7 +3,7 @@
 
 namespace App\Http\Service\MaterialManagement;
 
-use App\Http\Repository\MaterialManagement\WaitingChargesRepository;
+use App\Http\Repository\MaterialManagement\WareHouseLogRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 use Log;
@@ -13,7 +13,7 @@ class WareHouseLogService
     use ApiTraits;
     private $_wareHouseLogRepository;
 
-    public function __construct(WaitingChargesRepository $wareHouseLogRepository)
+    public function __construct(WareHouseLogRepository $wareHouseLogRepository)
     {
         $this->_wareHouseLogRepository = $wareHouseLogRepository;
     }

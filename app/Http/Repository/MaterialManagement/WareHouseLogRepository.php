@@ -127,7 +127,7 @@ class WareHouseLogRepository
                                 return DB::select("select * from warehouse_log where $search_index like '%$content%' ");
                                 break;
                             default:
-                                return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and $search_index like '%$content%' ");
+                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and $search_index like '%$content%' ");
                                 break;
                         }
                         break;
@@ -137,7 +137,7 @@ class WareHouseLogRepository
                                 return DB::select("select * from warehouse_log where `type`= $operator_type and $search_index like '%$content%' ");
                                 break;
                             default:
-                                return DB::select("select * from warehouse_log where operator_time > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and $search_index like '%$content%' ");
+                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and $search_index like '%$content%' ");
                                 break;
                         }
                         break;
@@ -150,7 +150,7 @@ class WareHouseLogRepository
                                 return DB::select("select * from warehouse_log where `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                             default:
-                                return DB::select("select * from warehouse_log where `operator_time` > DateAdd(year,$time_range,getdate()) and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                         }
                         break;
@@ -160,7 +160,7 @@ class WareHouseLogRepository
                                 return DB::select("select * from warehouse_log where `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                             default:
-                                return DB::select("select * from warehouse_log where  `operator_time` > DateAdd(year,$time_range,getdate()) and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+                                return DB::select("select * from warehouse_log where  date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
                                 break;
                         }
                         break;

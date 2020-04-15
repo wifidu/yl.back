@@ -24,7 +24,7 @@ class RolePermissionController extends Controller
      * @param name 必选 string 角色名
      * @json_param {"name":"admin"}
      * @return {"status":201,"message":"新增成功","data":{"id":17,"name":"admin","guard_name":"web","created_at":"2020-03-24 13:37:06","updated_at":"2020-03-24 17:53:13"}}
-     * @return_param id string 角色id
+     * @return_param id int 角色id
      * @return_param name string 角色名称
      * @return_param guard_name int 角色所属组
      * @remark
@@ -45,7 +45,7 @@ class RolePermissionController extends Controller
      * @url {{host}}/api/role-permission/list
      * @header Authorization 必选  string 应用认证token(Bearer类型)
      * @return {"status":200,"message":"操作成功","data":[{"id":1,"name":"material-management","guard_name":"web","created_at":"2020-03-24 11:03:12","updated_at":"2020-03-24 11:03:12","name_CN":"物资管理"},{"id":2,"name":"financial-management","guard_name":"web","created_at":"2020-03-24 11:03:13","updated_at":"2020-03-24 11:03:13","name_CN":"财务管理"},{"id":3,"name":"daily-management","guard_name":"web","created_at":"2020-03-24 11:03:14","updated_at":"2020-03-24 11:03:14","name_CN":"日常管理"},{"id":4,"name":"personnel-management","guard_name":"web","created_at":"2020-03-24 11:03:15","updated_at":"2020-03-24 11:03:15","name_CN":"人事管理"},{"id":5,"name":"diet-manage","guard_name":"web","created_at":"2020-03-24 11:03:16","updated_at":"2020-03-24 11:03:16","name_CN":"膳食管理"},{"id":6,"name":"member-management","guard_name":"web","created_at":"2020-03-24 11:03:16","updated_at":"2020-03-24 11:03:16","name_CN":"会员管理"},{"id":7,"name":"medicine-manage","guard_name":"web","created_at":"2020-03-24 11:03:17","updated_at":"2020-03-24 11:03:17","name_CN":"药品管理"},{"id":8,"name":"report-management","guard_name":"web","created_at":"2020-03-24 11:03:18","updated_at":"2020-03-24 11:03:18","name_CN":"报表管理"}]}
-     * @return_param id string 权限id
+     * @return_param id int 权限id
      * @return_param name string 权限名称
      * @return_param guard_name int 权限所属组
      * @return_param name_CN int 权限中文名
@@ -73,7 +73,7 @@ class RolePermissionController extends Controller
      * @json_param {"id":12,"permission":["personnel-management","material-management","financial-management"]}
      * @header Authorization 必选  string 应用认证token(Bearer类型)
      * @return  {"status":200,"message":"操作成功","data":{"id":17,"name":"admin","guard_name":"web","created_at":"2020-03-24 13:37:06","updated_at":"2020-03-24 17:53:13","permissions":[{"id":1,"name":"material-management","guard_name":"web","created_at":"2020-03-24 11:03:12","updated_at":"2020-03-24 11:03:12","pivot":{"role_id":17,"permission_id":1}},{"id":2,"name":"financial-management","guard_name":"web","created_at":"2020-03-24 11:03:13","updated_at":"2020-03-24 11:03:13","pivot":{"role_id":17,"permission_id":2}},{"id":4,"name":"personnel-management","guard_name":"web","created_at":"2020-03-24 11:03:15","updated_at":"2020-03-24 11:03:15","pivot":{"role_id":17,"permission_id":4}}]}}
-     * @return_param id string 角色id
+     * @return_param id int 角色id
      * @return_param name string 角色名
      * @return_param guard_name int 角色所属组
      * @return_param permissions.id int 权限id
@@ -81,7 +81,7 @@ class RolePermissionController extends Controller
      * @return_param permissions.guard_name int 权限所属组
      * @return_param permissions.pivot.role_id int 权限所属角色id
      * @return_param permissions.pivot.permission_id int 权限id
-     * @remark
+     * @remark 角色id即获取用户信息接口中返回的roles_id
      */
     public function givePermissionToRole(Request $request,Role $role)
     {
@@ -107,7 +107,7 @@ class RolePermissionController extends Controller
      * @json_param {"id":17,"permission":["personnel-management","material-management","financial-management"]}
      * @header Authorization 必选  string 应用认证token(Bearer类型)
      * @return  {"status":200,"message":"操作成功","data":{"id":17,"name":"admin","guard_name":"web","created_at":"2020-03-24 13:37:06","updated_at":"2020-03-24 17:53:13","permissions":[{"id":1,"name":"material-management","guard_name":"web","created_at":"2020-03-24 11:03:12","updated_at":"2020-03-24 11:03:12","pivot":{"role_id":17,"permission_id":1}},{"id":2,"name":"financial-management","guard_name":"web","created_at":"2020-03-24 11:03:13","updated_at":"2020-03-24 11:03:13","pivot":{"role_id":17,"permission_id":2}},{"id":4,"name":"personnel-management","guard_name":"web","created_at":"2020-03-24 11:03:15","updated_at":"2020-03-24 11:03:15","pivot":{"role_id":17,"permission_id":4}}]}}
-     * @return_param id string 角色id
+     * @return_param id int 角色id
      * @return_param name string 角色名
      * @return_param guard_name int 角色所属组
      * @return_param permissions.id int 权限id
@@ -115,7 +115,7 @@ class RolePermissionController extends Controller
      * @return_param permissions.guard_name int 权限所属组
      * @return_param permissions.pivot.role_id int 权限所属角色id
      * @return_param permissions.pivot.permission_id int 权限id
-     * @remark
+     * @remark 角色id即获取用户信息接口中返回的roles_id
      */
     public function revokePermissionToRole(Request $request,Role $role)
     {
@@ -146,7 +146,7 @@ class RolePermissionController extends Controller
      * @return_param name_CN int 权限中文名
      * @return_param pivot.role_id int 权限所属角色id
      * @return_param pivot.permission_id int 权限id
-     * @remark
+     * @remark 角色id即获取用户信息接口中返回的roles_id
      */
     public function roleHavePermisson(Request $request,Role $role)
     {

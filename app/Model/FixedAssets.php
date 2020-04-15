@@ -25,6 +25,6 @@ class FixedAssets extends Model
         'warranty',         //报修期
         'remarks',          //备注
         'picture_url',      //图片URL
-
+        'id'
     ];
 }

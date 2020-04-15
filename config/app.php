@@ -244,4 +244,9 @@ return [
      * showdoc_api 脚本文件目录
      */
     'showdoc_api_path' => env('SHOWDOC_API_PATH','/home/wwwroot/pension_operate/app/showdoc_api.sh'),
+
+    /**
+     * 日志文件目录
+     */
+    'log_path' => env('LOG_PATH','/home/wwwroot/pension_operate/storage/'),
 ];
