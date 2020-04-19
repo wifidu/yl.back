@@ -50,7 +50,7 @@ class MaterialController
      * @method `post` `application/json`
      * @url {{host}}/api/material-management/material/{id}
      * @json_param {id}为所要查询数据的主键id
-     * @return  {"status":200,"message":"操作成功","data":{"id":10,"name":"飞利浦灯泡","brand":"飞利浦","model":"Y00055","unit":0,"number":0,"supplier":null,"created_at":"2020-04-14 11:05:10","updated_at":"2020-04-14 11:05:10"}}
+     * @return  {"status":200,"message":"操作成功","data":{"id":8,"name":"飞利浦","brand":"飞利浦","model":"y-111","unit":0,"number":7700,"supplier":"上海飞利浦有限公司","created_at":"2020-03-01 13:14:43","updated_at":"2020-03-24 12:17:03","mate":[{"id":1,"odd_number":"CK20200302","type":1,"warehouse_name":"华南AB","material_name":"飞利浦","material_id":8,"brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"13.00","number":100,"total":"1300.00","operator":"彭超超","operator_time":1583402054,"created_at":"2020-03-05 09:53:00","updated_at":"2020-03-05 09:54:15"},{"id":3,"odd_number":"RK20200229","type":2,"warehouse_name":"华南A","material_name":"飞利浦","material_id":8,"brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"12.00","number":100,"total":"1200.00","operator":"彭超超","operator_time":1583402098,"created_at":"2020-03-05 09:54:58","updated_at":"2020-03-05 09:54:58"}]}}
      * @return_param id int 物资id
      * @return_param name string 物资名称
      * @return_param brand string 品牌
@@ -58,6 +58,20 @@ class MaterialController
      * @return_param number string 数量
      * @return_param supplier string 供应商
      * @return_param unit int 单位(见备注)
+     * @return_param mate.id int 仓库日志id
+     * @return_param mate.odd_number int 单号
+     * @return_param mate.type int 类操作型(见备注)
+     * @return_param mate.warehouse_name string 仓库名称
+     * @return_param mate.material_name string 物资名称
+     * @return_param mate.material_id string 物资id
+     * @return_param mate.brand string 品牌
+     * @return_param mate.supplier string 供应商
+     * @return_param mate.unit int 单位(见备注)
+     * @return_param mate.price string 价格
+     * @return_param mate.number int 数量
+     * @return_param mate.total string 总计金额
+     * @return_param mate.operator int 操作人
+     * @return_param mate.operator_time int 操作时间
      * @remark 单位(0-支 1-个 2-包)
      */
     public function detail($id)

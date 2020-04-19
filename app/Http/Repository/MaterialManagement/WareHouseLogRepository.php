@@ -187,14 +187,15 @@ class WareHouseLogRepository
                 $sheet->cell('B1', function($cell) {$cell->setValue('操作类型');   });
                 $sheet->cell('C1', function($cell) {$cell->setValue('仓库名称');   });
                 $sheet->cell('D1', function($cell) {$cell->setValue('物资名称'); });
-                $sheet->cell('E1', function($cell) {$cell->setValue('品牌规格'); });
-                $sheet->cell('F1', function($cell) {$cell->setValue('供应商'); });
-                $sheet->cell('G1', function($cell) {$cell->setValue('单位'); });
-                $sheet->cell('H1', function($cell) {$cell->setValue('单价'); });
-                $sheet->cell('I1', function($cell) {$cell->setValue('操作数量'); });
-                $sheet->cell('J1', function($cell) {$cell->setValue('金额(元)'); });
-                $sheet->cell('K1', function($cell) {$cell->setValue('操作人'); });
-                $sheet->cell('L1', function($cell) {$cell->setValue('变动时间'); });
+                $sheet->cell('E1', function($cell) {$cell->setValue('物资ID'); });
+                $sheet->cell('F1', function($cell) {$cell->setValue('品牌规格'); });
+                $sheet->cell('G1', function($cell) {$cell->setValue('供应商'); });
+                $sheet->cell('H1', function($cell) {$cell->setValue('单位'); });
+                $sheet->cell('I1', function($cell) {$cell->setValue('单价'); });
+                $sheet->cell('J1', function($cell) {$cell->setValue('操作数量'); });
+                $sheet->cell('K1', function($cell) {$cell->setValue('金额(元)'); });
+                $sheet->cell('L1', function($cell) {$cell->setValue('操作人'); });
+                $sheet->cell('M1', function($cell) {$cell->setValue('变动时间'); });
                 if (!empty($data)) {
                     foreach ($data as $key => $value) {
                         $i= $key+2;
@@ -202,14 +203,15 @@ class WareHouseLogRepository
                         $sheet->cell('B'.$i, CodeEnum::WareHouseLog[$value['type']]);
                         $sheet->cell('C'.$i, $value['warehouse_name']);
                         $sheet->cell('D'.$i, $value['material_name']);
-                        $sheet->cell('E'.$i, $value['brand']);
-                        $sheet->cell('F'.$i, $value['supplier']);
-                        $sheet->cell('G'.$i, CodeEnum::UNIT[$value['unit']]);
-                        $sheet->cell('H'.$i, $value['price']);
-                        $sheet->cell('I'.$i, $value['number']);
-                        $sheet->cell('J'.$i, $value['total']);
-                        $sheet->cell('K'.$i, $value['operator']);
-                        $sheet->cell('L'.$i, Date('Y-m-d h:i:s',$value['operator_time']));
+                        $sheet->cell('E'.$i, $value['material_id']);
+                        $sheet->cell('F'.$i, $value['brand']);
+                        $sheet->cell('G'.$i, $value['supplier']);
+                        $sheet->cell('H'.$i, CodeEnum::UNIT[$value['unit']]);
+                        $sheet->cell('I'.$i, $value['price']);
+                        $sheet->cell('J'.$i, $value['number']);
+                        $sheet->cell('K'.$i, $value['total']);
+                        $sheet->cell('L'.$i, $value['operator']);
+                        $sheet->cell('M'.$i, Date('Y-m-d h:i:s',$value['operator_time']));
                     }
                 }
             });

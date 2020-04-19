@@ -30,6 +30,7 @@ class WareHouseLogController
      * @return_param type int 类操作型(见备注)
      * @return_param warehouse_name string 仓库名称
      * @return_param material_name string 物资名称
+     * @return_param material_id string 物资id
      * @return_param brand string 品牌
      * @return_param supplier string 供应商
      * @return_param unit int 单位(见备注)
@@ -61,6 +62,7 @@ class WareHouseLogController
      * @return_param type int 类操作型(见备注)
      * @return_param warehouse_name string 仓库名称
      * @return_param material_name string 物资名称
+     * @return_param material_id string 物资id
      * @return_param brand string 品牌
      * @return_param supplier string 供应商
      * @return_param unit int 单位(见备注)
@@ -140,6 +142,7 @@ class WareHouseLogController
      * @return_param type int 类操作型(见备注)
      * @return_param warehouse_name string 仓库名称
      * @return_param material_name string 物资名称
+     * @return_param material_id string 物资id
      * @return_param brand string 品牌
      * @return_param supplier string 供应商
      * @return_param unit int 单位(见备注)

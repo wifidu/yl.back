@@ -38,7 +38,7 @@ class GenerateShowdocApi extends Command
     public function handle()
     {
         $system = php_uname('s');
-        $showdoc_api_path = config('app.showdoc_api_path');
+        $showdoc_api_path = app_path().'/showdoc_api.sh';
         if ('Linux'==$system){
             if(!is_executable($showdoc_api_path)){
                 $shell = 'chmod +x '.$showdoc_api_path;
@@ -46,6 +46,15 @@ class GenerateShowdocApi extends Command
             }
 
             $shell = $showdoc_api_path;
+            system($shell, $status);
+            //注意shell命令的执行结果和执行返回的状态值的对应关系
+            if ($status) {
+                echo "shell命令{$shell}执行失败".PHP_EOL;
+            } else {
+                echo "shell命令{$shell}成功执行".PHP_EOL;
+            }
+        }elseif ('Windows NT'==$system){
+            $shell = app_path().'\showdoc_api.sh';
             system($shell, $status);
             //注意shell命令的执行结果和执行返回的状态值的对应关系
             if ($status) {

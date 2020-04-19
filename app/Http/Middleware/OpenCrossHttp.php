@@ -20,6 +20,7 @@ class OpenCrossHttp
         $allow_origin = [
             'http://59.110.212.116:8090',
             'http://localhost:8090',
+            'http://localhost:8090/',
         ];
         if (in_array($origin, $allow_origin)) {
             $response->header('Access-Control-Allow-Origin', $origin);
