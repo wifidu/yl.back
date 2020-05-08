@@ -84,6 +84,9 @@ $api->version('v1', [
 
             // 固定资产搜索
             $api->post('/search', 'MaterialManagement\FixedAssetsController@search');
+
+            // 自动生成资产编号
+            $api->get('/assets_number', 'MaterialManagement\FixedAssetsController@generateAssetsNumber');
         });
         $api->group(["prefix" => "material"], function ($api) {
             // 物资数据存储

@@ -53,6 +53,7 @@ class WarehouseLogListener implements ShouldQueue
         $material_id = !is_object($material_detail) ? $material_detail['material_id'] : $material_detail->material_id;
         $data['warehouse_name'] = $params['warehouse_name'];
         $data['material_name']  = $material[$material_id]->name;
+        $data['material_id']    = 123;
         $data['brand']          = $material[$material_id]->brand;
         $data['supplier']       = !is_object($material_detail) ? $material_detail['supplier'] : $material_detail->supplier;
         $data['unit']           = $material[$material_id]->unit;

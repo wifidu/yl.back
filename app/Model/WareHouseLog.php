@@ -15,6 +15,7 @@ class WareHouseLog extends Model
         'type',                     //操作类型
         'warehouse_name',           //仓库名称
         'material_name',            //物资名称
+        'material_id',              //物资id
         'brand',                    //品牌规格
         'supplier',                 //供应商
         'unit',                     //单位

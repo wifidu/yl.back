@@ -111,4 +111,10 @@ class FixedAssetsService
         $search = $this->_fixedAssetsRepository->search($search_index,$content);
         return $this->apiReturn($search,CodeEnum::SUCCESS);
     }
+
+    public function generateAssetsNumber()
+    {
+        $odd_number = $this->_fixedAssetsRepository->generateAssetsNumber();
+        return $this->apiReturn(['assets_number'=>$odd_number],CodeEnum::SUCCESS);
+    }
 }

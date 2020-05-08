@@ -124,4 +124,10 @@ class FixedAssetsRepository
         }
         return DB::select("select * from fixed_assets where $search_index like '%$content%'");
     }
+
+    public function generateAssetsNumber()
+    {
+        $odd_number = FixedAssets::query()->orderBy('id','desc')->first();
+        return $odd_number['id']+1;
+    }
 }
