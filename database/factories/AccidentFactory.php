@@ -12,7 +12,7 @@ $factory->define(Accident::class, function (Faker $faker) {
         'occurrence_time' => $faker->unixTime,
         'duty_personnel'  => $faker->name,
         'head'            => $faker->name,
-        'type'            => $faker->word,
+        'type_id'         => $faker->numberBetween(0,4),
         'description'     => $faker->sentence
     ];
 });

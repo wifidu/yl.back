@@ -250,6 +250,13 @@ $api->version('v1', [
             $api->patch('/', 'DailyManagement\AccidentController@update');
             $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
         });
+        $api->group(["prefix" => "accidentTypes"], function ($api) {
+            $api->get('/', 'DailyManagement\AccidentTypeController@types');
+            $api->get('/{id}', 'DailyManagement\AccidentTypeController@show');
+            $api->post('/', 'DailyManagement\AccidentTypeController@store');
+            $api->patch('/', 'DailyManagement\AccidentTypeController@update');
+            $api->delete('/{id}', 'DailyManagement\AccidentTypeController@destory');
+        });
 
         $api->group(["prefix" => "visit"], function ($api) {
             $api->get('/', 'DailyManagement\VisitController@show');

@@ -95,7 +95,6 @@ class CheckInManageController extends Controller
         return $this->_checkInManage->upload($id, $file);
     }
 
-
     /**
      * 膳食变更以及业务变更
      * @param CheckInManageRequest $request
