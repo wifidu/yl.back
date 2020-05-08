@@ -12,7 +12,7 @@ class Accident extends Model
 
     protected $fillable = [
         'account_id',
-        'type',
+        'type_id',
         'level_accident',
         'occurrence_time',
         'duty_personnel',
@@ -23,5 +23,10 @@ class Accident extends Model
     public function account()
     {
         return $this->belongsTo('App\Model\Account');
+    }
+
+    public function accidentType()
+    {
+        return $this->belongsTo('App\Model\AccidentType', 'type_id');
     }
 }
