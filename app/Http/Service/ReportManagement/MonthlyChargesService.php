@@ -3,7 +3,7 @@
 
 namespace App\Http\Service\ReportManagement;
 
-use App\Http\Repository\ReportManagement\monthlyChargesRepository;
+use App\Http\Repository\ReportManagement\MonthlyChargesRepository;
 use App\Traits\ApiTraits;
 use App\Enum\CodeEnum;
 use SebastianBergmann\Environment\Console;
