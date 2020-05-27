@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RefundsTableSeeder::class);
         $this->call(AgencySeeder::class);
         $this->call(AccidentSeeder::class);
+        $this->call(AccidentTypesSeeder::class);
         $this->call(VisitSeeder::class);
         $this->call(ConsultSeeder::class);
     }

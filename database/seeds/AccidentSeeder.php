@@ -1,6 +1,7 @@
 <?php
 
 use App\Model\Accident;
+use App\Model\AccidentType;
 use App\Model\Account;
 use Illuminate\Database\Seeder;
 
