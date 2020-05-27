@@ -3,8 +3,8 @@
 
 namespace App\Http\Controllers\Api\ReportManagement;
 
-use App\Http\Service\ReportManagement\monthlyChargesService;
-use App\Http\Requests\Api\ReportManagement\monthlyChargesRequest;
+use App\Http\Service\ReportManagement\MonthlyChargesService;
+use App\Http\Requests\Api\ReportManagement\MonthlyChargesRequest;
 use Dingo\Api\Contract\Http\Request;
 
 class MonthlyChargesController
