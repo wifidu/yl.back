@@ -129,7 +129,7 @@ class WareHouseLogController
      * @title 搜索
      * @description 搜索的接口
      * @method `post` `application/json`
-     * @url  {{host}}/api/material-management/inventory-management/search
+     * @url  {{host}}/api/material-management/warehouse-log/search
      * @param search_index 非必选 string 搜索字段(见备注)
      * @param content 非必选 string 搜索内容
      * @param time_range 非必选 int 时间范围(见备注)
