@@ -6,13 +6,12 @@ namespace App\Http\Controllers\Api\MedicineManage;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\MedicineManage\DrugInformationRequest;
-use App\Http\Requests\Api\MemberManagement\OutManageRequest;
 use App\Http\Service\MedicineManage\DrugInformationService;
 use Dingo\Api\Http\Request;
 
 class DrugInformationController extends Controller
 {
-    private DrugInformationService $_drugInformation;
+    private $_drugInformation;
     public function __construct(DrugInformationService $drugInformationService)
     {
         $this->_drugInformation = $drugInformationService;
