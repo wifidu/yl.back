@@ -6,14 +6,13 @@ namespace App\Http\Service\MedicineManage;
 
 use App\Enum\CodeEnum;
 use App\Http\Repository\MedicineManage\DrugInformationRepository;
-use App\Http\Repository\MemberManagement\OutManageRepository;
 use App\Traits\ApiTraits;
 use Log;
 
 class DrugInformationService
 { 
     use ApiTraits;
-    private DrugInformationRepository $_drugInformationRepository;
+    private $_drugInformationRepository;
 
     public function __construct(DrugInformationRepository $drugInformationRepository)
     {
