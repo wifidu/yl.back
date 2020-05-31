@@ -140,7 +140,8 @@ $api->version('v1', [
 
         // 会员账户
         $api->group(["prefix" => "account"], function ($api) {
-            $api->get('/', 'FinancialManagement\AccountController@show');
+            $api->get('/', 'FinancialManagement\AccountController@index');
+            $api->get('/{account}', 'FinancialManagement\AccountController@show');
             $api->get('/deposit', 'FinancialManagement\AccountController@showDeposit');
             $api->post('/', 'FinancialManagement\AccountController@store');
             $api->patch('/', 'FinancialManagement\AccountController@update');
@@ -157,7 +158,8 @@ $api->version('v1', [
     });
     $api->group(["prefix" => "daily-management"], function ($api) {
         $api->group(["prefix" => "accident"], function ($api) {
-            $api->get('/', 'DailyManagement\AccidentController@show');
+            $api->get('/', 'DailyManagement\AccidentController@index');
+            $api->get('/{id}', 'DailyManagement\AccidentController@show');
             $api->post('/', 'DailyManagement\AccidentController@store');
             $api->patch('/', 'DailyManagement\AccidentController@update');
             $api->delete('/{id}', 'DailyManagement\AccidentController@destory');
@@ -171,7 +173,8 @@ $api->version('v1', [
         });
 
         $api->group(["prefix" => "visit"], function ($api) {
-            $api->get('/', 'DailyManagement\VisitController@show');
+            $api->get('/', 'DailyManagement\VisitController@index');
+            $api->get('/{id}', 'DailyManagement\VisitController@show');
             $api->post('/', 'DailyManagement\VisitController@store');
             $api->patch('/', 'DailyManagement\VisitController@update');
             $api->delete('/{id}', 'DailyManagement\VisitController@destroy');
