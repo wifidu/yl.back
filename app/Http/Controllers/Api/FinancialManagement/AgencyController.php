@@ -33,13 +33,13 @@ class AgencyController extends Controller
          * @param business_number  否    char  业务编号                            
          * @json_param `{host}/api/financial-management/agency?start_time=2015-04-26 17:52:38&end_time=2019-08-12 02:46:46`
          * @return { "status": 200, "message": "操作成功", "data": { "current_page": 1, "data": [ { "id": 5, "created_at": "2015-12-29 22:21:06", "updated_at": "2015-12-29 22:21:06", "serial_number": "LS42020030152561597", "business_number": "SK42020030139515836", "financial_type": "退费", "money_flow": "收入", "transaction_amount": "1874.75", "payment_channel": "刷卡", "note": "Fuga nostrum sit excepturi neque praesentium incidunt assumenda." }, { "id": 11, "created_at": "2018-11-17 01:03:20", "updated_at": "2018-11-17 01:03:20", "serial_number": "LS42020030176969739", "business_number": "SK42020030112274181", "financial_type": "退费", "money_flow": "收入", "transaction_amount": "8655.04", "payment_channel": "现金", "note": "Repudiandae omnis eum dignissimos repellendus officia autem." } ], "first_page_url": "http://yl.test/api/financial-management/agency?page=1", "from": 1, "last_page": 1, "last_page_url": "http://yl.test/api/financial-management/agency?page=1", "next_page_url": null, "path": "http://yl.test/api/financial-management/agency", "per_page": 15, "prev_page_url": null, "to": 2, "total": 2 } }
-         * @return_param serial_number       是    char    流水号                                        
-         * @return_param business_number     是    char    业务账单                                      
-         * @return_param financial_type      是    int     财务类型，0经营收费，1退费                    
-         * @return_param money_flow          是    int     资金流向，0支出，1收入                        
-         * @return_param payment_channel     是    int     支付渠道，0现金、1刷卡、2转帐、3微信、4支付宝 
-         * @return_param note                是    string  备注                                          
-         * @return_param transaction_amount  是    float   交易金额                                      
+         * @return_param serial_number           char    流水号                                        
+         * @return_param business_number         char    业务账单                                      
+         * @return_param financial_type          int     财务类型，0经营收费，1退费                    
+         * @return_param money_flow              int     资金流向，0支出，1收入                        
+         * @return_param payment_channel         int     支付渠道，0现金、1刷卡、2转帐、3微信、4支付宝 
+         * @return_param note                    string  备注                                          
+         * @return_param transaction_amount      float   交易金额                                      
          * @remark 备注
          */
     public function show(Request $request)
