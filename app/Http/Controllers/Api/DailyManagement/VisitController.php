@@ -7,13 +7,17 @@
 
 namespace App\Http\Controllers\Api\DailyManagement;
 
+use App\Enum\CodeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\DailyManagement\VisitRequest;
 use App\Http\Service\DailyManagement\VisitService;
+use App\Model\Account;
+use App\Traits\ApiTraits;
 use Illuminate\Http\Request;
 
 class VisitController extends Controller
 {
+    use ApiTraits;
     protected $visitService;
 
     public function __construct(VisitService $visitService)
@@ -85,13 +89,30 @@ class VisitController extends Controller
          * @return_param 返回参数名 类型 说明
          * @remark 备注
          */
-    public function show(Request $request)
+    public function index(Request $request)
     {
         return $this->visitService->show($request->get('page', 1),
             $request->get('page_size', 15),
             $request->get('id', ''),
             $request->get('start_time', ''),
             $request->get('end_time', ''));
+    }
+
+        /**
+         * showdoc
+         * @catalog 接口文档/日常管理/参观
+         * @title 根据用户id查看拜访记录
+         * @description 查看拜访记录
+         * @method GET  application/json
+         * @url {{host}}/api/daily-management/visit/1
+         * @param id true int 用户id
+         * @json_param yl.test/api/daily-management/visit/1
+         * @return { "status": 200, "message": "操作成功", "data": [ { "id": 1, "created_at": "2015-05-29 13:03:12", "updated_at": "2015-05-29 13:03:12", "account_number": "A4175984", "member_number": "3554", "member_name": "黄智渊", "beds": "2号楼-6-523-676", "account_balance": "2897.52", "beds_cost": "220.82", "meal_cost": "322.74", "nursing_cost": "644.37", "other_cost": "239.33", "cd_card": "532782822196542363", "deposit": "1338.43", "visits": [ { "id": 19, "created_at": "2016-03-02 06:54:15", "updated_at": "2016-03-02 06:54:15", "visitor": "鞠秀英", "phone": "18778523923", "visit_time": 1088668732, "member_name": "黄智渊", "visit_reason": "Animi quia quod voluptatibus. Illum saepe aliquid rerum quo praesentium ut eligendi. Est laudantium alias iure non.", "beds": "2号楼-6-523-676" } ] } ] }
+         * @remark 返回类型visits包裹的数据与上个查询一样，其他和account查询类型一样
+         */
+    public function show($id)
+    {
+        return $this->apiReturn(Account::where('id', $id)->with('visits')->get(), CodeEnum::SUCCESS);
     }
 
             /**

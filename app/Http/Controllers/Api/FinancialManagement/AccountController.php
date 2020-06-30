@@ -7,14 +7,19 @@
 
 namespace App\Http\Controllers\Api\FinancialManagement;
 
+use App\Enum\CodeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\FinancialManagement\AccountRequest;
 use App\Http\Service\FinancialManagement\AccountService;
+use App\Model\Account;
+use App\Traits\ApiTraits;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     protected $accountService;
+
+    use ApiTraits;
 
     public function __construct(AccountService $accountService)
     {
@@ -125,13 +130,42 @@ class AccountController extends Controller
          * @return_param deposit           float  押金     
          * @remark 备注
          */
-    public function show(Request $request)
+    public function index(Request $request)
     {
         if ($request->filled('no')) {
             return $this->accountService->showWithNo($request->get('no'), $request->get('page', 1), $request->get('page_size', 15));
         }
 
         return $this->accountService->show($request->get('page', 1), $request->get('page_size', 15));
+    }
+
+        /**
+         * showdoc
+         * @catalog 接口文档/财务管理/会员账户
+         * @title 根据id查询账户
+         * @description 根据id查询账户
+         * @method GET  application/json
+         * @url {{host}}/api/financial-management/account/:id
+         * @param id       是    int   id
+         * @json_param `{host}/api/financial-management/account/2`
+         * @return { "status": 200, "message": "操作成功", "data": [ { "id": 2, "created_at": "1998-12-04 11:19:13", "updated_at": "1998-12-04 11:19:13", "account_number": "A1433156", "member_number": "7461", "member_name": "程飞", "beds": "2号楼-5-813-284", "account_balance": "774.67", "beds_cost": "249.51", "meal_cost": "127.06", "nursing_cost": "60.47", "other_cost": "286.71", "cd_card": "489942468320905697", "deposit": "1012.58" } ] }
+         * @return_param account_number    char   账户编号 
+         * @return_param member_number     char   会员编号 
+         * @return_param member_name       char   会员姓名 
+         * @return_param beds              cahr   床位     
+         * @return_param account_balance   float  账户余额 
+         * @return_param beds_cost         float  床位费   
+         * @return_param meal_cost         float  膳食费   
+         * @return_param nursing_cost      float  护理费   
+         * @return_param other_cost        float  其他费用 
+         * @return_param cd_card           float  身份证   
+         * @return_param deposit           float  押金     
+         * @remark 备注
+         */
+    public function show($id, Account $account)
+    {
+        $data = $account->where('id', $id)->get();
+        return $this->apiReturn($data, CodeEnum::SUCCESS);
     }
 
     public function showDeposit(Request $request)
