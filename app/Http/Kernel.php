@@ -24,6 +24,7 @@ class Kernel extends HttpKernel
 //        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \App\Http\Middleware\OpenCrossHttp::class,
         \App\Http\Middleware\WriteLogMiddleware::class,
+        \App\Http\Middleware\EnableCrossRequestMiddleware::class,
     ];
 
     /**
