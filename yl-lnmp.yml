@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+    lnmp:
+        image: registry.cn-hangzhou.aliyuncs.com/duweifan/yl-lnmp:1
+        volumes:
+            - ./nginxconf/nginx.conf:/usr/local/nginx/conf/nginx.conf:ro,cached
+            - ./www:/var/www
+            - ./nginxconf/back.conf:/usr/local/nginx/conf/vhost/back.conf
+        networks:
+            - lnmp
+        depends_on:
+            - php
+        expose:
+            - "80"
+        ports:
+            - "32801:80"
+            - "8090:8090"
+        working_dir: /var/www
+        container_name: yl-lnmp
+networks:
+    lnmp:
