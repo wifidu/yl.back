@@ -20,6 +20,7 @@ class MaterialOut extends Model
         'remarks',              //备注
         'out_material',         //出库清单
         'inventory_id',         //盘点id
+        'amount'
     ];
 
     public function setOutMaterialAttribute($value) {

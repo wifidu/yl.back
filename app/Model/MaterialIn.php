@@ -20,6 +20,7 @@ class MaterialIn extends Model
         'remarks',              //备注
         'in_material',          //入库清单
         'inventory_id',         //盘点id
+        'amount'
     ];
 
     public function setInMaterialAttribute($value) {
