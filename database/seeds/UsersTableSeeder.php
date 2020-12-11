@@ -19,5 +19,12 @@ class UsersTableSeeder extends Seeder
         $user->password = bcrypt("admin");
         $user->save();
         $user->assignRole('Founder');
+
+        User::insert([
+            "roles_id" => 2,
+            "name"     => "weifan",
+            "email"    => "123@qq.com",
+            "password" => $user->password,
+        ]);
     }
 }
