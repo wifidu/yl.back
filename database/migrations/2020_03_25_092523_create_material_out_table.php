@@ -15,6 +15,7 @@ class CreateMaterialOutTable extends Migration {
 		Schema::create('material_out', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->integer('material_id')->unsigned()->default(0)->index();
 			$table->integer('inventory_id')->unsigned()->nullable()->index('material_out_fk_inventory')->comment('盘点id');
 			$table->string('warehouse_name', 64)->nullable()->comment('仓库名称');
 			$table->string('out_number', 128)->nullable()->comment('出库单号');

@@ -25,4 +25,9 @@ class MaterialOut extends Model
     public function setOutMaterialAttribute($value) {
         $this->attributes['out_material'] = json_encode($value);
     }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }

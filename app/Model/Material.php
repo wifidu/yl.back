@@ -19,4 +19,14 @@ class Material extends Model
         'price',            //价格
         'number',           //数量
     ];
+
+    public function materialIns()
+    {
+        return $this->hasMany(MaterialIn::class);
+    }
+    
+    public function materialOuts()
+    {
+        return $this->hasMany(MaterialOut::class);
+    }
 }

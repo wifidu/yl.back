@@ -25,4 +25,9 @@ class MaterialIn extends Model
     public function setInMaterialAttribute($value) {
         $this->attributes['in_material'] = json_encode($value);
     }
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }
