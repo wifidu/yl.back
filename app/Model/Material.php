@@ -29,4 +29,9 @@ class Material extends Model
     {
         return $this->hasMany(MaterialOut::class);
     }
+
+    public function WareHouseLogs()
+    {
+        return $this->hasMany(WareHouseLog::class);
+    }
 }

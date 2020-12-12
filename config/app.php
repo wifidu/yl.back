@@ -243,5 +243,5 @@ return [
     /**
      * 日志文件目录
      */
-    'log_path' => env('LOG_PATH','/home/wwwroot/pension_operate/storage/'),
+    'log_path' => env('LOG_PATH',storage_path('logs/yake.log')),
 ];

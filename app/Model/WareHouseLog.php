@@ -15,7 +15,7 @@ class WareHouseLog extends Model
         'type',                     //操作类型
         'warehouse_name',           //仓库名称
         'material_name',            //物资名称
-        'material_id',              //物资id
+        // 'material_id',              //物资id
         'brand',                    //品牌规格
         'supplier',                 //供应商
         'unit',                     //单位
@@ -25,4 +25,9 @@ class WareHouseLog extends Model
         'operator',                 //操作人
         'operator_time',            //变动时间
     ];
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class);
+    }
 }
