@@ -38,8 +38,11 @@ class MaterialRequest extends FormRequest
                     "ids"               => "required",
                 ];
                 break;
-            case "":
-                $rule = [];
+            case "api.material.detail":
+                $rule = [
+                    "id"   => 'required_without:name',
+                    "name" => 'required_without:id'
+                ];
                 break;
         };
 

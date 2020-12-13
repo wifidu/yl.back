@@ -93,8 +93,8 @@ $api->version('v1', [
             $api->post('/', 'MaterialManagement\MaterialController@store')->name('api.material.store');
 
             // 物资数据详情
-            $api->get('/{id}', 'MaterialManagement\MaterialController@detail')
-                ->where(['id' => '\d+']);
+            $api->get('/', 'MaterialManagement\MaterialController@detail')->name('api.material.detail');
+                // ->where(['id' => '\d+']); 
 
             // 物资数据删除
             $api->delete('/{id}', 'MaterialManagement\MaterialController@delete')

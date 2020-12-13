@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api\MaterialManagement;
 
 use App\Http\Service\MaterialManagement\MaterialService;
 use App\Http\Requests\Api\MaterialManagement\MaterialRequest;
-use Dingo\Api\Contract\Http\Request;
 
 class MaterialController
 {
@@ -49,7 +48,8 @@ class MaterialController
      * @description 物资数据详情的接口
      * @method `post` `application/json`
      * @url {{host}}/api/material-management/material/{id}
-     * @json_param {id}为所要查询数据的主键id
+     * @param id 否 int 主键(id和name二选一,必须有一个)
+     * @param name 否 string 物资名称
      * @return  {"status":200,"message":"操作成功","data":{"id":8,"name":"飞利浦","brand":"飞利浦","model":"y-111","unit":0,"number":7700,"supplier":"上海飞利浦有限公司","created_at":"2020-03-01 13:14:43","updated_at":"2020-03-24 12:17:03","mate":[{"id":1,"odd_number":"CK20200302","type":1,"warehouse_name":"华南AB","material_name":"飞利浦","material_id":8,"brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"13.00","number":100,"total":"1300.00","operator":"彭超超","operator_time":1583402054,"created_at":"2020-03-05 09:53:00","updated_at":"2020-03-05 09:54:15"},{"id":3,"odd_number":"RK20200229","type":2,"warehouse_name":"华南A","material_name":"飞利浦","material_id":8,"brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"12.00","number":100,"total":"1200.00","operator":"彭超超","operator_time":1583402098,"created_at":"2020-03-05 09:54:58","updated_at":"2020-03-05 09:54:58"}]}}
      * @return_param id int 物资id
      * @return_param name string 物资名称
@@ -74,9 +74,11 @@ class MaterialController
      * @return_param mate.operator_time int 操作时间
      * @remark 单位(0-支 1-个 2-包)
      */
-    public function detail($id)
+    public function detail(MaterialRequest $request)
     {
-        return $this->_materialService->detail($id);
+        $id = $request->id ?? null;
+        $name = $request->name ?? null;
+        return $this->_materialService->detail($id, $name);
     }
 
     /**

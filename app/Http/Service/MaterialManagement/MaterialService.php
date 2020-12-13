@@ -46,9 +46,9 @@ class MaterialService
      * @author ZhaoDaYuan
      * 2020/2/11 上午11:14
      */
-    public function detail($id)
+    public function detail($id = null, $name = null)
     {
-        $data = $this->_materialRepository->item($id);
+        $data = $this->_materialRepository->item($id, $name);
 
         if ($data) {
             return $this->apiReturn($data, CodeEnum::SUCCESS);

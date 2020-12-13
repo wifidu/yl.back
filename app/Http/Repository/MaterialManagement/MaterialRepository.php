@@ -40,20 +40,21 @@ class MaterialRepository
      * @author ZhaoDaYuan
      * 2020/2/11 上午11:15
      */
-    public function item($id)
+    public function item($id = null, $name = null)
     {
         //查询缓存
 //        $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $id));
 
         //缓存为空则查询数据库并将数据存入缓存
-        if (empty($cache)){
+        if (empty($name)){
             $query = Material::query()->where(['id' => $id])->first();
-            $data = WareHouseLog::query()->where(['material_id' => $id])->whereIn('type',[1,2])->get();
-            $query['mate'] = empty($data)?'':$data;
 //            $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, json_encode($query));
-
-            return $query;
+        } else {
+            $query = Material::query()->where(['name' => $name])->first();
         }
+            // $data = WareHouseLog::query()->where(['material_id' => $id])->whereIn('type',[1,2])->get();
+            // $query['mate'] = empty($data)?'':$data;
+            return $query;
 
 //        return $cache;
     }

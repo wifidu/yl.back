@@ -27,6 +27,7 @@ class MaterialInRepository
     public function store($params)
     {
         $id = $params['id'] ?? '';
+        // $name = $params['name'] ?? '';
         return MaterialIn::query()->updateOrCreate(['id' => $id], $params);
     }
 
