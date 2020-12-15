@@ -27,13 +27,15 @@ class MaterialInRequest extends FormRequest
         switch ($routeName) {
             case "api.material.in.store":
                 $rule = [
-                    "warehouse_name"    => "required",
-                    "in_number"         => "required",
-                    "origin"            => "required",
-                    "batch_number"      => "required",
-                    "in_time"           => "required|integer",
-                    "operator"          => "required",
-                    "in_material"       => "required",
+                    "warehouse_name" => "required",
+                    "in_number"      => "required",
+                    "origin"         => "required",
+                    "batch_number"   => "required",
+                    "in_time"        => "required|integer",
+                    "operator"       => "required",
+                    "material_id"    => "required|exists:material,id",
+                    "amount"         => "required",
+                    // "in_material"       => "required",
                 ];
                 break;
             case "api.material.in.delete":
@@ -52,14 +54,16 @@ class MaterialInRequest extends FormRequest
     public function messages()
     {
         return [
-            'warehouse_name.required'        => '仓库名称 必须',
-            'in_number.required'             => '入库单号 必须',
-            'origin.required'                => '来源 必须',
-            'batch_number.required'          => '批号 必须',
-            'in_time.required'               => '入库时间 必须',
-            'operator.required'              => '操作人 必须',
-            'in_material.required'           => '入库清单 必须',
-            'ids.required'                   => '删除id 必须',
+            'warehouse_name.required' => '仓库名称 必须',
+            'in_number.required'      => '入库单号 必须',
+            'origin.required'         => '来源 必须',
+            'batch_number.required'   => '批号 必须',
+            'in_time.required'        => '入库时间 必须',
+            'operator.required'       => '操作人 必须',
+            'in_material.required'    => '入库清单 必须',
+            'ids.required'            => '删除id 必须',
+            'material_id.exists'      => '物资id不存在',
+            'material_id.required'    => '物资id必须',
         ];
     }
 }

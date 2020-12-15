@@ -11,6 +11,7 @@ class MaterialIn extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'material_id',
         'warehouse_name',       //仓库名称
         'in_number',            //入库单号
         'origin',               //来源
@@ -30,5 +31,10 @@ class MaterialIn extends Model
     public function material()
     {
         return $this->belongsTo(Material::class);
+    }
+
+    public function wareHouseLog()
+    {
+        return $this->hasOne(WareHouseLog::class, 'in_id');
     }
 }

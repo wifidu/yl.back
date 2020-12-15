@@ -30,12 +30,8 @@ class MaterialInController
      * @param in_time 必选 int 入库时间
      * @param operator 必选 string 操作人
      * @param remarks 必选 string 备注
-     * @param in_material 必选 json 入库清单
-     * @param in_material.material_id 必选 int 物资id
-     * @param in_material.number 必选 int 入库数量
-     * @param in_material.price 必选 float 价格
-     * @param in_material.supplier 必选 string 供应商
-     * @param in_material.expiry_date 必选 int 有效期
+     * @param material_id 必选 int 物资id
+     * @param amount 必选 int 入库数量
      * @json_param {"in_number":"RK20200229","warehouse_name":"华南A","origin":"上海","batch_number":"asa123456","in_time":1581941906,"operator":"彭超超","remarks":"很专业","in_material":{"material_id":8,"number":100,"price":12,"supplier":"飞利浦","expiry_date":1581942906}}
      * @return  {"status":200,"message":"操作成功","data":{"id":{"in_number":"RK20200229","warehouse_name":"华南A","origin":"上海","batch_number":"asa123456","in_time":1581941906,"operator":"彭超超","remarks":"很专业","in_material":"{\"material_id\":8,\"number\":100,\"price\":12,\"supplier\":\"飞利浦\",\"expiry_date\":1581942906}","updated_at":"2020-04-14 11:32:28","created_at":"2020-04-14 11:32:28","id":132}}}
      * @return_param id int 物资入库id
@@ -46,12 +42,8 @@ class MaterialInController
      * @return_param in_time int 入库时间
      * @return_param operator string 操作人
      * @return_param remarks string 备注
-     * @return_param in_material json 入库清单
-     * @return_param in_material.material_id int 物资id
-     * @return_param in_material.number int 入库数量
-     * @return_param in_material.price float 价格
-     * @return_param in_material.supplier string 供应商
-     * @return_param in_material.expiry_date int 有效期
+     * @return_param material_id int 物资id
+     * @return_param amount int 入库数量
      * @remark 入库单号，通过获取入库单号接口获取,入库清单格式如下：{"material_id":8,"number":100,"price":12,"supplier":"飞利浦","expiry_date":1581942906}
      */
     public function store(MaterialInRequest $request)

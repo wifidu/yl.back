@@ -29,7 +29,7 @@ class MaterialInListener implements ShouldQueue
     public function handle(MaterialInEvents $event)
     {
         $params = $event->_materIn;
-        $in_material = $params['in_material'];
-        MaterialModel::query()->where('id','=',$in_material['material_id'])->increment('number',$in_material['number']);
+        $in_material = $params['material_id'];
+        MaterialModel::query()->where('id',$in_material)->increment('number',$params['amount']);
     }
 }

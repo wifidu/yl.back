@@ -33,6 +33,7 @@ class MaterialInService
 
         $id = $this->_materialInRepository->store($params);
         if ($id) {
+            $params['id'] = $id['id'];
             MaterialIn::dispatch($params);
             return $this->apiReturn(['id' => $id], CodeEnum::SUCCESS);
         }

@@ -31,4 +31,9 @@ class MaterialOut extends Model
     {
         return $this->belongsTo(Material::class);
     }
+
+    public function wareHouseLog()
+    {
+        return $this->hasOne(WareHouseLog::class, 'out_id');
+    }
 }

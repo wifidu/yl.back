@@ -15,7 +15,7 @@ class CreateMaterialInTable extends Migration {
 		Schema::create('material_in', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('material_id')->unsigned()->default(0)->index();
+            $table->integer('material_id')->unsigned()->index();
             $table->integer('amount')->unsigned()->nullable()->default(1)->comment('数量');
             $table->integer('inventory_id')->unsigned()->nullable()->comment('盘点id');
 			$table->string('in_number', 32)->nullable()->comment('入库单号');
