@@ -86,22 +86,10 @@ class WareHouseLogService
         return $this->apiReturn('', CodeEnum::SUCCESS);
     }
 
-    /**
-     * function 仓库日志-搜索
-     * describe 仓库日志-搜索
-     * @param $search_index 搜索索引
-     * @param $time_range 搜索时间范围
-     * @param $operator_type 操作类型
-     * @param $warehouse_name 仓库名称
-     * @param $content 搜索内容
-     * @return array
-     * @author ZhaoDaYuan
-     * 2020/3/6 上午11:14
-     */
-    public function search($search_index,$time_range,$operator_type,$warehouse_name,$content)
+    public function search($page, $page_size, $id, $start_time, $end_time)
     {
-        $search = $this->_wareHouseLogRepository->search($search_index,$time_range,$operator_type,$warehouse_name,$content);
-        return $this->apiReturn($search,CodeEnum::SUCCESS);
+        $data   = $this->_wareHouseLogRepository->search($page, $page_size, $id, $start_time, $end_time);
+        return $this->apiReturn($data,CodeEnum::SUCCESS);
     }
 
     /**

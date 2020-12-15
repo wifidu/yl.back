@@ -17,7 +17,7 @@ class CreateWarehouseLogTable extends Migration {
 			$table->increments('id');
 			// $table->string('odd_number', 128)->nullable()->comment('单号');
 			$table->boolean('type')->nullable()->comment('(0-盘点 1-出库 2-入库)');
-			// $table->string('warehouse_name', 64)->nullable()->comment('仓库名称');
+            $table->string('warehouse_name', 64)->nullable()->comment('仓库名称');
 			// $table->string('material_name', 64)->nullable()->comment('物资名称');
             $table->integer('material_id')->unsigned()->index()->nullable()->comment('物资id');
 			$table->integer('in_id')->unsigned()->index()->nullable()->comment('入库id');

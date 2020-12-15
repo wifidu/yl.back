@@ -13,7 +13,7 @@ class WareHouseLog extends Model
     protected $fillable = [
         // 'odd_number',               //单号
         'type',                     //操作类型
-        // 'warehouse_name',           //仓库名称
+        'warehouse_name',           //仓库名称
         // 'material_name',            //物资名称
         'material_id',              //物资id
         'in_id',

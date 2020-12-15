@@ -30,8 +30,7 @@ class WareHouseLogRepository
      */
     public function list($page, $page_size)
     {
-
-        return WareHouseLog::query()->paginate($page_size);
+        return WareHouseLog::query()->with([ 'materialIn', 'materialOut', 'material' ])->paginate($page_size);
     }
 
     /**
@@ -50,7 +49,7 @@ class WareHouseLogRepository
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)) {
             //
-            $query = WareHouseLog::query()->where(['id' => $id])->first();
+            $query = WareHouseLog::query()->where(['id' => $id])->with([ 'materialIn', 'materialOut', 'material' ])->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -104,69 +103,70 @@ class WareHouseLogRepository
         }
     }
 
-    /**
-     * function 仓库日志-搜索
-     * describe 仓库日志-搜索
-     * @param $search_index 搜索索引
-     * @param $time_range 搜索时间范围
-     * @param $operator_type 操作类型
-     * @param $warehouse_name 仓库名称
-     * @param $content 搜索内容
-     * @return mixed
-     * @author ZhaoDaYuan
-     * 2020/3/6 上午11:04
-     */
-    public function search($search_index, $time_range, $operator_type, $warehouse_name, $content)
+    public function search($page, $page_size, $warehouse_name = '', $start_time = '', $end_time = '')
     {
-        switch ($warehouse_name){
-            case 'all':
-                switch ($operator_type){
-                    case 'all':
-                        switch ($time_range){
-                            case 'all':
-                                return DB::select("select * from warehouse_log where $search_index like '%$content%' ");
-                                break;
-                            default:
-                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and $search_index like '%$content%' ");
-                                break;
-                        }
-                        break;
-                    default:
-                        switch ($time_range){
-                            case 'all':
-                                return DB::select("select * from warehouse_log where `type`= $operator_type and $search_index like '%$content%' ");
-                                break;
-                            default:
-                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and $search_index like '%$content%' ");
-                                break;
-                        }
-                        break;
-                }
-            default:
-                switch ($operator_type){
-                    case 'all':
-                        switch ($time_range){
-                            case 'all':
-                                return DB::select("select * from warehouse_log where `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
-                                break;
-                            default:
-                                return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
-                                break;
-                        }
-                        break;
-                    default:
-                        switch ($time_range){
-                            case 'all':
-                                return DB::select("select * from warehouse_log where `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
-                                break;
-                            default:
-                                return DB::select("select * from warehouse_log where  date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
-                                break;
-                        }
-                        break;
-                }
+        $query = WareHouseLog::query();
+        if ($warehouse_name) {
+            return $query = $query->where('warehouse_name', $warehouse_name)->with([ 'materialIn', 'materialOut', 'material' ])->get();
         }
+        if ($start_time) {
+            $query = $query->where('created_at', '>=', $start_time);
+        }
+        if ($end_time) {
+            $query = $query->where('created_at', '<=', $end_time);
+        }
+
+        return $query->with([ 'materialIn', 'materialOut', 'material' ])->paginate($page_size);
     }
+        // switch ($warehouse_name){
+        //     case 'all':
+        //         switch ($operator_type){
+        //             case 'all':
+        //                 switch ($time_range){
+        //                     case 'all':
+        //                         return DB::select("select * from warehouse_log where $search_index like '%$content%' ");
+        //                         break;
+        //                     default:
+        //                         return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and $search_index like '%$content%' ");
+        //                         break;
+        //                 }
+        //                 break;
+        //             default:
+        //                 switch ($time_range){
+        //                     case 'all':
+        //                         return DB::select("select * from warehouse_log where `type`= $operator_type and $search_index like '%$content%' ");
+        //                         break;
+        //                     default:
+        //                         return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and $search_index like '%$content%' ");
+        //                         break;
+        //                 }
+        //                 break;
+        //         }
+        //     default:
+        //         switch ($operator_type){
+        //             case 'all':
+        //                 switch ($time_range){
+        //                     case 'all':
+        //                         return DB::select("select * from warehouse_log where `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+        //                         break;
+        //                     default:
+        //                         return DB::select("select * from warehouse_log where date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+        //                         break;
+        //                 }
+        //                 break;
+        //             default:
+        //                 switch ($time_range){
+        //                     case 'all':
+        //                         return DB::select("select * from warehouse_log where `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+        //                         break;
+        //                     default:
+        //                         return DB::select("select * from warehouse_log where  date_add(FROM_UNIXTIME(operator_time),INTERVAL $time_range YEAR) >= now() and `type`= $operator_type and `warehouse_name`='$warehouse_name' and $search_index like '%$content%' ");
+        //                         break;
+        //                 }
+        //                 break;
+        //         }
+        // }
+    // }
 
     /**
      * function 导出仓库日志EXCELl

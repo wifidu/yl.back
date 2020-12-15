@@ -34,12 +34,14 @@ class WarehouseLogListener implements ShouldQueue
         $params = $event->_warehousedata;
         $data['type'] = isset($params['in_number']) ? 2 : 1;
         $data['material_id'] = $params['material_id'];
+        $data['warehouse_name'] = $params['warehouse_name'];
 
         if ($data['type'] == 2) {
             $data['in_id'] = $params['id'];
         } else {
             $data['out_id'] = $params['id'];
         }
+        // var_dump($data);
         WareHouseLogModel::create($data);
         // $type = $params['type'] ?? substr($data['odd_number'],0,2);
         // if ($type=='CK'){

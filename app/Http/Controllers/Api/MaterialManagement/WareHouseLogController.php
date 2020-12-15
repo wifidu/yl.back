@@ -56,7 +56,7 @@ class WareHouseLogController
      * @param page 非必选 当前页数
      * @param page_size 非必选 页面大小
      * @json_param 参数以query_string的形式连接在url后，例：{{host}}/api/material-management/warehouse-log/list?page=10&page_size=1
-     * @return  {"status":200,"message":"操作成功","data":{"current_page":10,"data":[{"id":16,"odd_number":"RK20200229","type":2,"warehouse_name":"华南A","material_name":"飞利浦","brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"12.00","number":100,"total":"1200.00","operator":"彭超超","operator_time":1583420700,"created_at":"2020-03-05 15:05:00","updated_at":"2020-03-05 15:05:00"}],"first_page_url":"http://59.110.212.116:32801/api/material-management/warehouse-log/list?page=1","from":10,"last_page":274,"last_page_url":"http://59.110.212.116:32801/api/material-management/warehouse-log/list?page=274","next_page_url":"http://59.110.212.116:32801/api/material-management/warehouse-log/list?page=11","path":"http://59.110.212.116:32801/api/material-management/warehouse-log/list","per_page":"1","prev_page_url":"http://59.110.212.116:32801/api/material-management/warehouse-log/list?page=9","to":10,"total":274}}
+     * @return  { "status": 200, "message": "操作成功", "data": { "current_page": 1, "data": [ { "id": 1, "type": 2, "warehouse_name": null, "material_id": 1, "in_id": 21, "out_id": null, "created_at": "2020-12-15 05:40:09", "updated_at": "2020-12-15 05:40:09", "material_in": { "id": 21, "material_id": 1, "amount": 100, "inventory_id": null, "in_number": "123", "warehouse_name": "伊莱克", "origin": "俄罗斯", "batch_number": "123", "in_time": 336180368, "operator": "杜韦凡", "remarks": "oye", "created_at": "2020-12-15 05:40:09", "updated_at": "2020-12-15 05:40:09" }, "material_out": null, "material": { "id": 1, "name": "sunt", "brand": "sed", "model": "esse", "unit": 1, "number": 43344, "price": "1436.07", "supplier": "quis", "created_at": "1977-01-30 00:19:58", "updated_at": "2020-12-15 05:40:09" } } ], "first_page_url": "http://yl.test/api/material-management/warehouse-log/list?page=1", "from": 1, "last_page": 1, "last_page_url": "http://yl.test/api/material-management/warehouse-log/list?page=1", "next_page_url": null, "path": "http://yl.test/api/material-management/warehouse-log/list", "per_page": 20, "prev_page_url": null, "to": 1, "total": 1 } }
      * @return_param id int 仓库日志id
      * @return_param odd_number int 单号
      * @return_param type int 类操作型(见备注)
@@ -135,8 +135,8 @@ class WareHouseLogController
      * @param time_range 非必选 int 时间范围(见备注)
      * @param operator_type 非必选 int 操作方式(见备注)
      * @param warehouse_name 非必选 string 仓库名称
-     * @json_param {"operator_type":1,"warehouse_name":"华南A","time_range":1}
-     * @return {"status":200,"message":"操作成功","data":[{"id":2,"odd_number":"CK20200302","type":1,"warehouse_name":"华南A","material_name":"飞利浦","brand":"飞利浦","supplier":"飞利浦","unit":0,"price":"13.00","number":100,"total":"1300.00","operator":"彭超超","operator_time":1583402086,"created_at":"2020-03-05 09:54:46","updated_at":"2020-03-05 09:54:46"}]}
+     * @json_param {//warehouse_name:伊莱克 start_time:2020-12-15 05:46:01 end_time:2020-12-15 05:48:03}
+     * @return { "status": 200, "message": "操作成功", "data": { "current_page": 1, "data": [ { "id": 2, "type": 2, "warehouse_name": null, "material_id": 1, "in_id": 22, "out_id": null, "created_at": "2020-12-15 05:46:01", "updated_at": "2020-12-15 05:46:01", "material_in": { "id": 22, "material_id": 1, "amount": 100, "inventory_id": null, "in_number": "123", "warehouse_name": "伊莱克", "origin": "俄罗斯", "batch_number": "123", "in_time": 336180368, "operator": "杜韦凡", "remarks": "oye", "created_at": "2020-12-15 05:46:00", "updated_at": "2020-12-15 05:46:00" }, "material_out": null, "material": { "id": 1, "name": "sunt", "brand": "sed", "model": "esse", "unit": 1, "number": 43644, "price": "1436.07", "supplier": "quis", "created_at": "1977-01-30 00:19:58", "updated_at": "2020-12-15 05:48:45" } }, { "id": 3, "type": 2, "warehouse_name": null, "material_id": 1, "in_id": 23, "out_id": null, "created_at": "2020-12-15 05:48:03", "updated_at": "2020-12-15 05:48:03", "material_in": { "id": 23, "material_id": 1, "amount": 100, "inventory_id": null, "in_number": "123", "warehouse_name": "伊莱克", "origin": "俄罗斯", "batch_number": "123", "in_time": 336180368, "operator": "杜韦凡", "remarks": "oye", "created_at": "2020-12-15 05:48:02", "updated_at": "2020-12-15 05:48:02" }, "material_out": null, "material": { "id": 1, "name": "sunt", "brand": "sed", "model": "esse", "unit": 1, "number": 43644, "price": "1436.07", "supplier": "quis", "created_at": "1977-01-30 00:19:58", "updated_at": "2020-12-15 05:48:45" } } ], "first_page_url": "http://yl.test/api/material-management/warehouse-log/search?page=1", "from": 1, "last_page": 1, "last_page_url": "http://yl.test/api/material-management/warehouse-log/search?page=1", "next_page_url": null, "path": "http://yl.test/api/material-management/warehouse-log/search", "per_page": 15, "prev_page_url": null, "to": 2, "total": 2 } }
      * @return_param id int 仓库日志id
      * @return_param odd_number int 单号
      * @return_param type int 类操作型(见备注)
@@ -155,13 +155,19 @@ class WareHouseLogController
      */
     public function search(WareHouseLogRequest $request)
     {
-        $search_index   = $request->post('search_index') ?? 'odd_number';
-        $time_range     = $request->post('time_range') ?? 'all';
-        $operator_type  = $request->post('operator_type') ?? 'all';
-        $warehouse_name = $request->post('warehouse_name') ?? 'all';
-        $content        = $request->post('content') ?? '';
+        return $this->_wareHouseLogService->search($request->post('page', 1),
+            $request->post('page_size', 15),
+            $request->post('warehouse_name', ''),
+            $request->post('start_time', ''),
+            $request->post('end_time', ''));
 
-        return $this->_wareHouseLogService->search((string)$search_index,(string)$time_range,(string)$operator_type,(string)$warehouse_name,(string)$content);
+        // $search_index   = $request->post('search_index') ?? 'odd_number';
+        // $time_range     = $request->post('time_range') ?? 'all';
+        // $operator_type  = $request->post('operator_type') ?? 'all';
+        // $warehouse_name = $request->post('warehouse_name') ?? 'all';
+        // $content        = $request->post('content') ?? '';
+
+        // return $this->_wareHouseLogService->search((string)$search_index,(string)$time_range,(string)$operator_type,(string)$warehouse_name,(string)$content);
     }
 
     /**
