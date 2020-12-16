@@ -64,6 +64,7 @@ $api->version('v1', [
     });
     //物资管理
     $api->group(['prefix' => "material-management"],function ($api) {
+        $api->post('/cache-flush', 'MaterialManagement\CacheController@flush');
         $api->group(["prefix" => "fixed-assets"], function ($api) {
             // 固定资产数据存储
             $api->post('/', 'MaterialManagement\FixedAssetsController@store')->name('api.fixed-assets.store');

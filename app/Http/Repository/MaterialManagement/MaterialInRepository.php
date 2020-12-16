@@ -47,7 +47,7 @@ class MaterialInRepository
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($cache)){
             //
-            $query = MaterialIn::query()->where(['id' => $id])->first();
+            $query = MaterialIn::query()->where(['id' => $id])->with('material')->first();
             $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, $query);
 
             return $query;
@@ -68,7 +68,7 @@ class MaterialInRepository
     public function list($page, $page_size)
     {
 
-        return MaterialIn::query()->paginate($page_size);
+        return MaterialIn::query()->with('material')->paginate($page_size);
     }
 
     /**

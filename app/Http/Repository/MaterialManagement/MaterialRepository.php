@@ -5,6 +5,8 @@ namespace App\Http\Repository\MaterialManagement;
 
 use App\Model\Material;
 use App\Model\WareHouseLog;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Redis;
 
 class MaterialRepository
 {
@@ -43,20 +45,37 @@ class MaterialRepository
     public function item($id = null, $name = null)
     {
         //查询缓存
-//        $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $id));
 
         //缓存为空则查询数据库并将数据存入缓存
         if (empty($name)){
-            $query = Material::query()->where(['id' => $id])->first();
-//            $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, json_encode($query));
+
+            $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $id));
+
+            if (empty($cache)) {
+                for ($i=0; $i < 9999900; $i++){
+                    //do nothing, 1000 times
+                }
+                $query = Material::query()->where(['id' => $id])->first();
+                $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, json_encode($query));
+                return $query;
+            }
+
+           return $cache;
+
         } else {
-            $query = Material::query()->where(['name' => $name])->first();
+
+            $cache = json_decode($this->_redis->get(self::CACHE_KEY_RULE_PRE . $name));
+
+            if (empty($cache)) {
+                $query = Material::query()->where(['name' => $name])->first();
+                $this->_redis->set(self::CACHE_KEY_RULE_PRE . $name, json_encode($query));
+            }
+
+           return $cache;
         }
             // $data = WareHouseLog::query()->where(['material_id' => $id])->whereIn('type',[1,2])->get();
             // $query['mate'] = empty($data)?'':$data;
-            return $query;
 
-//        return $cache;
     }
 
     /**

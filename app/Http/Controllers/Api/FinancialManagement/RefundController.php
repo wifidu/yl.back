@@ -102,7 +102,7 @@ class RefundController extends Controller
          * @method PATCH  application/json
          * @url {{host}}/api/financial-management/refund
          * @param business_time  否    int    业务时间                                                        
-         * @param refund_no      否    char   退款单号                                                        
+         * @param refund_no      是    char   退款单号                                                        
          * @param account_id     否    int    账户id                                                          
          * @param refund_type    否    int    退款类型：0变更退费，1请假退费，2押金退费，3退院退费，4直接退费 
          * @param refund_amount  否    float  退款金额                                                        
