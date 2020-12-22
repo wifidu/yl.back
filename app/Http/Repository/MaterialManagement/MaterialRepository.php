@@ -12,7 +12,7 @@ class MaterialRepository
 {
     private $_redis;
 
-    const CACHE_KEY_RULE_PRE = 'material_';
+    const CACHE_KEY_RULE_PRE = 'active_material_';
 
     public function __construct()
     {

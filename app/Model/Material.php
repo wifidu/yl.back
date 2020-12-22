@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Material extends Model
 {
+    use Traits\ActiveDataHelper;
+
     protected $table = 'material';
 
     public $timestamps = true;

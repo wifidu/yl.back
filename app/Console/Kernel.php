@@ -6,6 +6,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\CalculateActiveMaterial;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -22,6 +23,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\GenerateInventory::class,
         \App\Console\Commands\GenerateMonthlyCharges::class,
         \App\Console\Commands\GenerateShowdocApi::class,
+        CalculateActiveMaterial::class,
     ];
 
     /**
