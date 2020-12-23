@@ -37,6 +37,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('p_o:generate-inventory')->monthly();
         $schedule->command('p_o:generate-monthly-charges')->daily();
         $schedule->command('p_o:generate-showdoc-api')->everyMinute();
+        $schedule->command('yake:calculate-active-material')->everyMinute();
     }
 
     /**

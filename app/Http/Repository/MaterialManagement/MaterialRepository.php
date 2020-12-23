@@ -56,7 +56,7 @@ class MaterialRepository
                     //do nothing, 1000 times
                 }
                 $query = Material::query()->where(['id' => $id])->first();
-                $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, json_encode($query));
+                // $this->_redis->set(self::CACHE_KEY_RULE_PRE . $id, json_encode($query));
                 return $query;
             }
 
@@ -68,7 +68,7 @@ class MaterialRepository
 
             if (empty($cache)) {
                 $query = Material::query()->where(['name' => $name])->first();
-                $this->_redis->set(self::CACHE_KEY_RULE_PRE . $name, json_encode($query));
+                // $this->_redis->set(self::CACHE_KEY_RULE_PRE . $name, json_encode($query));
             }
 
            return $cache;

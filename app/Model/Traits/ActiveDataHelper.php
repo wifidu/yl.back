@@ -36,6 +36,7 @@ trait ActiveDataHelper
         // 取得活跃用户列表
         $active_data = $this->calculateActiveData();
         // 缓存
+        // dd(Cache::get($this->cache_key. '12', 'nothing'));
         $this->cacheActiveData($active_data);
     }
 
@@ -53,7 +54,9 @@ trait ActiveDataHelper
         $materials = array_reverse($materials, true);
 
         // 只获取我们想要的数量
-        $materials = array_slice($materials, 0, $this->material_number, true);
+        $materials = array_slice($materials, 0, $this->data_number, true);
+
+        // dd($materials);
 
         // 新建一个空集合
         $active_data = collect();
@@ -73,7 +76,7 @@ trait ActiveDataHelper
                         ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
                         ->groupBy('material_id')
                         ->get();
-        dd($in_data);
+        // dd($in_data->toArray());
         // 计算得分
         foreach ($in_data as $value){
             $this->materials[$value->material_id]['score'] = $value->in_count * $this->in_weight;
@@ -86,6 +89,7 @@ trait ActiveDataHelper
                         ->where('created_at', '>=', Carbon::now()->subDays($this->pass_days))
                         ->groupBy('material_id')
                         ->get();
+        // dd($out_data->toArray());
         // 根据回复数量计算得分
         foreach ($out_data as $value){
             $out_score = $value->out_count * $this->reply_weight;
@@ -99,9 +103,11 @@ trait ActiveDataHelper
 
     public function cacheActiveData($active_data)
     {
-        dd($active_data);
+        // dd($active_data->toArray());
         // 将数据放入缓存中
-        Cache::put($this->cache_key, $active_data, $this->cache_expire_in_seconds);
+        foreach ($active_data as $data){
+            Cache::put($this->cache_key. $data['id'], $data, $this->cache_expire_in_seconds);
+        }
     }
 
 }

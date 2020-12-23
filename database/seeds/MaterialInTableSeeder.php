@@ -16,7 +16,7 @@ class MaterialInTableSeeder extends Seeder
         $material_ids = Material::all()->pluck('id')->toArray();
         $faker = app(Faker\Generator::class);
         $materialIns = factory(MaterialIn::class)
-            ->times(20)
+            ->times(50)
             ->make()
             ->each(function ($materialIn, $index)
                 use ($faker, $material_ids)

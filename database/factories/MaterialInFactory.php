@@ -8,7 +8,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Model\MaterialIn::class, function (Faker $faker) {
-    $date_time = $faker->date . ' ' . $faker->time;
+    $date_time = $faker->dateTimeThisMonth;
 
     return [
         'inventory_id'   => $faker->randomDigit,
