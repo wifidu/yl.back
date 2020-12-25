@@ -2,10 +2,12 @@
 
 namespace App\Model;
 
+use App\Model\Traits\ActiveUserHelper;
 use Illuminate\Database\Eloquent\Model;
 
 class Account extends Model
 {
+    use ActiveUserHelper;
     protected $table = "accounts";
 
     public $timestamps = true;

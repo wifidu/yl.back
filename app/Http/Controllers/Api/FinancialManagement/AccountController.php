@@ -13,11 +13,13 @@ use App\Http\Requests\Api\FinancialManagement\AccountRequest;
 use App\Http\Service\FinancialManagement\AccountService;
 use App\Model\Account;
 use App\Traits\ApiTraits;
+use Cache;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
 {
     protected $accountService;
+    protected $cache_key = 'active_user_';
 
     use ApiTraits;
 
@@ -164,7 +166,11 @@ class AccountController extends Controller
          */
     public function show($id, Account $account)
     {
-        $data = $account->where('id', $id)->get();
+        $data = Cache::get($this->cache_key . $id);
+        if (!$data) {
+            // echo "123";
+            $data = $account->where('id', $id)->get();
+        }
         return $this->apiReturn($data, CodeEnum::SUCCESS);
     }
 

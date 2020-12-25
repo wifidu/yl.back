@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Model\Account;
 use App\Model\Material;
 use Illuminate\Console\Command;
 
@@ -12,14 +13,14 @@ class CalculateActiveMaterial extends Command
      *
      * @var string
      */
-    protected $signature = 'yake:calculate-active-material';
+    protected $signature = 'yake:calculate-active-data';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '生成活跃材料';
+    protected $description = '生成活跃材料和活跃用户，并储存在缓存里。';
 
     /**
      * Create a new command instance.
@@ -36,11 +37,12 @@ class CalculateActiveMaterial extends Command
      *
      * @return mixed
      */
-    public function handle(Material $material)
+    public function handle(Material $material, Account $account)
     {
         $this->info("开始计算...");
 
         $material->calculateAndCacheActiveData();
+        $account->calculateAndCacheActiveData();
 
         $this->info("成功生成!");
 

@@ -10,8 +10,11 @@ use Faker\Generator as Faker;
 
 $factory->define(CreditManagement::class, function (Faker $faker) {
     $unix_time = $faker->unixTime;
+    $date_time = $faker->dateTimeThisMonth;
 
     return [
+        'created_at'        => $date_time,
+        'updated_at'        => $date_time,
         'business_time'     => $unix_time,
         'billing_date'      => $unix_time,
         'payment_type'      => $faker->numberBetween(0, 1),
