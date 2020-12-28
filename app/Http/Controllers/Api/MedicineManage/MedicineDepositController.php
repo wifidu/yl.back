@@ -10,7 +10,7 @@ use Dingo\Api\Http\Request;
 
 class MedicineDepositController
 {
-    private MedicineDepositService $_drugInformation;
+    private $_drugInformation;
     public function __construct(MedicineDepositService $MedicineDepositService)
     {
         $this->_drugInformation = $MedicineDepositService;

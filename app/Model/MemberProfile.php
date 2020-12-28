@@ -1,13 +1,13 @@
 <?php
 
-namespace App;
+namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class MemberProfileController
  * 会员档案表模型类
- * @package App
+ * @package App\Model
  * @author YanJiGang
  */
 class MemberProfile extends Model
