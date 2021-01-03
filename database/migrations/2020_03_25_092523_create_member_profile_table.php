@@ -21,11 +21,11 @@ class CreateMemberProfileTable extends Migration {
 			$table->string('nation', 8)->default('')->comment('民族');
 			$table->integer('height')->comment('身高');
 			$table->integer('weight')->comment('体重');
-			$table->string('birth_date', 16)->comment('出生日期');
-			$table->string('own_system', 32)->comment('所属系统');
+			$table->string('birth_date', 64)->comment('出生日期');
+			$table->string('own_system', 64)->comment('所属系统');
 			$table->string('sign_doctor', 32)->default('')->comment('签约医生');
 			$table->string('community', 64)->default('')->comment('社区');
-			$table->string('email', 32)->default('')->comment('邮箱');
+			$table->string('email', 255)->default('')->comment('邮箱');
 			$table->string('phone_number', 16)->comment('手机号');
 			$table->string('address', 128)->default('')->comment('地址');
 			$table->string('domicile', 128)->default('')->comment('户籍所在地');
