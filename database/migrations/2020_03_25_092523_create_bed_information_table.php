@@ -23,7 +23,7 @@ class CreateBedInformationTable extends Migration {
 			$table->string('appoint_person', 32)->comment('预约人');
 			$table->bigInteger('appoint_time')->default(0)->comment('预约时间');
 			$table->string('elderly_name', 32)->comment('老人姓名');
-			$table->string('elderly_ID', 24)->default('')->comment('老人身份证号');
+			$table->string('elderly_ID', 24)->default('')->nullable()->comment('老人身份证号');
 			$table->integer('elderly_age')->default(0)->comment('老人年龄');
 			$table->boolean('elderly_gender')->comment('老人性别 0-男 1-女');
 			$table->boolean('self-care_ability')->comment('自理能力 0-自理 1-半自理 2-失能');

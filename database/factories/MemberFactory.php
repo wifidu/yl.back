@@ -19,7 +19,7 @@ $factory->define(App\Model\MemberProfile::class, function (Faker $faker) {
         'phone_number' => $faker->phoneNumber,         //手机号( 必填 )
         'address' => $faker->address,              //地址
         'domicile' => $faker->city,             //户籍所在地
-        'avatar_url' => $faker->url,           //头像 url
+        'avatar_url' => $faker->word,           //头像 url
         'created_at' => $date_time,
         'updated_at' => $date_time
     ];

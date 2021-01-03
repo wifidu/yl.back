@@ -26,5 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MaterialOutTableSeeder::class);
         $this->call(BookBedSeeder::class);
         $this->call(MemberSeeder::class);
+        $this->call(CheckOutSeeder::class);
+        $this->call(OutManagementSeeder::class);
     }
 }

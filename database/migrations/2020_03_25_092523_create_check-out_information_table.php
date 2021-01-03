@@ -16,7 +16,7 @@ class CreateCheckOutInformationTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('member_name', 32)->comment('会员姓名');
-			$table->string('member_ID', 16)->comment('身份证号');
+			$table->string('member_ID', 16)->nullable()->comment('身份证号');
 			$table->string('bed', 64)->comment('床位');
 			$table->integer('check-out_time')->comment('退住时间');
 			$table->text('check-out_reason', 65535)->comment('退住原因');
