@@ -6,6 +6,7 @@ use App\Enum\CodeEnum;
 use \App\Traits\ApiTraits;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\AuthorizationRequest;
+use Illuminate\Support\Facades\Cache;
 
 class AuthorizationsController extends Controller
 {
@@ -36,6 +37,13 @@ class AuthorizationsController extends Controller
             return $this->apiReturn('',CodeEnum::ERR_NAME_OR_PASSWORD);
         }
 
+        // $request->session()->put('testwf', $token);
+        // Cache::flush();
+        session_start();
+        session(['duweifan' => '123']);
+        session()->put('test', 123);
+        Cache::put(session_id(), session()->all(), 65*60);
+        // var_dump(Cache::get(session_id()));
         return $this->apiReturn([
             'access_token' => $token,
             'token_type' => 'Bearer',
