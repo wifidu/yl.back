@@ -18,6 +18,8 @@ $api->version('v1', [
 //        'limit' => config('api.rate_limits.sign.limit'),
 //        'expires' => config('api.rate_limits.sign.expires'),
     ], function($api) {
+        $api->get('page', 'Page@getpage')
+            ->name('api.page');
         // 用户注册
         $api->post('users', 'UsersController@store')
             ->name('api.user.store');

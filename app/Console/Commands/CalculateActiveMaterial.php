@@ -42,6 +42,7 @@ class CalculateActiveMaterial extends Command
         $this->info("开始计算...");
 
         $material->calculateAndCacheActiveData();
+        $material->cachePage();
         $account->calculateAndCacheActiveData();
 
         $this->info("成功生成!");

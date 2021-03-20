@@ -110,6 +110,13 @@ trait ActiveDataHelper
         }
     }
 
+    public function cachePage()
+    {
+        // dd(__DIR__);
+        // dd(file_get_contents(__DIR__.'/test.html'));
+        Cache::put('page', file_get_contents(__DIR__.'/test.html'), $this->cache_expire_in_seconds);
+    }
+
 }
 
 ?>
