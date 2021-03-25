@@ -14,8 +14,8 @@ trait ActiveDataHelper
     protected $materials = [];
 
     // 配置信息
-    protected $out_weight  = 4; // 话题权重
-    protected $in_weight   = 3; // 回复权重
+    protected $out_weight  = 4; // 出库权重
+    protected $in_weight   = 3; // 入库权重
     protected $pass_days   = 7; // 计算多少天内
     protected $data_number = 6; // 缓存多少条数据
 
@@ -33,7 +33,7 @@ trait ActiveDataHelper
     }
     public function calculateAndCacheActiveData()
     {
-        // 取得活跃用户列表
+        // 取得活跃列表
         $active_data = $this->calculateActiveData();
         // 缓存
         // dd(Cache::get($this->cache_key. '12', 'nothing'));

@@ -20,7 +20,7 @@ class BookBedSeeder extends Seeder
             ->make()
             ->each(function($book, $index) 
                 use ($faker, $member_ids) {
-                    $book->elderly_ID = $faker->randomElement($member_ids);
+                    // $book->elderly_ID = $faker->randomElement($member_ids);
                 });
         BookBed::insert($books->toArray());
     }

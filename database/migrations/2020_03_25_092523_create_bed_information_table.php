@@ -22,16 +22,17 @@ class CreateBedInformationTable extends Migration {
 			$table->string('contract_number', 16)->comment('联系电话');
 			$table->string('appoint_person', 32)->comment('预约人');
 			$table->bigInteger('appoint_time')->default(0)->comment('预约时间');
-			$table->string('elderly_name', 32)->comment('老人姓名');
-			$table->string('elderly_ID', 24)->default('')->nullable()->comment('老人身份证号');
-			$table->integer('elderly_age')->default(0)->comment('老人年龄');
-			$table->boolean('elderly_gender')->comment('老人性别 0-男 1-女');
+			$table->string('name', 32)->comment('姓名');
+			// $table->string('ID', 24)->default('')->nullable()->comment('身份证号');
+			$table->integer('age')->default(0)->comment('老人年龄');
+			$table->boolean('gender')->comment('性别 0-男 1-女');
 			$table->boolean('self-care_ability')->comment('自理能力 0-自理 1-半自理 2-失能');
 			$table->string('address', 128)->default('')->comment('居住地址');
 			$table->text('remark', 65535)->comment('备注');
 			$table->boolean('is_checkin')->default(0)->comment('是否入住 0-未入住 1-已入住');
 			$table->boolean('is_cancel')->default(0)->comment('是否取消入住 0-未取消 1-已取消 ');
 			$table->softDeletes()->comment('软删除设置');
+            $table->integer('account_id')->comment('对应账户ｉｄ');
 			$table->timestamps();
 		});
 	}

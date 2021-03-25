@@ -13,7 +13,7 @@ class OutManagementSeeder extends Seeder
      */
     public function run()
     {
-        $member_name = BookBed::all()->pluck('elderly_name')->toArray();
+        $member_name = BookBed::all()->pluck('name')->toArray();
         $bed = BookBed::all()->pluck('bed_number')->toArray();
         $faker = app(Faker\Generator::class);
         $checkOut = factory(OutManage::class)

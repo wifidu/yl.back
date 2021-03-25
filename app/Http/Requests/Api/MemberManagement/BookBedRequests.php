@@ -34,10 +34,11 @@ class BookBedRequests extends FormRequest
                     "check-in_date"     => "required|integer",
                     "contract_number"   => "required",
                     "appoint_person"    => "required",
-                    "elderly_name"      => "required",
-                    "elderly_gender"    => "required",
+                    "name"      => "required",
+                    "gender"    => "required",
                     "self-care_ability" => "required",
-                    "remark"            => "required"
+                    "remark"            => "required",
+                    "account_id"            => "required"
                 ];
                 break;
             case "":
@@ -60,9 +61,9 @@ class BookBedRequests extends FormRequest
             'check-in_date.integer'      => '入住日期必须为整形',
             'contract_number.required'   => '联系人电话必须',
             'appoint_person.required'    => '联系人必须',
-            'elderly_name.required'      => '老人姓名必须',
-            'elderly_gender.required'    => '老人性别必须',
-            'self-care_ability.required' => '老人自理能力必须',
+            'name.required'      => '姓名必须',
+            'gender.required'    => '性别必须',
+            'self-care_ability.required' => '自理能力必须',
         ];
     }
 

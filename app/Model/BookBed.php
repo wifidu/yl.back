@@ -21,20 +21,26 @@ class BookBed extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'bed_number',       // 预约床位 (必填)
-        'bed_cost',         // 床位费用 (必填)
-        'check-in_date',    // 入住日期 (必填)
-        'appoint_deposit',  // 预付押金
-        'contract_number',  // 联系电话 (必填)
-        'appoint_person',   // 预约人 (必填)
-        'appoint_time',     // 预约时间
-        'elderly_name',     // 老人姓名 (必填)
-        'elderly_ID',       // 老人身份证号
-        'elderly_age',      // 老人年龄
-        'elderly_gender',   // 老人姓名 0-男 1-女 (必填)
-        'self-care_ability',// 老人自理能力 (必填)
-        'address',          // 居住地址
-        'remark',           // 备注 ( 必填 )
+        'bed_number',      // 预约床位 (必填)
+        'bed_cost',        // 床位费用 (必填)
+        'check-in_date',   // 入住日期 (必填)
+        'appoint_deposit', // 预付押金
+        'contract_number', // 联系电话 (必填)
+        'appoint_person',  // 预约人 (必填)
+        'appoint_time',    // 预约时间
+        'name',            // 姓名 (必填)
+        'ID',              // 身份证号
+        'age',             // 年龄
+        'gender',          // 姓名 0-男 1-女 (必填)
+        'self-care_ability',// 自理能力 (必填)
+        'address',         // 居住地址
+        'remark',          // 备注 ( 必填 )
+        'account_id',    
     ];
+
+    public function account()
+    {
+        return $this->belongsTo('App\Model\Account');
+    }
 
 }

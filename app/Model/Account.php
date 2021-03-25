@@ -53,4 +53,9 @@ class Account extends Model
     {
         return $this->hasMany('App\Model\Visit', 'member_name', 'member_name');
     }
+
+    public function bookbeds()
+    {
+        return $this->hasMany('App\Model\BookBed');
+    }
 }

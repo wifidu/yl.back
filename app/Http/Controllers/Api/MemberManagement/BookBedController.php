@@ -3,14 +3,17 @@
 
 namespace App\Http\Controllers\Api\MemberManagement;
 
-
+use App\Enum\CodeEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\MemberManagement\BookBedRequests;
 use App\Http\Service\MemberManagement\BookBedService;
+use App\Jobs\Appointment;
+use App\Traits\ApiTraits;
 use Request;
 
 class BookBedController extends Controller
 {
+    use ApiTraits;
     private $_bookBedService;
     public function __construct(BookBedService $bookBedService)
     {
@@ -25,7 +28,9 @@ class BookBedController extends Controller
     public function store(BookBedRequests $request)
     {
         $params = $request->post();
-        return $this->_bookBedService->store($params);
+        dispatch(new Appointment($params, config('app.order_ttl')));
+        return $this->apiReturn($params,CodeEnum::SUCCESS);
+        // return $this->_bookBedService->store($params);
     }
     /**
      * 预约订单详情

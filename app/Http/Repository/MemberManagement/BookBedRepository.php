@@ -73,8 +73,8 @@ class BookBedRepository
     public function search($params)
     {
         return BookBed::query()
-            ->when(isset($params['elderly_name']), function ($query) use ($params) {
-                return $query->where('elderly_name', 'like', '%'.CommonFunc::escapeLikeStr($params['elderly_name']).'%')
+            ->when(isset($params['name']), function ($query) use ($params) {
+                return $query->where('name', 'like', '%'.CommonFunc::escapeLikeStr($params['name']).'%')
                     ->where('is_cancel', '=', '0');
             })
             ->when(isset($params['contract_number']), function ($query) use ($params) {

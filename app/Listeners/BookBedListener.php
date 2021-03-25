@@ -30,10 +30,10 @@ class BookBedListener implements ShouldQueue
     public function handle(BookBed $event)
     {
         $params = $event->_bookBed;
-        $member_name = $params['elderly_name'];
+        $member_name = $params['name'];
         $data = [
             'deposit'       => $params['appoint_deposit'] ?? 0,
-            'cd_card'       => $params['elderly_ID'] ?? '',
+            'cd_card'       => $params['ID'] ?? '',
         ];
         Account::query()->updateOrCreate(['member_name'=> $member_name],$data);
 
