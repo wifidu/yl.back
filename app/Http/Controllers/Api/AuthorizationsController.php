@@ -28,7 +28,7 @@ class AuthorizationsController extends Controller
      * @return_param expires_in int token有效期(单位：秒)
      * @remark 新的Token，从当前时间开始计算的Token，并不代表当前Token不能使用，建议将现有Token替换成新的Token以延长使用时间
      */
-    public function login(AuthorizationRequest $request)
+    public function login(AuthorizationRequest $request, UsersController $usersController)
     {
         $credentials['name'] = $request->username;
         $credentials['password'] = $request->password;
@@ -37,13 +37,15 @@ class AuthorizationsController extends Controller
             return $this->apiReturn('',CodeEnum::ERR_NAME_OR_PASSWORD);
         }
 
-        // $request->session()->put('testwf', $token);
-        // Cache::flush();
+        $info = $usersController->me();
+
         session_start();
-        session(['duweifan' => '123']);
-        session()->put('test', 123);
+        session(['name' => $credentials['name']]);
+        session(['token' => $token]);
+        session(['info' => $info]);
+        session(['test' => '测试1']);
         Cache::put(session_id(), session()->all(), 65*60);
-        // var_dump(Cache::get(session_id()));
+        var_dump(Cache::get(session_id()));
         return $this->apiReturn([
             'access_token' => $token,
             'token_type' => 'Bearer',
